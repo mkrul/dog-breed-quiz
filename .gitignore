@@ -1,0 +1,6 @@
+api/staging.env
+api/production.env
+api/development.env
+
+api/node_modules
+client/node_modules
