@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import "../../assets/css/main.css";
-import "../../assets/css/homepage.css";
+import "../../assets/main.css";
+import "../../assets/homepage.css";
 
 const HomePage = () => {
   return (
@@ -13,7 +13,7 @@ const HomePage = () => {
               <div className="overflow-hidden rounded-2xl">
                 <img
                   className="w-full h-full object-cover"
-                  src="assets/images/pit-bull-01.jpg"
+                  src={require("../../assets/images/pit-bull-01.jpg")}
                   alt="Photo by Katie Bernotsky"
                 />
                 <div className="mt-4 text-sm">

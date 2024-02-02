@@ -23,7 +23,7 @@ const AboutPage = () => {
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap -m-8">
               <div className="w-full md:w-1/3 p-8">
-                <h1 className="text-6xl sm:text-9xl xl:text-11xl text-white font-semibold mb-10 font-heading text-neutral-900">
+                <h1 className="text-6xl sm:text-9xl xl:text-11xl font-semibold mb-10 font-heading text-neutral-900">
                   FAQ
                 </h1>
                 <p className="text-xl font-medium max-w-3xl text-neutral-400">
@@ -34,7 +34,7 @@ const AboutPage = () => {
               <div className="w-full md:w-2/3 p-8">
                 <div className="pt-4 pb-8 border-t border-neutral-600">
                   <div className="flex justify-between gap-4">
-                    <h2 className="text-white text-2xl sm:text-3xl font-semibold font-heading text-neutral-700">
+                    <h2 className="text-2xl sm:text-3xl font-semibold font-heading text-neutral-700">
                       What is the purpose of this test?
                     </h2>
                     <Circle buttonId="q1" toggle={toggleDivVisibility} />
@@ -49,7 +49,7 @@ const AboutPage = () => {
                 </div>
                 <div className="pt-4 pb-8 border-t border-neutral-600">
                   <div className="flex justify-between gap-4">
-                    <h2 className="text-white text-2xl sm:text-3xl font-semibold font-heading text-neutral-700">
+                    <h2 className="text-2xl sm:text-3xl font-semibold font-heading text-neutral-700">
                       How does the test work?
                     </h2>
                     <Circle buttonId="q2" toggle={toggleDivVisibility} />
@@ -57,16 +57,16 @@ const AboutPage = () => {
                   {divVisibility["q2"] && (
                     <div className="mt-5 text-left">
                       This test is designed to measure how accurately pit bulls
-                      can be identified based on the physical characteristics of
-                      the dog. The assessment relies on both DNA results and the
-                      individual participant's criteria of which breeds
-                      constitute a "pit bull".
+                      can be identified based on observed physical
+                      characteristics. The assessment relies on DNA results
+                      curated from public sources, as well as how individual
+                      participants categorize pit bulls.
                     </div>
                   )}
                 </div>
                 <div className="pt-4 pb-8 border-t border-neutral-600">
                   <div className="flex justify-between gap-4">
-                    <h2 className="text-white text-2xl sm:text-3xl font-semibold font-heading text-neutral-700">
+                    <h2 className="text-2xl sm:text-3xl font-semibold font-heading text-neutral-700">
                       Where do the DNA results come from?
                     </h2>
                     <Circle buttonId="q3" toggle={toggleDivVisibility} />
@@ -81,34 +81,51 @@ const AboutPage = () => {
                       >
                         r/DoggyDNA
                       </a>
-                      . Companies that provided these results are a mixture of
-                      Embark, Wisdom Panel, DNA My Dog, and others.
+                      . Some of the companies that provide DNA testing services
+                      for dogs include{" "}
+                      <a href="https://shop.embarkvet.com" target="_blank">
+                        Embark
+                      </a>
+                      ,{" "}
+                      <a href="https://www.wisdompanel.com/" target="_blank">
+                        Wisdom Panel
+                      </a>
+                      ,{" "}
+                      <a href="https://www.dnamydog.com/" target="_blank">
+                        DNA My Dog
+                      </a>
+                      , and{" "}
+                      <a href="https://www.orivet.com/" target="_blank">
+                        Orivet
+                      </a>{" "}
+                      .
                     </div>
                   )}
                 </div>
                 <div className="pt-4 pb-8 border-t border-neutral-600">
                   <div className="flex justify-between gap-4">
-                    <h2 className="text-white text-2xl sm:text-3xl font-semibold font-heading text-neutral-700">
+                    <h2 className="text-2xl sm:text-3xl font-semibold font-heading text-neutral-700">
                       What are the limitations of using DNA to identify breeds?
                     </h2>
                     <Circle buttonId="q4" toggle={toggleDivVisibility} />
                   </div>
                   {divVisibility["q4"] && (
                     <div className="mt-5 text-left">
-                      There are several known limitations of DNA testing. For
-                      example, DNA tests only go back a few generations and may
-                      not be able to accurately detect the presence of certain
-                      breeds. The accuracy of DNA tests can also vary
-                      significantly between different companies and tests. Some
-                      "bull breeds" can be especially difficult to identify due
-                      to the wide variety of breeds that fall under this
-                      category and how closely related they are, genetically.
+                      There are several known limitations of using DNA to
+                      identify breeds. For example, DNA testing can only detect
+                      breeds that are present in a dog's immediate ancestry, and
+                      ancestors more than three or four generations back may not
+                      be detected at all. The accuracy of DNA tests can also
+                      vary significantly between different companies and tests.
+                      Some "bull breeds" can be especially difficult to identify
+                      due to the variety of breeds that fall under this category
+                      and how closely related they are genetically.
                     </div>
                   )}
                 </div>
                 <div className="pt-4 pb-8 border-t border-neutral-600">
                   <div className="flex justify-between gap-4">
-                    <h2 className="text-white text-2xl sm:text-3xl font-semibold font-heading text-neutral-700">
+                    <h2 className="text-2xl sm:text-3xl font-semibold font-heading text-neutral-700">
                       How will the results be used?
                     </h2>
                     <Circle buttonId="q5" toggle={toggleDivVisibility} />

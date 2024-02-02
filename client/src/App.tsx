@@ -7,6 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import "bulma/css/bulma.min.css";
+import "./App.css";
 import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/AboutPage";
 
