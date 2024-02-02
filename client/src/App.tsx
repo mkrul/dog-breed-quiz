@@ -7,9 +7,8 @@ import {
   Navigate,
 } from "react-router-dom";
 import "bulma/css/bulma.min.css";
-import NavBar from "./components/shared/NavBar";
 import HomePage from "./components/pages/HomePage";
-import ReptilesPage from "./components/pages/ReptilesPage";
+import AboutPage from "./components/pages/AboutPage";
 
 function App() {
   const loc = window.location;
@@ -19,11 +18,10 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/guides/reptiles" element={<ReptilesPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
