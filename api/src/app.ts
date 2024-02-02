@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import * as ReptileRoutes from "./routes/reptiles";
+import * as AboutRoutes from "./routes/about";
 
 const cors = require("cors");
 
@@ -11,6 +11,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use(ReptileRoutes.router);
+app.use(AboutRoutes.router);
 
 export default app;
