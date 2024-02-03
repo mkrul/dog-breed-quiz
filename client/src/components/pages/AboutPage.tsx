@@ -6,7 +6,7 @@ interface targetVisibilityState {
   [buttonId: string]: boolean;
 }
 
-const AboutPage = () => {
+const AboutPage: React.FC = () => {
   const [divVisibility, setDivVisibility] = useState<targetVisibilityState>({});
 
   const toggleDivVisibility = (buttonId: string) => {
@@ -58,9 +58,9 @@ const AboutPage = () => {
                     <div className="mt-5 text-left">
                       This test is designed to measure how accurately pit bulls
                       can be identified based on observed physical
-                      characteristics. The assessment relies on DNA results
-                      curated from public sources, as well as how individual
-                      participants categorize pit bulls.
+                      characteristics. The assessment relies on how individual
+                      participants categorize pit bulls, as well as DNA results
+                      curated from public sources.
                     </div>
                   )}
                 </div>
@@ -111,15 +111,16 @@ const AboutPage = () => {
                   </div>
                   {divVisibility["q4"] && (
                     <div className="mt-5 text-left">
-                      There are several known limitations of using DNA to
-                      identify breeds. For example, DNA testing can only detect
-                      breeds that are present in a dog's immediate ancestry, and
-                      ancestors more than three or four generations back may not
-                      be detected at all. The accuracy of DNA tests can also
-                      vary significantly between different companies and tests.
-                      Some "bull breeds" can be especially difficult to identify
-                      due to the variety of breeds that fall under this category
-                      and how closely related they are genetically.
+                      DNA testing can only detect breeds that are present in a
+                      dog's immediate ancestry, and ancestors more than four
+                      generations back may not be detected at all. The accuracy
+                      of DNA tests can also vary significantly between different
+                      companies and tests. Some breeds can be especially
+                      difficult to distinguish from one another due to their
+                      common ancestry. For example, the American Pit Bull
+                      Terrier, the American Staffordshire Terrier, and the
+                      Staffordshire Bull Terrier are all closely related breeds,
+                      and their genetic profiles can be very similar.
                     </div>
                   )}
                 </div>
@@ -132,12 +133,11 @@ const AboutPage = () => {
                   </div>
                   {divVisibility["q5"] && (
                     <div className="mt-5 text-left">
-                      This project was created purely for educational purposes.
-                      It has been developed by a private third party and is not
-                      a part of any official government or academic research.
-                      The results of this test are not intended to promote or
-                      support any specific breed or breed type, and should not
-                      be used to influence public policy or legislation.
+                      This project was created for educational purposes only. It
+                      has been developed by a private third party and is not a
+                      part of any official government or academic research. The
+                      results of this test are not intended to promote or
+                      support any specific breed or breed type.
                     </div>
                   )}
                 </div>

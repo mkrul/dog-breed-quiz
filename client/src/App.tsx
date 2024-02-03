@@ -10,6 +10,8 @@ import "bulma/css/bulma.min.css";
 import "./App.css";
 import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/AboutPage";
+import ResultsPage from "./components/pages/ResultsPage";
+import TestPage from "./components/pages/TestPage";
 
 function App() {
   const loc = window.location;
@@ -23,6 +25,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/results" element={<ResultsPage />} />
+          <Route path="/test" element={<TestPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

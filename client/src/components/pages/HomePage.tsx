@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "../../assets/main.css";
 import "../../assets/homepage.css";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <div className="antialiased bg-body text-body font-body">
       <section className="pt-8 py-12 md:py-24">
@@ -36,43 +36,40 @@ const HomePage = () => {
                   </h6>
                   <p className="mb-10 text-xl text-neutral-700 font-medium">
                     Proponents of breed-specific legislation (BSL) argue that
-                    certain dog breeds are more dangerous due to the amount of
-                    damage they can inflict on victims when they attack. The
-                    most commonly targeted breeds are those labeled "Pit Bulls".
-                    For many, "pit bull" is used as a catch-all term for dogs
-                    with similar physical characteristics or a certain amount of
-                    "pit bull" heritage. For others, the term is used to
-                    describe a specific breed of dog, the American Pit Bull
-                    Terrier.
+                    certain dog breeds should be banned or regulated based on
+                    statistical data surrounding dog attacks. The most commonly
+                    targeted breeds are those labeled "pit bulls". For many,
+                    "pit bull" is used as a catch-all term for dogs with similar
+                    physical characteristics or a certain amount of "pit bull"
+                    heritage. For others, the term is used to describe a
+                    specific breed of dog, the American Pit Bull Terrier.
                   </p>
                   <p className="mb-12 text-xl text-neutral-700 font-medium">
                     This project aims to test the assertion that "pit bulls" are
-                    easy to identify by comparing the accuracy of different
-                    groups of people in identifying "pit bulls". We will be
-                    relying on publicly available DNA test results to determine
-                    the accuracy of these identifications. You can learn more
+                    easy to identify by comparing the accuracy of visual
+                    identifications to DNA test results. You can learn more
                     about this test and its methodology by clicking{" "}
                     {<Link to="/about">here</Link>}.
                   </p>
                   <div className="flex flex-wrap -m-4 justify-center">
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
-                        <a
+                        <Link
+                          to="/test"
                           className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
-                          href="#"
                         >
                           Start the test
-                        </a>
+                        </Link>
                       </p>
                     </div>
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
-                        <a
+                        <Link
+                          to="/results"
                           className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
-                          href="#"
                         >
                           View results
-                        </a>
+                        </Link>
                       </p>
                     </div>
                   </div>
