@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import * as AboutRoutes from "./routes/about";
+import * as ResultsRoutes from "./routes/results";
 
 const cors = require("cors");
 
