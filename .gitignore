@@ -4,3 +4,11 @@ api/development.env
 
 api/node_modules
 client/node_modules
+
+api/dist/development.env
+api/dist/staging.env
+api/dist/production.env
+
+client/dist/development.env
+client/dist/staging.env
+client/dist/production.env
