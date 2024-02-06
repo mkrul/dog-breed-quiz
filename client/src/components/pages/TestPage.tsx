@@ -1,10 +1,15 @@
-import React from "react";
+import { useEffect } from "react";
+import { getUser } from "../../redux/features/userSlice";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 
 const TestPage = () => {
-  fetch("http://localhost:5000/test").then((response: Response) =>
-    console.log("DERP:", response)
-  );
-  // .then((data) => console.log(data));
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
+  console.log("user", user);
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
 
   return <div>TestPage</div>;
 };

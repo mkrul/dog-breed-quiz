@@ -34,6 +34,7 @@ const TestRoutes = __importStar(require("./routes/test"));
 const cors = require("cors");
 const app = (0, express_1.default)();
 app.use(cors());
+app.use(express_1.default.static(__dirname + "/public"));
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });
