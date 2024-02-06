@@ -1,25 +1,16 @@
 import env from "../src/util/validateEnv"
-const { MongoClient } = require("mongodb");
+import mongoose from "mongoose";
 
 const mongoUri = env.MONGO_URI;
-const client = new MongoClient(mongoUri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+
+mongoose.connect(mongoUri);
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+
+db.once('open', function() {
+  console.log("Connected to MongoDB");
 });
 
-let _db: any;
-
-module.exports = {
-  connectToServer: function (callback: any) {
-    client.connect(function (err: any, db: any) {
-      if (err) {
-        console.error(err);
-      }
-      _db = db;
-      return callback(err);
-    });
-  },
-  getDb: function () {
-    return _db;
-  },
-};
+export default db;

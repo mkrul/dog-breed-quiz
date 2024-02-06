@@ -1,4 +1,3 @@
-import axios from "axios";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -14,11 +13,6 @@ import ResultsPage from "./components/pages/ResultsPage";
 import TestPage from "./components/pages/TestPage";
 
 function App() {
-  const loc = window.location;
-  axios.defaults.baseURL = `${loc.protocol}//${loc.hostname}${
-    loc.hostname === "localhost" ? ":3000" : ""
-  }`;
-
   return (
     <div className="App">
       <Router>

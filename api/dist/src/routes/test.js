@@ -7,7 +7,6 @@ exports.router = void 0;
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 exports.router = router;
+const testController = require("../controllers/test");
 // GET /results
-router.get("/test", (req, res) => {
-    res.send("Test page");
-});
+router.get("/test", testController.startTest);

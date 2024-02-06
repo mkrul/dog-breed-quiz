@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import * as AboutRoutes from "./routes/about";
 import * as ResultsRoutes from "./routes/results";
+import * as TestRoutes from "./routes/test";
 
 const cors = require("cors");
 
@@ -13,5 +14,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(AboutRoutes.router);
+app.use(ResultsRoutes.router);
+app.use(TestRoutes.router);
 
 export default app;

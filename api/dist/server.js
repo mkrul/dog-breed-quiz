@@ -15,25 +15,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const validateEnv_1 = __importDefault(require("./src/util/validateEnv"));
 const app_1 = __importDefault(require("./src/app"));
+const conn_1 = __importDefault(require("./db/conn"));
 (() => __awaiter(void 0, void 0, void 0, function* () {
     const port = validateEnv_1.default.PORT;
     app_1.default.use(express_1.default.json());
     // get driver connection
-    const dbo = require('./db/conn');
     try {
         app_1.default.listen(port, () => {
             //connect to db
-            dbo.connectToServer(function (err) {
-                if (err)
-                    console.error(err);
+            conn_1.default.on("error", console.error.bind(console, "connection error:"));
+            conn_1.default.on("connected", function () {
+                console.log("Connected to MongoDB");
             });
-            console.log(`Server listening on port ${port}`);
+            console.log(`Server started at http://localhost:${port}`);
         });
     }
     catch (err) {
         console.error(err);
     }
     finally {
-        console.log('Server started');
+        console.log("Server started");
     }
 }))();

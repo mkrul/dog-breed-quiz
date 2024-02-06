@@ -29,6 +29,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 const express_1 = __importDefault(require("express"));
 const AboutRoutes = __importStar(require("./routes/about"));
+const ResultsRoutes = __importStar(require("./routes/results"));
+const TestRoutes = __importStar(require("./routes/test"));
 const cors = require("cors");
 const app = (0, express_1.default)();
 app.use(cors());
@@ -36,4 +38,6 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 app.use(AboutRoutes.router);
+app.use(ResultsRoutes.router);
+app.use(TestRoutes.router);
 exports.default = app;

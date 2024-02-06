@@ -571,8 +571,12 @@ video {
   margin-bottom: 5rem;
 }
 
-.mb-4 {
-  margin-bottom: 1rem;
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
 }
 
 .mt-3 {
@@ -625,10 +629,6 @@ video {
 
 .animate-searchInput {
   animation: showSearchInput 1s linear;
-}
-
-.list-disc {
-  list-style-type: disc;
 }
 
 .flex-col {
@@ -735,12 +735,12 @@ video {
   padding-bottom: 2rem;
 }
 
-.pl-6 {
-  padding-left: 1.5rem;
-}
-
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
 }
 
 .pt-8 {
@@ -803,10 +803,6 @@ video {
 
 .font-semibold {
   font-weight: 600;
-}
-
-.font-extrabold {
-  font-weight: 800;
 }
 
 .tracking-tight {
@@ -954,6 +950,11 @@ video {
 
   .md\:w-auto {
     width: auto;
+  }
+
+  .md\:py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 
   .md\:py-24 {

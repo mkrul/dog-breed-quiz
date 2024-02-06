@@ -8,11 +8,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const user = require("../models/user");
+const user_1 = __importDefault(require("../models/user"));
 const asyncHandler = require("express-async-handler");
-exports.ip_address = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const ipAddress = getUserIp(req);
-    console.log(ipAddress);
-    res.send("Your IP address has been saved");
+exports.startTest = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const ipAddress = req.ip;
+    const user = yield getUser(ipAddress);
+    if (user) {
+        return res.send("User already exists with IP: " + ipAddress);
+    }
+    const newUser = new user_1.default({
+        ipAddress: ipAddress,
+        createdAt: new Date(),
+    });
+    yield newUser.save();
 }));
+function getUser(ipAddress) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const user = yield user_1.default.findOne({ ipAddress: ipAddress }).exec();
+        return user;
+    });
+}

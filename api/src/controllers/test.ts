@@ -1,9 +1,24 @@
-import User from "../components/interfaces/user.interface";
-const user: User = require("../models/user");
+import User, { UserType } from "../models/user";
 const asyncHandler = require("express-async-handler");
 
-exports.ip_address = asyncHandler(async (req: any, res: any, next: any) => {
-  const ipAddress: string = getUserIp(req);
-  console.log(ipAddress);
-  res.send("Your IP address has been saved");
+exports.startTest = asyncHandler(async (req: any, res: any, next: any) => {
+  const ipAddress: string = req.ip;
+
+  const user = await getUser(ipAddress);
+  if (user) {
+    return res.send("User already exists with IP: " + ipAddress);
+  }
+
+  const newUser = new User({
+    ipAddress: ipAddress,
+    createdAt: new Date(),
+  });
+
+  await newUser.save();
 });
+
+async function getUser(ipAddress: string): Promise<UserType | null> {
+  const user = await User.findOne({ ipAddress: ipAddress }).exec();
+
+  return user;
+}
