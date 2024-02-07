@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../interfaces/user";
+import userApi from "../../apis/user";
 import type { RootState } from "../store";
 
 interface IState {
@@ -14,21 +15,15 @@ const initialState: IState = {
 };
 
 export const getUser = createAsyncThunk(
-  "user/getUser",
+  "/user/:ipAddress",
   async (data, thunkApi) => {
     try {
-      const response = await fetch("/api/user");
-      console.log(data)
-      return response.json();
+      const response: any = await userApi.getUser();
+      console.log("in userSlice", response)
+      return response.user
     } catch (error) {
-      throw thunkApi.rejectWithValue({ error: "nope" });
+      throw thunkApi.rejectWithValue({ error: "user not initialized" });
     }
-  },
-  {
-    condition: (_, { getState }) => {
-      const { user } = getState() as RootState;
-      return !user;
-    },
   }
 );
 
