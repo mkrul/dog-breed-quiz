@@ -1,26 +1,19 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../interfaces/user";
 import userApi from "../../apis/user";
-import type { RootState } from "../store";
 
-interface IState {
-  user: IUser;
-}
-
-const initialState: IState = {
-  user: {
-    _id: "",
+export const initialState: IUser = {
+  profile: {
     ipAddress: "",
   },
 };
 
 export const getUser = createAsyncThunk(
-  "/user/:ipAddress",
-  async (data, thunkApi) => {
+  "user/getUser",
+  async (_, thunkApi) => {
     try {
-      const response: any = await userApi.getUser();
-      console.log("in userSlice", response)
-      return response.user
+      const response = await userApi.getUser();
+      return response
     } catch (error) {
       throw thunkApi.rejectWithValue({ error: "user not initialized" });
     }
@@ -30,17 +23,12 @@ export const getUser = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(
-      getUser.fulfilled,
-      (state, action: PayloadAction<IUser>) => {
-        state.user = action.payload;
-      }
-    );
+  reducers: {
+    getUser: (state, action: PayloadAction<string>) => {
+      state.profile = action.payload
+    }
   },
 });
 
-const { reducer } = userSlice;
-
-export default reducer;
+export const { getUser: getUserAction } = userSlice.actions;
+export default userSlice.reducer;

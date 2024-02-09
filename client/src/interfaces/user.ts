@@ -1,4 +1,7 @@
-export interface IUser {
-  _id?: string;
-  ipAddress?: string;
+export interface IUserProfile {
+  ipAddress: string;
 }
+export interface IUser {
+  profile: IUserProfile;
+}
+
