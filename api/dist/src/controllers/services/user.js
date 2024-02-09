@@ -8,12 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const user_1 = require("./services/user");
-const asyncHandler = require("express-async-handler");
-exports.getUser = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const ipAddress = req.ip;
-    const user = yield (0, user_1.findOrCreateUserByIpAddress)(ipAddress);
-    console.log("in user controller", user);
-    res.status(200).json({ user });
-}));
+exports.findOrCreateUserByIpAddress = void 0;
+const user_1 = __importDefault(require("../../models/user"));
+function findOrCreateUserByIpAddress(ipAddress) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // Try to find the user in the database by ipAddress
+        let user = yield user_1.default.findOne({ ipAddress });
+        // If user doesn't exist, create a new user
+        if (!user) {
+            user = new user_1.default({ ipAddress });
+            yield user.save();
+        }
+        return user;
+    });
+}
+exports.findOrCreateUserByIpAddress = findOrCreateUserByIpAddress;
