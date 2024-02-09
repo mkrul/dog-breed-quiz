@@ -1,7 +1,13 @@
-export interface IUserProfile {
-  ipAddress: string;
+export type User = {
+  profile: UserProfile
 }
-export interface IUser {
-  profile: IUserProfile;
+
+export type UserProfile = {
+  ipAddress: string
 }
+
+export type UserState = {
+  user: User
+}
+
 

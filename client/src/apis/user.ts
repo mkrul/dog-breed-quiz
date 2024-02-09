@@ -1,11 +1,15 @@
+
+
 const userApi = {
   getUser: async () => {
     try {
       const response = await fetch("http://localhost:5000/user/:ipAddress");
-      console.log("in userApi", JSON.stringify(response));
-      return response;
+      const user = await response.json();
+      console.log("in user api:", user);
+      return user;
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching user:", error);
+      return error;
     }
   },
 };
