@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../interfaces/user";
+import { UserState } from "../../interfaces/user";
 import userApi from "../../apis/user";
 
 export const getUser = createAsyncThunk("user/getUser", async (_, thunkApi) => {
@@ -11,17 +11,36 @@ export const getUser = createAsyncThunk("user/getUser", async (_, thunkApi) => {
   }
 });
 
+const initialState: UserState = {
+  profile: {
+    user: {
+      _id: "",
+      ipAddress: "",
+      createdAt: "",
+    },
+    loading: false,
+    error: "",
+  },
+};
+
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    profile: {
-      ipAddress: "",
+  initialState,
+  reducers: {
+    getUser: (state, action: PayloadAction<UserState>) => {
+      state.profile = action.payload.profile;
     },
   },
-  reducers: {
-    getUser: (state, action: PayloadAction<User>) => {
-      state.user = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      state.profile = action.payload.user;
+    });
+    builder.addCase(getUser.pending, (state) => {
+      state.profile.loading = true;
+    });
+    builder.addCase(getUser.rejected, (state, action) => {
+      state.profile.error = action.error.message || "user not initialized";
+    });
   },
 });
 

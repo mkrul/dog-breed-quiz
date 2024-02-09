@@ -1,13 +1,17 @@
 export type User = {
-  profile: UserProfile
+  _id: string
+  ipAddress: string
+  createdAt: string
 }
 
 export type UserProfile = {
-  ipAddress: string
+  user: User
+  loading: boolean
+  error: string
 }
 
 export type UserState = {
-  user: User
+  profile: UserProfile
 }
 
 
