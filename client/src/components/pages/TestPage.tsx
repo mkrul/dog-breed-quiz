@@ -5,7 +5,6 @@ import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 const TestPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
-  console.log("in testpage", user);
 
   useEffect(() => {
     dispatch(getUser());
