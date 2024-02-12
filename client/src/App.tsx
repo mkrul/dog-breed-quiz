@@ -11,6 +11,7 @@ import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/AboutPage";
 import ResultsPage from "./components/pages/ResultsPage";
 import TestPage from "./components/pages/TestPage";
+import AlignmentPage from "./components/pages/AlignmentPage";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/results" element={<ResultsPage />} />
-          <Route path="/test" element={<TestPage />} />
+          <Route path="/test/alignment" element={<AlignmentPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

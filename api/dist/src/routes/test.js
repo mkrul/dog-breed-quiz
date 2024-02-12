@@ -8,5 +8,4 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 exports.router = router;
 const testController = require("../controllers/test");
-// GET /results
-router.get("/test", testController.startTest);
+router.get("/test/alignment", testController.startTest);

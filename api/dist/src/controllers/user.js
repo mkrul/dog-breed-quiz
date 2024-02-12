@@ -14,6 +14,5 @@ const asyncHandler = require("express-async-handler");
 exports.getUser = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const ipAddress = req.ip;
     const user = yield (0, user_1.findOrCreateUserByIpAddress)(ipAddress);
-    console.log("in user controller", user);
     res.status(200).json({ user });
 }));

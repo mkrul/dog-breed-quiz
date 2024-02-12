@@ -55,7 +55,7 @@ const HomePage: React.FC = () => {
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <Link
-                          to="/test"
+                          to="/test/alignment"
                           className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
                         >
                           Start the test

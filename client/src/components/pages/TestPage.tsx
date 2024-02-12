@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { getUser } from "../../redux/features/userSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { Link } from "react-router-dom";
 
 const TestPage = () => {
   const dispatch = useAppDispatch();
@@ -10,7 +11,7 @@ const TestPage = () => {
     dispatch(getUser());
   }, [dispatch]);
 
-  return <div>TestPage</div>;
+  return;
 };
 
 export default TestPage;

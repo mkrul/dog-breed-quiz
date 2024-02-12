@@ -3,8 +3,6 @@ const router = express.Router();
 
 const testController = require("../controllers/test");
 
-// GET /results
-
-router.get("/test", testController.startTest);
+router.get("/test/alignment", testController.startTest);
 
 export { router };
