@@ -1,17 +1,8 @@
-export type User = {
+export type IUser = {
   _id: string
   ipAddress: string
   createdAt: string
-}
-
-export type UserProfile = {
-  user: User
+  alignment: string
   loading: boolean
   error: string
 }
-
-export type UserState = {
-  profile: UserProfile
-}
-
-

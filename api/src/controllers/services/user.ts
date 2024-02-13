@@ -12,3 +12,13 @@ export async function findOrCreateUserByIpAddress(ipAddress: string): Promise<Us
 
   return user;
 }
+
+export async function updateUser(ipAddress: string, document: any): Promise<UserType> {
+  console.log("in updateUser service", document);
+
+  let user = await User.updateOne({ ipAddress: ipAddress }, { document });
+
+  const updatedUser = new User({ ...user });
+
+  return updatedUser;
+}

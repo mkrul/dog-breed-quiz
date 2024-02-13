@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findOrCreateUserByIpAddress = void 0;
+exports.updateUser = exports.findOrCreateUserByIpAddress = void 0;
 const user_1 = __importDefault(require("../../models/user"));
 function findOrCreateUserByIpAddress(ipAddress) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -27,3 +27,12 @@ function findOrCreateUserByIpAddress(ipAddress) {
     });
 }
 exports.findOrCreateUserByIpAddress = findOrCreateUserByIpAddress;
+function updateUser(ipAddress, document) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log("in updateUser service", document);
+        let user = yield user_1.default.updateOne({ ipAddress: ipAddress }, { document });
+        const updatedUser = new user_1.default(Object.assign({}, user));
+        return updatedUser;
+    });
+}
+exports.updateUser = updateUser;

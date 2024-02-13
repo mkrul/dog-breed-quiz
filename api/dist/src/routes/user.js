@@ -10,3 +10,4 @@ exports.router = router;
 const userController = require("../controllers/user");
 // GET /user/:ipAddress
 router.get("/user/:ipAddress", userController.getUser);
+router.put("/user/:ipAddress", userController.updateUser);

@@ -16,3 +16,11 @@ exports.getUser = asyncHandler((req, res, next) => __awaiter(void 0, void 0, voi
     const user = yield (0, user_1.findOrCreateUserByIpAddress)(ipAddress);
     res.status(200).json({ user });
 }));
+exports.updateUser = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("in update user");
+    console.log("req.params.ipAddress", req.params.ipAddress);
+    console.log("req.body", req.body);
+    console.log("params", req.params);
+    const user = yield (0, user_1.updateUser)(req.ip, req.body);
+    res.status(200).json({ user });
+}));

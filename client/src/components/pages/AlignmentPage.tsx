@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUser } from "../../redux/features/userSlice";
+import { getUser, updateUser } from "../../redux/features/userSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { Link } from "react-router-dom";
 
@@ -13,24 +13,23 @@ const AlignmentPage = () => {
   }, [dispatch]);
 
   const handleSetAlignment = (value: string) => {
-    console.log(value);
-    const radios = document.querySelectorAll(
-      'input[type="radio"]'
-    ) as NodeListOf<HTMLInputElement>;
-    radios.forEach((radio: HTMLInputElement) => {
-      radio.removeAttribute("checked");
-      const style = document.getElementById(`${value}-style`);
-      style?.classList.add("hidden");
-      console.log("classlist:", style?.classList);
-    });
+    setAlignment(value);
+    const selected = document.getElementById(
+      `${value}-radio`
+    ) as HTMLInputElement;
+    selected.checked = true;
+    const style = document.getElementById(`${value}-style`);
+    style?.classList.remove("hidden");
+    dispatch(updateUser({ alignment: value }));
 
-    const selectedRadio = document.getElementById(`${value}-radio`);
-    selectedRadio?.setAttribute("checked", "checked");
-    const selectedStyle = document.getElementById(`${value}-style`);
-    selectedStyle?.classList.remove("hidden");
-    if (value === "pro") {
-      setAlignment("pro");
-    }
+    document.querySelectorAll("input[type=checkbox]").forEach((el) => {
+      const option = el as HTMLInputElement;
+      if (option !== selected) {
+        option.removeAttribute("checked");
+        const style = document.getElementById(`${option.value}-style`);
+        style?.classList.add("hidden");
+      }
+    });
   };
 
   return (
@@ -68,10 +67,11 @@ const AlignmentPage = () => {
                     <label className="relative flex items-center gap-2 mb-4">
                       <input
                         className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
-                        type="radio"
+                        type="checkbox"
                         id="pro-radio"
                         name="field-radio"
-                        defaultValue="pro"
+                        value="pro"
+                        checked={alignment === "pro"}
                         onChange={() => handleSetAlignment("pro")}
                       />
                       <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
@@ -107,10 +107,11 @@ const AlignmentPage = () => {
                     <label className="relative flex items-center gap-2 mb-4">
                       <input
                         className="input-radio-2-06 opacity-0 absolute h-8 w-8 rounded-full"
-                        type="radio"
+                        type="checkbox"
                         id="neutral-radio"
                         name="field-radio"
-                        defaultValue="neutral"
+                        value="neutral"
+                        checked={alignment === "neutral"}
                         onChange={() => handleSetAlignment("neutral")}
                       />
                       <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
@@ -146,10 +147,11 @@ const AlignmentPage = () => {
                     <label className="relative flex items-center gap-2 mb-4">
                       <input
                         className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
-                        type="radio"
+                        type="checkbox"
                         id="anti-radio"
                         name="field-radio"
-                        defaultValue="anti"
+                        value="anti"
+                        checked={alignment === "anti"}
                         onChange={() => handleSetAlignment("anti")}
                       />
                       <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
@@ -188,20 +190,20 @@ const AlignmentPage = () => {
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <Link
-                          to="/test"
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
+                          to="/"
+                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
-                          Next
+                          Back
                         </Link>
                       </p>
                     </div>
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <Link
-                          to="/"
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
+                          to="/test"
+                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
                         >
-                          Back
+                          Next
                         </Link>
                       </p>
                     </div>
