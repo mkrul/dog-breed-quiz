@@ -1,4 +1,4 @@
-export type IUser = {
+export type IUserState = {
   _id: string
   ipAddress: string
   createdAt: string

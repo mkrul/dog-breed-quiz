@@ -1,4 +1,5 @@
-
+import { current } from "@reduxjs/toolkit";
+import { IUserState } from "../interfaces/user";
 
 const userApi = {
   getUser: async () => {
@@ -11,10 +12,12 @@ const userApi = {
       return error;
     }
   },
-  updateUser: async (document: any) => {
+  updateUser: async (user: IUserState, data: any) => {
+    const currentUser = user;
     try {
-      const doc = JSON.stringify(document)
-      console.log("document", doc)
+      const doc = JSON.stringify(data)
+      console.log("apis/user.ts - user", currentUser)
+      console.log("apis/user.ts - document", doc)
       const response = await fetch("http://localhost:5000/user/:ipAddress", {
         method: "PUT",
         headers: {
@@ -22,7 +25,7 @@ const userApi = {
         },
         body: doc,
       });
-      console.log("response", response)
+      console.log("apis/user.ts - response", response)
       const user = await response.json();
       return user;
     } catch (error) {

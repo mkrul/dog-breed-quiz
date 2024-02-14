@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../../interfaces/user";
+import { IUserState } from "../../interfaces/user";
+import { useSelector } from "react-redux";
 import userApi from "../../apis/user";
+import { RootState } from "../store";
 
-const initialState: IUser = {
+const initialState: IUserState = {
   _id: "",
   ipAddress: "",
   createdAt: "",
@@ -20,12 +22,13 @@ export const getUser = createAsyncThunk("user/getUser", async (_, thunkApi) => {
   }
 });
 
-export const updateUser = createAsyncThunk(
+export const updateUser = createAsyncThunk<IUserState, any, { state: RootState }>(
   "user/updateUser",
-  async (document: any, thunkApi) => {
-    console.log("document", document)
+  async (data: any, thunkApi) => {
+    console.log("document", data);
     try {
-      const response = await userApi.updateUser(document);
+      const user = useSelector((state: RootState) => state.user);
+      const response = await userApi.updateUser(user, data);
       return response;
     } catch (error) {
       throw thunkApi.rejectWithValue({ error: "user not updated" });
@@ -37,12 +40,12 @@ const userSlice = createSlice({
   name: "userData",
   initialState,
   reducers: {
-    getUser: (state, action: PayloadAction<IUser>) => {
+    getUser: (state, action: PayloadAction<IUserState>) => {
       state = Object.assign(state, action.payload);
 
       return state;
     },
-    updateUser: (state, action: PayloadAction<IUser>) => {
+    updateUser: (state, action: PayloadAction<IUserState>) => {
       state = Object.assign(state, action.payload);
 
       return state;
@@ -68,4 +71,4 @@ const userSlice = createSlice({
 export const { getUser: getUserAction, updateUser: updateUserAction } =
   userSlice.actions;
 
-export default userSlice.reducer;
+export default userSlice;
