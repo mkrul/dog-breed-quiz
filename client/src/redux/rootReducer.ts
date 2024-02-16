@@ -6,8 +6,8 @@ export interface RootState {
   user: IUserState;
 }
 
-const rootReducer = combineReducers({
+export type RootReducer = ReturnType<typeof rootReducer>;
+
+export const rootReducer = combineReducers({
   user: userSlice.reducer,
 });
-
-export default rootReducer;

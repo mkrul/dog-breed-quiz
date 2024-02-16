@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserState } from "../../interfaces/user";
-import { useSelector } from "react-redux";
 import userApi from "../../apis/user";
 import { RootState } from "../store";
 
@@ -22,16 +21,14 @@ export const getUser = createAsyncThunk("user/getUser", async (_, thunkApi) => {
   }
 });
 
-export const updateUser = createAsyncThunk<IUserState, any, { state: RootState }>(
+export const updateUser = createAsyncThunk(
   "user/updateUser",
   async (data: any, thunkApi) => {
-    console.log("document", data);
     try {
-      const user = useSelector((state: RootState) => state.user);
-      const response = await userApi.updateUser(user, data);
-      return response;
+      const user = (thunkApi.getState() as RootState).user;
+      return await userApi.updateUser(user, data);
     } catch (error) {
-      throw thunkApi.rejectWithValue({ error: "user not updated" });
+      return thunkApi.rejectWithValue({ error: "user not updated" });
     }
   }
 );
@@ -40,20 +37,16 @@ const userSlice = createSlice({
   name: "userData",
   initialState,
   reducers: {
-    getUser: (state, action: PayloadAction<IUserState>) => {
-      state = Object.assign(state, action.payload);
-
-      return state;
+    getUserAction: (_state, action: PayloadAction<IUserState>) => {
+      return action.payload;
     },
-    updateUser: (state, action: PayloadAction<IUserState>) => {
-      state = Object.assign(state, action.payload);
-
-      return state;
+    updateUserAction: (_state, action: PayloadAction<IUserState>) => {
+      return action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getUser.fulfilled, (state, action) => {
-      state = Object.assign(state, action.payload);
+      Object.assign(state, action.payload);
       state.loading = false;
       state.error = "";
     });
@@ -68,7 +61,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { getUser: getUserAction, updateUser: updateUserAction } =
+export const { getUserAction, updateUserAction } =
   userSlice.actions;
 
 export default userSlice;
