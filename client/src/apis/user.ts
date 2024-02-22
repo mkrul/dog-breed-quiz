@@ -13,26 +13,22 @@ const userApi = {
     }
   },
   updateUser: async (user: IUserState, data: any) => {
-    const currentUser = user;
+    console.log("in apis/user, user", user)
     try {
-      const doc = JSON.stringify(data)
-      console.log("apis/user.ts - user", currentUser)
-      console.log("apis/user.ts - document", doc)
       const response = await fetch("http://localhost:5000/user/:ipAddress", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: doc,
       });
-      console.log("apis/user.ts - response", response)
       const user = await response.json();
+      // console.log("userApi.updateUser - user", user);
       return user;
     } catch (error) {
       console.error("Error updating user:", error);
       return error;
     }
-  }
+  },
 
 };
 

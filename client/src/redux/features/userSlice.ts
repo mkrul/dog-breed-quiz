@@ -25,8 +25,9 @@ export const updateUser = createAsyncThunk(
   "user/updateUser",
   async (data: any, thunkApi) => {
     try {
-      const user = (thunkApi.getState() as RootState).user;
-      return await userApi.updateUser(user, data);
+      // get persisted user state
+      const userState = (thunkApi.getState() as RootState).userState as any;
+      return await userApi.updateUser(userState.user, data);
     } catch (error) {
       return thunkApi.rejectWithValue({ error: "user not updated" });
     }

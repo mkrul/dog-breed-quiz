@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const TestPage = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.userState);
 
   useEffect(() => {
     dispatch(getUser());

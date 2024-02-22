@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const AlignmentPage = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user);
+  const userState = useAppSelector((state) => state.userState);
   const [alignment, setAlignment] = useState("");
 
   useEffect(() => {
@@ -14,14 +14,21 @@ const AlignmentPage = () => {
 
   const handleSetAlignment = (value: string) => {
     setAlignment(value);
+    displayNewAlignment(value);
+    dispatch(updateUser({ alignment: value }));
+  };
+
+  const displayNewAlignment = (value: string) => {
     const selected = document.getElementById(
       `${value}-radio`
     ) as HTMLInputElement;
     selected.checked = true;
     const style = document.getElementById(`${value}-style`);
     style?.classList.remove("hidden");
-    dispatch(updateUser({ alignment: value }));
+    hideUnselectedAlignment(selected);
+  };
 
+  const hideUnselectedAlignment = (selected: HTMLInputElement) => {
     document.querySelectorAll("input[type=checkbox]").forEach((el) => {
       const option = el as HTMLInputElement;
       if (option !== selected) {

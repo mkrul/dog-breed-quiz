@@ -7,6 +7,7 @@ import { rootReducer, RootReducer } from './rootReducer'
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: ['user'],
   stateReconciler: autoMergeLevel2,
 }
 
@@ -14,6 +15,11 @@ const persistedReducer = persistReducer<RootReducer>(persistConfig, rootReducer)
 
 export const store = configureStore({
   reducer: persistedReducer,
+  middleware: getDefaultMiddleware => getDefaultMiddleware(
+    {
+      serializableCheck: false,
+    }
+  ),
 });
 
 export const persistor = persistStore(store);

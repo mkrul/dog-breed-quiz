@@ -3,11 +3,11 @@ import { IUserState } from "../interfaces/user";
 import userSlice from "./features/userSlice";
 
 export interface RootState {
-  user: IUserState;
+  userState: IUserState;
 }
 
 export type RootReducer = ReturnType<typeof rootReducer>;
 
 export const rootReducer = combineReducers({
-  user: userSlice.reducer,
+  userState: userSlice.reducer,
 });
