@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
-import { getUser, updateUser } from "../../redux/features/userSlice";
+import { updateUser, createUser } from "../../redux/features/userSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { store } from "../../redux/store";
 import { Link } from "react-router-dom";
 
 const AlignmentPage = () => {
   const dispatch = useAppDispatch();
-  const userState = useAppSelector((state) => state.userState);
   const [alignment, setAlignment] = useState("");
 
   useEffect(() => {
-    dispatch(getUser());
+    const userStore = store.getState().userState as any;
+    if (userStore.user._id === "") {
+      dispatch(createUser("ipAddress"));
+    } else {
+      dispatch(updateUser({ id: userStore.user._id, alignment: alignment }));
+    }
   }, [dispatch]);
 
   const handleSetAlignment = (value: string) => {

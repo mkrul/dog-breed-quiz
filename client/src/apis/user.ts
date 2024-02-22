@@ -2,9 +2,32 @@ import { current } from "@reduxjs/toolkit";
 import { IUserState } from "../interfaces/user";
 
 const userApi = {
-  getUser: async () => {
+  createUser: async (ipAddress: string) => {
     try {
-      const response = await fetch("http://localhost:5000/user/:ipAddress");
+      const response = await fetch("http://localhost:5000/api/user", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ipAddress }),
+      });
+
+      if (response.status === 201) {
+        return await response.json();
+      } else {
+        throw new Error("Error creating user");
+      }
+    } catch (error) {
+      console.error("Error creating user:", error);
+      return error;
+    }
+  },
+  findUser: async (id: string) => {
+    try {
+      console.log("fetching user")
+      console.log("id", id)
+      const response = await fetch(`http://localhost:5000/api/user/${id}`);
+      console.log("response", response);
       const user = await response.json();
       return user;
     } catch (error) {
@@ -12,24 +35,26 @@ const userApi = {
       return error;
     }
   },
-  updateUser: async (user: IUserState, data: any) => {
-    console.log("in apis/user, user", user)
+  updateUser: async (id: string, data: any) => {
     try {
-      const response = await fetch("http://localhost:5000/user/:ipAddress", {
-        method: "PUT",
+      const response = await fetch(`/api/user/${id}`, {
+        method: "PATCH",
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ ...data }),
       });
-      const user = await response.json();
-      // console.log("userApi.updateUser - user", user);
-      return user;
+
+      if (response.status === 200) {
+        return await response.json();
+      } else {
+        throw new Error("Error updating user");
+      }
     } catch (error) {
       console.error("Error updating user:", error);
       return error;
     }
-  },
-
+  }
 };
 
 export default userApi;

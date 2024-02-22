@@ -10,7 +10,6 @@ import "./App.css";
 import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/AboutPage";
 import ResultsPage from "./components/pages/ResultsPage";
-import TestPage from "./components/pages/TestPage";
 import AlignmentPage from "./components/pages/AlignmentPage";
 
 function App() {
