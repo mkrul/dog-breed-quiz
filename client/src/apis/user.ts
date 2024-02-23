@@ -1,5 +1,5 @@
-import { current } from "@reduxjs/toolkit";
-import { IUserState } from "../interfaces/user";
+// import { current } from "@reduxjs/toolkit";
+// import { IUserState } from "../interfaces/user";
 
 const userApi = {
   createUser: async (ipAddress: string) => {
@@ -36,6 +36,8 @@ const userApi = {
     }
   },
   updateUser: async (id: string, data: any) => {
+    console.log("id", id);
+    console.log("data", data);
     try {
       const response = await fetch(`/api/user/${id}`, {
         method: "PATCH",

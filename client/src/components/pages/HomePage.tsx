@@ -1,17 +1,12 @@
 import { useEffect } from "react";
-import { createUser } from "../../redux/features/userSlice";
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { selectSelectedUser } from "../../redux/selectors";
 import "../../assets/main.css";
 import "../../assets/homepage.css";
 
-const HomePage: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.userState);
-
-  useEffect(() => {
-    dispatch(createUser("ipAddress"));
-  }, [dispatch]);
+const HomePage = () => {
+  const user = useSelector(selectSelectedUser);
 
   return (
     <div className="antialiased bg-body text-body font-body">
