@@ -11,8 +11,19 @@ import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/AboutPage";
 import ResultsPage from "./components/pages/ResultsPage";
 import AlignmentPage from "./components/pages/AlignmentPage";
+import { useAppDispatch, useAppSelector } from "./redux/store";
+import { useEffect } from "react";
+import { fetchUser } from "./redux/actions/user";
+import { RootState } from "./redux/store";
 
 function App() {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state: RootState) => state.userData.user);
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <Router>

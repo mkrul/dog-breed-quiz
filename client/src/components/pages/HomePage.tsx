@@ -1,13 +1,9 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { selectSelectedUser } from "../../redux/selectors";
+
 import "../../assets/main.css";
 import "../../assets/homepage.css";
 
 const HomePage = () => {
-  const user = useSelector(selectSelectedUser);
-
   return (
     <div className="antialiased bg-body text-body font-body">
       <section className="pt-8 py-12 md:py-24">
