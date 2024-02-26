@@ -16,6 +16,7 @@ export const fetchUser = () => async (dispatch: any) => {
 export const updateUser = (userId: string, data: any) => async (dispatch: any) => {
   try {
     console.log('in actions/user.ts, userId:', userId);
+    console.log('in actions/user.ts, data:', data);
     console.log('in actions/user.ts, data:', JSON.stringify(data));
     dispatch(setLoadingAction(true));
 
