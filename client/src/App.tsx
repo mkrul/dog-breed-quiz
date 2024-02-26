@@ -18,7 +18,6 @@ import { RootState } from "./redux/store";
 
 function App() {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state: RootState) => state.userData.user);
 
   useEffect(() => {
     dispatch(fetchUser());

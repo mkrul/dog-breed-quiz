@@ -12,11 +12,14 @@ const AlignmentPage = () => {
     (state: RootState) => state.userData.user
   );
 
-  const handleSetAlignment = (alignment: string) => {
-    setAlignment(alignment);
-    displayNewAlignment(alignment);
+  const handleSetAlignment = (value: string) => {
+    setAlignment(value);
+    displayNewAlignment(value);
     if (user) {
-      dispatch(updateUser(user._id, { alignment }));
+      console.log("in AlignmentPage.tsx, user._id:", user._id);
+      console.log("in AlignmentPage.tsx, alignment:", value);
+      console.log("in AlignmentPage.tsx:", { alignment: value });
+      dispatch(updateUser(user._id, { alignment: value }));
     }
   };
 

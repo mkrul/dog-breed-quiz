@@ -36,11 +36,13 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    updateUserAction: (state, action: PayloadAction<User>) => {
-      state.user = action.payload;
+    updateUserAction(state, action: PayloadAction<User>) {
+      if (state.user) {
+        state.user = { ...state.user, ...action.payload }
+      }
       state.loading = false;
       state.error = null;
-    }
+    },
   },
 });
 

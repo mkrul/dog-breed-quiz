@@ -11,25 +11,26 @@ export const fetchUser = () => async (dispatch: any) => {
   }
 }
 
-export const updateUser = (id: string, data: any) => async (dispatch: any) => {
+// write an action to update the user
+
+export const updateUser = (userId: string, data: any) => async (dispatch: any) => {
   try {
-    console.log('in actions/user.ts, id:', id);
-    console.log('in actions/user.ts, data:', data);
-    const response = await fetch(`http://localhost:5000/api/user/${id}`, {
-      method: "PUT",
+    console.log('in actions/user.ts, userId:', userId);
+    console.log('in actions/user.ts, data:', JSON.stringify(data));
+    dispatch(setLoadingAction(true));
+
+    const response = await fetch(`http://localhost:5000/api/user/${userId}`, {
+      method: 'PUT',
+      cache: 'no-cache',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...data }),
+      body: JSON.stringify(data)
     });
 
-    console.log('in actions/user.ts, response:', response);
-    if (response.status === 200) {
-      const user = await response.json();
-      dispatch(updateUserAction(user));
-    } else {
-      throw new Error("Error updating user");
-    }
+    const updatedUser = await response.json();
+    console.log('in actions/user.ts, updatedUser:', updatedUser);
+    dispatch(updateUserAction(updatedUser.user));
   } catch (error) {
     dispatch(setErrorAction('error updating user!'));
   }
