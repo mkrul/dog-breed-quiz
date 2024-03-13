@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = exports.findOrCreateUserByIpAddress = void 0;
+exports.updateUser = exports.findOrCreateUser = void 0;
 const user_1 = __importDefault(require("../../models/user"));
-function findOrCreateUserByIpAddress(ipAddress) {
+function findOrCreateUser(ipAddress) {
     return __awaiter(this, void 0, void 0, function* () {
-        // Try to find the user in the database by ipAddress
+        // Try to find the user in the database
         let user = yield user_1.default.findOne({ ipAddress });
         // If user doesn't exist, create a new user
         if (!user) {
@@ -26,13 +26,15 @@ function findOrCreateUserByIpAddress(ipAddress) {
         return user;
     });
 }
-exports.findOrCreateUserByIpAddress = findOrCreateUserByIpAddress;
-function updateUser(ipAddress, document) {
+exports.findOrCreateUser = findOrCreateUser;
+function updateUser(userId, data) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("in updateUser service", document);
-        let user = yield user_1.default.updateOne({ ipAddress: ipAddress }, { document });
-        const updatedUser = new user_1.default(Object.assign({}, user));
-        return updatedUser;
+        // Find the user in the database and update it
+        // update user in mongo db]
+        console.log('in services/user.ts, userId:', userId);
+        console.log('in services/user.ts, data:', JSON.stringify(data));
+        const user = yield user_1.default.findByIdAndUpdate(userId, data, { new: true });
+        return user;
     });
 }
 exports.updateUser = updateUser;

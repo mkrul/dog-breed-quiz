@@ -4,7 +4,8 @@ const router = express.Router();
 const userController = require("../controllers/user");
 
 // GET /user/:ipAddress
-router.get("/user/:ipAddress", userController.getUser);
-router.put("/user/:ipAddress", userController.updateUser);
+// router.post("/", userController.createUser);
+router.get("/api/user", userController.getUser);
+router.put("/api/user/:userId", express.json(), userController.updateUser);
 
 export { router };

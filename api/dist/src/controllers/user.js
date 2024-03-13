@@ -13,14 +13,12 @@ const user_1 = require("./services/user");
 const asyncHandler = require("express-async-handler");
 exports.getUser = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const ipAddress = req.ip;
-    const user = yield (0, user_1.findOrCreateUserByIpAddress)(ipAddress);
-    res.status(200).json({ user });
+    const user = yield (0, user_1.findOrCreateUser)(ipAddress);
+    res.status(201).json({ user });
 }));
 exports.updateUser = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("in update user");
-    console.log("req.params.ipAddress", req.params.ipAddress);
-    console.log("req.body", req.body);
-    console.log("params", req.params);
-    const user = yield (0, user_1.updateUser)(req.ip, req.body);
+    const { userId } = req.params;
+    const data = req.body;
+    const user = yield (0, user_1.updateUser)(userId, data);
     res.status(200).json({ user });
 }));

@@ -9,5 +9,6 @@ const router = express_1.default.Router();
 exports.router = router;
 const userController = require("../controllers/user");
 // GET /user/:ipAddress
-router.get("/user/:ipAddress", userController.getUser);
-router.put("/user/:ipAddress", userController.updateUser);
+// router.post("/", userController.createUser);
+router.get("/api/user", userController.getUser);
+router.put("/api/user/:userId", express_1.default.json(), userController.updateUser);

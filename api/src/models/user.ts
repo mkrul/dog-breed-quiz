@@ -1,8 +1,10 @@
-import mongoose, { ObjectId } from 'mongoose';
+import mongoose from 'mongoose';
+import { ObjectId } from 'mongodb';
 
 const Schema = mongoose.Schema;
 
 export type UserType = {
+  _id: ObjectId,
   ipAddress: string,
   alignment: string,
   createdAt: Date
