@@ -5,13 +5,13 @@ const Schema = mongoose.Schema;
 
 export type UserType = {
   _id: ObjectId,
-  ipAddress: string,
+  uuid: string,
   alignment: string,
   createdAt: Date
 }
 
 const userSchema = new Schema({
-  ipAddress: { type: String, required: true },
+  uuid: { type: String, required: true },
   alignment: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now }
 });

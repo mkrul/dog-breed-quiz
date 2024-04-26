@@ -4,7 +4,7 @@ import { IUserState } from "../interfaces/user";
 const userApi = {
   getUser: async () => {
     try {
-      const response = await fetch("http://localhost:5000/user/:ipAddress");
+      const response = await fetch("http://localhost:5000/user/:uuid");
       const user = await response.json();
       return user;
     } catch (error) {
@@ -15,7 +15,7 @@ const userApi = {
   updateUser: async (user: IUserState, data: any) => {
     console.log("in apis/user, user", user)
     try {
-      const response = await fetch("http://localhost:5000/user/:ipAddress", {
+      const response = await fetch("http://localhost:5000/user/:uuid", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

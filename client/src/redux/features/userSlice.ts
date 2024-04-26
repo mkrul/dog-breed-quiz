@@ -5,7 +5,7 @@ import { RootState } from "../store";
 
 const initialState: IUserState = {
   _id: "",
-  ipAddress: "",
+  uuid: "",
   createdAt: "",
   alignment: "",
   loading: false,

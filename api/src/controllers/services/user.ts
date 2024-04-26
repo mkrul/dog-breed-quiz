@@ -1,12 +1,12 @@
 import User, { UserType } from "../../models/user";
 
-export async function findOrCreateUser(ipAddress: string): Promise<UserType> {
+export async function findOrCreateUser(uuid: string): Promise<UserType> {
   // Try to find the user in the database
-  let user = await User.findOne({ ipAddress });
+  let user = await User.findOne({ uuid });
 
   // If user doesn't exist, create a new user
   if (!user) {
-    user = new User({ ipAddress });
+    user = new User({ uuid });
     await user.save();
   }
 

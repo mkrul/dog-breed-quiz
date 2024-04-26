@@ -1,6 +1,6 @@
 export type IUserState = {
   _id: string
-  ipAddress: string
+  uuid: string
   createdAt: string
   alignment: string
   loading: boolean

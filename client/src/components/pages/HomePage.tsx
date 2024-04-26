@@ -34,21 +34,23 @@ const HomePage: React.FC = () => {
                   <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
                     Why "ban this breed"?
                   </h6>
-                  <p className="mb-10 text-xl text-neutral-700 font-medium">
+                  <p className="mb-5 text-xl text-neutral-700 font-medium">
                     Proponents of breed-specific legislation (BSL) argue that
                     certain dog breeds should be banned or regulated based on
                     statistical data surrounding dog attacks. The most commonly
                     targeted breeds are those labeled "pit bulls". For many,
                     "pit bull" is used as a catch-all term for dogs with similar
-                    physical characteristics or a certain amount of "pit bull"
+                    physical characteristics or a certain amount of pit bull
                     heritage. For others, the term is used to describe a
                     specific breed of dog, the American Pit Bull Terrier.
                   </p>
-                  <p className="mb-12 text-xl text-neutral-700 font-medium">
-                    This project aims to test the assertion that "pit bulls" are
+                  <p className="mb-5 text-xl text-neutral-700 font-medium">
+                    This project aims to test the assertion that pit bulls are
                     easy to identify by comparing the accuracy of visual
-                    identifications to DNA test results. You can learn more
-                    about this test and its methodology by clicking{" "}
+                    identifications to DNA test results.
+                  </p>
+                  <p className="mb-12 text-xl text-neutral-700 font-medium">
+                    You can learn more about this test by clicking{" "}
                     {<Link to="/about">here</Link>}.
                   </p>
                   <div className="flex flex-wrap -m-4 justify-center">

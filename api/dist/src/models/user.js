@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
 const userSchema = new Schema({
-    ipAddress: { type: String, required: true },
+    uuid: { type: String, required: true },
     alignment: { type: String, default: '' },
     createdAt: { type: Date, default: Date.now }
 });

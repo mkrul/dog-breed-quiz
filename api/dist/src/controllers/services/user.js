@@ -14,13 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateUser = exports.findOrCreateUser = void 0;
 const user_1 = __importDefault(require("../../models/user"));
-function findOrCreateUser(ipAddress) {
+function findOrCreateUser(uuid) {
     return __awaiter(this, void 0, void 0, function* () {
         // Try to find the user in the database
-        let user = yield user_1.default.findOne({ ipAddress });
+        let user = yield user_1.default.findOne({ uuid });
         // If user doesn't exist, create a new user
         if (!user) {
-            user = new user_1.default({ ipAddress });
+            user = new user_1.default({ uuid });
             yield user.save();
         }
         return user;

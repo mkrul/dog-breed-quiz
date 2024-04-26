@@ -5,7 +5,7 @@ const ResultsPage: React.FC = () => {
   return (
     <div className="antialiased bg-body text-body font-body">
       <section className="mt-4 pt-6 py-12 md:py-2">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 pb-5">
           <div className="mb-20">
             <h2 className="mb-12 text-5xl font-semibold font-subheading">
               Your Results
@@ -104,7 +104,7 @@ const ResultsPage: React.FC = () => {
             <h6 className="mb-5 font-bold">(Neutral)</h6>
             <p className="mb-6">
               These results are based on the criteria set by participants who
-              identified as neutral in regards to pit bulls.
+              identified as neutral.
             </p>
             <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
               <thead>

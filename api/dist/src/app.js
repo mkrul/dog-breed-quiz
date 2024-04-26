@@ -47,13 +47,15 @@ const app = (0, express_1.default)();
 app.use(cors());
 app.use(express_1.default.static(__dirname + "/public"));
 app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const ipAddress = req.ip;
+    const uuid = localStorage.getItem("btb_uuid") || "";
+    console.log("uuid", uuid);
     try {
         // Check if user exists in database
-        let user = yield user_1.default.findOne({ ipAddress });
+        let user = yield user_1.default.findOne({ uuid });
         // If user doesn't exist, create a new user
         if (!user) {
-            user = yield user_1.default.create({ ipAddress });
+            localStorage.setItem("btb_uuid", uuid);
+            user = yield user_1.default.create({ uuid });
         }
         // Send user data back to client
         res.json(user);
