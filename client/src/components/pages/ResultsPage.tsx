@@ -13,20 +13,24 @@ const ResultsPage: React.FC = () => {
             <div className="mb-5 text-xl text-neutral-700 font-medium">
               <p className="mb-5">
                 You identified <span className="font-bold">30</span> out of{" "}
-                <span className="font-bold">100</span> dogs as pit bulls.
+                <span className="font-bold">100</span> dogs as pit bulls based
+                on the criteria you set at the beginning of the test.
               </p>
               <p className="mb-5">
-                Based on the criteria you set, your overall accuracy was{" "}
-                <span className="font-bold">33%</span>.
+                <span className="font-bold">17</span> of these dogs would be
+                classified as pit bulls based on your identification criteria.
               </p>
               <p className="mb-5">
-                This means that <span className="font-bold">20</span> dogs were
-                identified incorrectly based on your critera.
+                <span className="font-bold">20</span> dogs were identified
+                incorrectly based on your critera.
               </p>
-              <p className="mb-20">
-                Out of all dogs shown, 18 were within{" "}
-                <span className="font-bold">25%</span> of the threshold you set
-                at the beginning of the test.
+              <p className="mb-5">
+                Of these, <span className="font-bold">5</span> were within the
+                10% threshold.
+              </p>
+              <p className="mb-5">
+                Your overall accuracy was <span className="font-bold">33%</span>
+                .
               </p>
             </div>
           </div>
