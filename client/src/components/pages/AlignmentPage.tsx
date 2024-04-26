@@ -68,7 +68,7 @@ const AlignmentPage = () => {
               <div className="flex flex-col justify-center h-full">
                 <div>
                   <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
-                    How do you identify your feelings about "pit bulls"?
+                    How do you identify your feelings about pit bulls?
                   </h6>
                   <div className="mb-6 ml-6">
                     <label className="relative flex items-center gap-2 mb-4">
