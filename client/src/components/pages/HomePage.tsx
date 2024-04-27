@@ -1,8 +1,57 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Modal, Box } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { Input } from "@mui/material";
+import { setUsernameAction } from "../../redux/features/userSlice";
+
 import "../../assets/main.css";
 import "../../assets/homepage.css";
 
-const HomePage: React.FC = () => {
+const HomePage = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [userNameInput, setUserNameInput] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const modalStyle = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleUserNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserNameInput(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (userNameInput.length > 0) {
+      try {
+        dispatch(setUsernameAction(userNameInput));
+      } catch (error) {
+        console.log(error);
+      }
+      navigate("/test/alignment");
+    } else {
+      alert("Please enter a username to begin the test");
+    }
+  };
+
   return (
     <div className="antialiased bg-body text-body font-body">
       <section className="pt-8 py-12 md:py-24">
@@ -56,12 +105,52 @@ const HomePage: React.FC = () => {
                   <div className="flex flex-wrap -m-4 justify-center">
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
-                        <Link
-                          to="/test/alignment"
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
+                        <button
+                          onClick={handleOpenModal}
+                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
                           Start the test
-                        </Link>
+                        </button>
+                        {showModal && (
+                          <Modal
+                            open={showModal}
+                            onClose={handleCloseModal}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                          >
+                            <Box sx={modalStyle} borderRadius={2}>
+                              <h2 className="text-2xl font-semibold tracking-tight">
+                                Please enter a username
+                              </h2>
+                              <Input
+                                type="text"
+                                value={userNameInput}
+                                onChange={handleUserNameInput}
+                                placeholder={"Type your name here"}
+                                className="mt-4 mb-4"
+                              />
+                              <div className="mt-3 mb-3">
+                                <span className="font-semibold">NOTE:</span> You
+                                will lose your progress if you navigate away
+                                from this site before completing the test.
+                              </div>
+                              <div className="flex justify-around">
+                                <button
+                                  onClick={handleSubmit}
+                                  className="inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-3"
+                                >
+                                  Start test
+                                </button>
+                                <button
+                                  onClick={handleCloseModal}
+                                  className="inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-3"
+                                >
+                                  Close
+                                </button>
+                              </div>
+                            </Box>
+                          </Modal>
+                        )}
                       </p>
                     </div>
                     <div className="w-full md:w-auto p-4">
