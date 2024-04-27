@@ -12,25 +12,31 @@ const ResultsPage: React.FC = () => {
             </h2>
             <div className="mb-5 text-xl text-neutral-700 font-medium">
               <p className="mb-5">
-                You identified <span className="font-bold">30</span> out of{" "}
-                <span className="font-bold">100</span> dogs as pit bulls based
-                on the criteria you set at the beginning of the test.
+                Out of <span className="font-bold">50</span> dogs, you selected{" "}
+                <span className="font-bold">20</span> that appeared to be pit
+                bulls based on the criteria you set at the beginning of the test
               </p>
               <p className="mb-5">
-                <span className="font-bold">17</span> of these dogs would be
-                classified as pit bulls based on your identification criteria.
+                Of the <span className="font-bold">20</span> that you selected,{" "}
+                only <span className="font-bold">17</span> would be classified
+                as pit bulls based on your identification criteria
               </p>
               <p className="mb-5">
-                <span className="font-bold">20</span> dogs were identified
-                incorrectly based on your critera.
+                <span className="font-bold">10</span> out of the{" "}
+                <span className="font-bold">20</span> dogs that were shown were
+                identified incorrectly based on your critera
               </p>
               <p className="mb-5">
-                Of these, <span className="font-bold">5</span> were within the
-                10% threshold.
+                Of these, <span className="font-bold">5</span> were within{" "}
+                <span className="font-bold">10%</span> of the threshold for what
+                you classify as a pit bull
+              </p>
+              <p className="mb-5">
+                The average accuracy for all participants is currently{" "}
+                <span className="font-bold">45.3%</span>
               </p>
               <p className="mb-5">
                 Your overall accuracy was <span className="font-bold">33%</span>
-                .
               </p>
             </div>
           </div>
@@ -159,6 +165,44 @@ const ResultsPage: React.FC = () => {
                   <td className="py-2">All Breeds *</td>
                   <td className="py-2">0</td>
                   <td className="py-2">0</td>
+                </tr>
+              </tbody>
+            </table>
+
+            {/* top scores */}
+
+            <h2 className="pt-6 text-5xl font-semibold font-subheading">
+              Top Scores
+            </h2>
+            <h6 className="mb-5 font-bold">(All Participants)</h6>
+
+            <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
+              <thead>
+                <tr>
+                  <th className="py-2">Username</th>
+                  <th className="py-2">Accuracy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="py-2">User1</td>
+                  <td className="py-2">48%</td>
+                </tr>
+                <tr>
+                  <td className="py-2">User2</td>
+                  <td className="py-2">47%</td>
+                </tr>
+                <tr>
+                  <td className="py-2">User3</td>
+                  <td className="py-2">45%</td>
+                </tr>
+                <tr>
+                  <td className="py-2">User4</td>
+                  <td className="py-2">44%</td>
+                </tr>
+                <tr>
+                  <td className="py-2">User5</td>
+                  <td className="py-2">43%</td>
                 </tr>
               </tbody>
             </table>

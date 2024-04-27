@@ -5,29 +5,38 @@ import { RootState } from "../store";
 
 const initialState: IUserState = {
   _id: "",
-  uuid: "",
+  username: "",
   createdAt: "",
   alignment: "",
   loading: false,
   error: "",
 };
 
-export const getUser = createAsyncThunk("user/getUser", async (_, thunkApi) => {
-  try {
-    const response = await userApi.getUser();
-    return response;
-  } catch (error) {
-    throw thunkApi.rejectWithValue({ error: "user not initialized" });
-  }
+// Action Types
+
+const SET_USERNAME = "SET_USERNAME";
+
+// Action Creators
+
+export const setUsername = (username: string) => ({
+  type: SET_USERNAME,
+  payload: username,
 });
+
+export const setAlignment = (alignment: string) => ({
+  type: "SET_ALIGNMENT",
+  payload: alignment,
+});
+
+// Thunks
 
 export const updateUser = createAsyncThunk(
   "user/updateUser",
   async (data: any, thunkApi) => {
     try {
       // get persisted user state
-      const userState = (thunkApi.getState() as RootState).userState as any;
-      return await userApi.updateUser(userState.user, data);
+      const user = (thunkApi.getState() as RootState).user as any;
+      return await userApi.updateUser(user.user, data);
     } catch (error) {
       return thunkApi.rejectWithValue({ error: "user not updated" });
     }
@@ -38,31 +47,25 @@ const userSlice = createSlice({
   name: "userData",
   initialState,
   reducers: {
-    getUserAction: (_state, action: PayloadAction<IUserState>) => {
+    setUsernameAction: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        username: action.payload,
+      }
+    },
+    setAlignmentAction: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        alignment: action.payload,
+      }
+    },
+    updateUserAction: (state, action: PayloadAction<IUserState>) => {
       return action.payload;
     },
-    updateUserAction: (_state, action: PayloadAction<IUserState>) => {
-      return action.payload;
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(getUser.fulfilled, (state, action) => {
-      Object.assign(state, action.payload);
-      state.loading = false;
-      state.error = "";
-    });
-    builder.addCase(getUser.pending, (state) => {
-      state.loading = true;
-      state.error = "";
-    });
-    builder.addCase(getUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message || "user not initialized";
-    });
   },
 });
 
-export const { getUserAction, updateUserAction } =
+export const { updateUserAction, setUsernameAction, setAlignmentAction } =
   userSlice.actions;
 
-export default userSlice;
+export default userSlice.reducer;

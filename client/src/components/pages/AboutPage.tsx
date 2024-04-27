@@ -42,8 +42,8 @@ const AboutPage: React.FC = () => {
                   {divVisibility["q1"] && (
                     <div className="mt-5 text-left">
                       The purpose of this test is to provide participants with
-                      an opportunity to learn more about the accuracy of visual
-                      breed identification.
+                      an opportunity to learn more about the accuracy and
+                      limitations of visual breed identification.
                     </div>
                   )}
                 </div>
@@ -136,7 +136,7 @@ const AboutPage: React.FC = () => {
                   </div>
                   {divVisibility["q5"] && (
                     <div className="mt-5 text-left">
-                      This project was created for educational or entertainment
+                      This project was created for educational and entertainment
                       purposes only. It has been developed by a private third
                       party and is not a part of any official government or
                       academic research. The results of this test are not

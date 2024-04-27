@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-import { getUser, updateUser } from "../../redux/features/userSlice";
+import { updateUser } from "../../redux/features/userSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { Link } from "react-router-dom";
 
 const AlignmentPage = () => {
   const dispatch = useAppDispatch();
-  const userState = useAppSelector((state) => state.userState);
   const [alignment, setAlignment] = useState("");
-
-  useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
 
   const handleSetAlignment = (value: string) => {
     setAlignment(value);

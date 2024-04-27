@@ -1,6 +1,6 @@
 export type IUserState = {
   _id: string
-  uuid: string
+  username: string
   createdAt: string
   alignment: string
   loading: boolean
