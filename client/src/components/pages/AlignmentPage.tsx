@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { updateUser } from "../../redux/features/userSlice";
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { Link } from "react-router-dom";
+import { setAlignmentAction } from "../../redux/features/userSlice";
 
 const AlignmentPage = () => {
   const dispatch = useAppDispatch();
@@ -10,7 +11,7 @@ const AlignmentPage = () => {
   const handleSetAlignment = (value: string) => {
     setAlignment(value);
     displayNewAlignment(value);
-    dispatch(updateUser({ alignment: value }));
+    dispatch(setAlignmentAction(value));
   };
 
   const displayNewAlignment = (value: string) => {
@@ -63,7 +64,7 @@ const AlignmentPage = () => {
               <div className="flex flex-col justify-center h-full">
                 <div>
                   <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
-                    How do you identify your feelings about pit bulls?
+                    Choose the statement that best aligns with your beliefs
                   </h6>
                   <div className="mb-6 ml-6">
                     <label className="relative flex items-center gap-2 mb-4">
@@ -102,8 +103,9 @@ const AlignmentPage = () => {
                           />
                         </svg>
                       </div>
-                      <span className="text-neutral-600 text-lg font-medium tracking-tight">
-                        Pro-Pit Bull
+                      <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
+                        "Pit bulls are just like any other dog, and it truly is
+                        all in how you raise them."
                       </span>
                     </label>
                     <label className="relative flex items-center gap-2 mb-4">
@@ -142,8 +144,10 @@ const AlignmentPage = () => {
                           />
                         </svg>
                       </div>
-                      <span className="text-neutral-600 text-lg font-medium tracking-tight">
-                        Neutral
+                      <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
+                        "Pit Bulls are genetically inclined to be dog
+                        aggressive, but in the right hands, they can be amazing
+                        companions."
                       </span>
                     </label>
                     <label className="relative flex items-center gap-2 mb-4">
@@ -182,8 +186,9 @@ const AlignmentPage = () => {
                           />
                         </svg>
                       </div>
-                      <span className="text-neutral-600 text-lg font-medium tracking-tight">
-                        Anti-Pit Bull
+                      <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
+                        "Pit Bulls are dangerous and should be banned,
+                        regulated, or phased out of existence."
                       </span>
                     </label>
                   </div>

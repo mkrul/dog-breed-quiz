@@ -64,7 +64,7 @@ const ResultsPage: React.FC = () => {
                   <td className="py-2">0</td>
                 </tr>
                 <tr>
-                  <td className="py-2">Neutral</td>
+                  <td className="py-2">Moderate</td>
                   <td className="py-2">0</td>
                   <td className="py-2">0</td>
                 </tr>
@@ -111,10 +111,10 @@ const ResultsPage: React.FC = () => {
             <h2 className="text-5xl font-semibold font-subheading">
               Breakdown
             </h2>
-            <h6 className="mb-5 font-bold">(Neutral)</h6>
+            <h6 className="mb-5 font-bold">(Moderate)</h6>
             <p className="mb-6">
               These results are based on the criteria set by participants who
-              identified as neutral.
+              identified as moderate.
             </p>
             <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
               <thead>
@@ -180,28 +180,34 @@ const ResultsPage: React.FC = () => {
               <thead>
                 <tr>
                   <th className="py-2">Username</th>
+                  <th className="py-2">Alignment</th>
                   <th className="py-2">Accuracy</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td className="py-2">User1</td>
+                  <td className="py-2">Moderate</td>
                   <td className="py-2">48%</td>
                 </tr>
                 <tr>
                   <td className="py-2">User2</td>
+                  <td className="py-2">Moderate</td>
                   <td className="py-2">47%</td>
                 </tr>
                 <tr>
                   <td className="py-2">User3</td>
+                  <td className="py-2">Pro-pit bull</td>
                   <td className="py-2">45%</td>
                 </tr>
                 <tr>
                   <td className="py-2">User4</td>
+                  <td className="py-2">Anti-pit bull</td>
                   <td className="py-2">44%</td>
                 </tr>
                 <tr>
                   <td className="py-2">User5</td>
+                  <td className="py-2">Pro-pit bull</td>
                   <td className="py-2">43%</td>
                 </tr>
               </tbody>

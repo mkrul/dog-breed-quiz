@@ -15,6 +15,7 @@ const initialState: IUserState = {
 // Action Types
 
 const SET_USERNAME = "SET_USERNAME";
+const SET_ALIGNMENT = "SET_ALIGNMENT";
 
 // Action Creators
 

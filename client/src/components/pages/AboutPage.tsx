@@ -114,16 +114,21 @@ const AboutPage: React.FC = () => {
                   </div>
                   {divVisibility["q4"] && (
                     <div className="mt-5 text-left">
-                      DNA testing can only detect breeds that are present in a
-                      dog's immediate ancestry, and ancestors more than four
-                      generations back may not be detected at all. The accuracy
-                      of DNA tests can also vary significantly between different
-                      companies and tests. Some breeds can be especially
-                      difficult to distinguish from one another due to their
-                      common ancestry. For example, the genetic profiles of the
-                      American Pit Bull Terrier and the American Staffordshire
-                      Terrier are very similar, as they are closely related
-                      breeds.
+                      <p>
+                        DNA testing can only detect breeds that are present in a
+                        dog's immediate ancestry, and ancestors more than four
+                        generations back may not be detected at all. The
+                        accuracy of DNA tests can also vary significantly
+                        between different companies and tests.
+                      </p>
+                      <p className="mt-2">
+                        Additionally, some breeds can be especially difficult to
+                        distinguish from one another due to their common
+                        ancestry. For example, the genetic profiles of the
+                        American Pit Bull Terrier and the American Staffordshire
+                        Terrier are very similar, as they are closely related
+                        breeds.
+                      </p>
                     </div>
                   )}
                 </div>

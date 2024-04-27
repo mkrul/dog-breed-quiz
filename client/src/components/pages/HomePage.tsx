@@ -131,8 +131,8 @@ const HomePage = () => {
                               />
                               <div className="mt-3 mb-3">
                                 <span className="font-semibold">NOTE:</span> You
-                                will lose your progress if you navigate away
-                                from this site before completing the test.
+                                may lose your progress if you navigate away from
+                                this site before completing the test.
                               </div>
                               <div className="flex justify-around">
                                 <button
