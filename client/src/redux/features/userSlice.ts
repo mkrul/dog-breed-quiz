@@ -8,6 +8,7 @@ const initialState: IUserState = {
   username: "",
   createdAt: "",
   alignment: "",
+  breeds: [],
   loading: false,
   error: "",
 };
@@ -16,6 +17,8 @@ const initialState: IUserState = {
 
 const SET_USERNAME = "SET_USERNAME";
 const SET_ALIGNMENT = "SET_ALIGNMENT";
+const ADD_BREED = "ADD_BREED";
+const REMOVE_BREED = "REMOVE_BREED";
 
 // Action Creators
 
@@ -25,8 +28,18 @@ export const setUsername = (username: string) => ({
 });
 
 export const setAlignment = (alignment: string) => ({
-  type: "SET_ALIGNMENT",
+  type: SET_ALIGNMENT,
   payload: alignment,
+});
+
+export const addBreed = (value: string) => ({
+  type: ADD_BREED,
+  payload: value,
+});
+
+export const removeBreed = (value: string) => ({
+  type: REMOVE_BREED,
+  payload: value,
 });
 
 // Thunks
@@ -52,12 +65,24 @@ const userSlice = createSlice({
       return {
         ...state,
         username: action.payload,
-      }
+      };
     },
     setAlignmentAction: (state, action: PayloadAction<string>) => {
       return {
         ...state,
         alignment: action.payload,
+      };
+    },
+    addBreedAction: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        breeds: [...state.breeds, action.payload],
+      };
+    },
+    removeBreedAction: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        breeds: state.breeds.filter((breed) => breed !== action.payload),
       }
     },
     updateUserAction: (state, action: PayloadAction<IUserState>) => {
@@ -66,7 +91,12 @@ const userSlice = createSlice({
   },
 });
 
-export const { updateUserAction, setUsernameAction, setAlignmentAction } =
-  userSlice.actions;
+export const {
+  updateUserAction,
+  setUsernameAction,
+  setAlignmentAction,
+  addBreedAction,
+  removeBreedAction,
+} = userSlice.actions;
 
 export default userSlice.reducer;

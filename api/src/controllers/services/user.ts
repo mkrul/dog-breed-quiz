@@ -1,5 +1,13 @@
 import User, { UserType } from "../../models/user";
 
+export async function createUser(username: string): Promise<UserType> {
+  // Create a new user in the database
+  const user = new User({ username });
+  await user.save();
+
+  return user;
+}
+
 export async function findOrCreateUser(uuid: string): Promise<UserType> {
   // Try to find the user in the database
   let user = await User.findOne({ uuid });

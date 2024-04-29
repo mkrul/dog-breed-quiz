@@ -12,7 +12,7 @@ const environment = process.env.NODE_ENV || 'development';
     path: path_1.default.join(__dirname, `../../${environment}.env`),
 });
 const env = (0, envalid_1.cleanEnv)(process.env, {
-    MONGO_URI: (0, validators_1.str)(),
+    MONGO_DB_URI: (0, validators_1.str)(),
     NODE_ENV: (0, validators_1.str)(),
     PORT: (0, validators_1.port)(),
 });

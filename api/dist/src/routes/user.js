@@ -8,7 +8,3 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 exports.router = router;
 const userController = require("../controllers/user");
-// GET /user/:uuid
-router.post("/", userController.getUser);
-router.get("/api/user", userController.getUser);
-router.put("/api/user/:userId", express_1.default.json(), userController.updateUser);

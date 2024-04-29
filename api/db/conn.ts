@@ -1,7 +1,7 @@
 import env from "../src/util/validateEnv";
 import mongoose from "mongoose";
 
-const mongoUri = env.MONGO_URI;
+const mongoUri = env.MONGO_DB_URI;
 
 mongoose.connect(mongoUri);
 

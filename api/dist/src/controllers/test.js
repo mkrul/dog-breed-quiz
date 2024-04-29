@@ -8,11 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const user_1 = require("./services/user");
-const asyncHandler = require("express-async-handler");
+const asyncHandler = require('express-async-handler');
 exports.startTest = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const ipAddress = req.ip;
-    const user = yield (0, user_1.findOrCreateUserByIpAddress)(ipAddress);
-    res.status(200).json({ user });
+    res.status(200).json({
+        message: 'Test started'
+    });
+}));
+exports.showBreedsPage = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('in controllers/test.ts, showBreedsPage');
+    res.status(200).json({
+        message: 'Breeds page'
+    });
 }));

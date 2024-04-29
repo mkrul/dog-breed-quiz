@@ -10,7 +10,7 @@ import "./App.css";
 import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/AboutPage";
 import ResultsPage from "./components/pages/ResultsPage";
-import TestPage from "./components/pages/TestPage";
+import BreedsPage from "./components/pages/BreedsPage";
 import AlignmentPage from "./components/pages/AlignmentPage";
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/test/alignment" element={<AlignmentPage />} />
+          <Route path="/test/breeds" element={<BreedsPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

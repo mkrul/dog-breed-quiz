@@ -11,10 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = require("./services/user");
 const asyncHandler = require("express-async-handler");
-exports.getUserByUuid = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { uuid } = req.params;
-    console.log("uuid", uuid);
-    const user = yield (0, user_1.findOrCreateUser)(uuid);
+exports.createUser = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { username } = req.body;
+    const user = yield (0, user_1.createUser)(username);
     res.status(201).json({ user });
 }));
 exports.updateUser = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {

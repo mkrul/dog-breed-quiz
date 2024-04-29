@@ -3,6 +3,7 @@ export type IUserState = {
   username: string
   createdAt: string
   alignment: string
+  breeds: string[]
   loading: boolean
   error: string
 }

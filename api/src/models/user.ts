@@ -5,14 +5,16 @@ const Schema = mongoose.Schema;
 
 export type UserType = {
   _id: ObjectId,
-  uuid: string,
+  username: string,
   alignment: string,
+  breeds: string[],
   createdAt: Date
 }
 
 const userSchema = new Schema({
-  uuid: { type: String, required: true },
+  username: { type: String, required: true },
   alignment: { type: String, default: '' },
+  breeds: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now }
 });
 

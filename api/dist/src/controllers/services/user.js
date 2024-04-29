@@ -12,8 +12,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = exports.findOrCreateUser = void 0;
+exports.updateUser = exports.findOrCreateUser = exports.createUser = void 0;
 const user_1 = __importDefault(require("../../models/user"));
+function createUser(username) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // Create a new user in the database
+        const user = new user_1.default({ username });
+        yield user.save();
+        return user;
+    });
+}
+exports.createUser = createUser;
 function findOrCreateUser(uuid) {
     return __awaiter(this, void 0, void 0, function* () {
         // Try to find the user in the database

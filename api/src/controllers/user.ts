@@ -1,10 +1,10 @@
-import { findOrCreateUser, updateUser } from "./services/user";
+import { createUser, updateUser } from "./services/user";
 const asyncHandler = require("express-async-handler");
 
-exports.getUserByUuid = asyncHandler(async (req: any, res: any, next: any) => {
-  const { uuid } = req.params;
-  console.log("uuid", uuid)
-  const user = await findOrCreateUser(uuid);
+exports.createUser = asyncHandler(async (req: any, res: any, next: any) => {
+  const { username } = req.body;
+
+  const user = await createUser(username);
 
   res.status(201).json({ user });
 });

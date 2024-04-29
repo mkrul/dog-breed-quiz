@@ -1,30 +1,51 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
-import { setAlignmentAction } from "../../redux/features/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { IUserState } from "../../interfaces/user";
+import {
+  addBreedAction,
+  removeBreedAction,
+} from "../../redux/features/userSlice";
+import e from "cors";
 
-const AlignmentPage = () => {
+const BreedsPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [alignment, setAlignment] = useState("");
+  const selectedBreeds = useSelector(
+    (state: { user: IUserState }) => state.user.breeds
+  );
 
-  const handleSetAlignment = (value: string) => {
-    setAlignment(value);
-    displayNewAlignment(value);
-    dispatch(setAlignmentAction(value));
+  const handleSetBreeds = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("e.target", e.target);
+    const { value, checked } = e.target as HTMLInputElement;
+    selectOrUnselectBreed(value);
+    if (checked) {
+      dispatch(addBreedAction(value));
+    } else {
+      dispatch(removeBreedAction(value));
+    }
   };
 
-  const displayNewAlignment = (value: string) => {
+  const selectOrUnselectBreed = (value: string) => {
+    console.log("value", value);
     const selected = document.getElementById(
       `${value}-radio`
     ) as HTMLInputElement;
-    selected.checked = true;
-    const style = document.getElementById(`${value}-style`);
-    style?.classList.remove("hidden");
-    hideUnselectedAlignment(selected);
+    if (selected.checked) {
+      selected.checked = false;
+      selected.removeAttribute("checked");
+      const style = document.getElementById(`${value}-style`);
+      style?.classList.add("hidden");
+    } else {
+      selected.checked = true;
+      selected.setAttribute("checked", "checked");
+      const style = document.getElementById(`${value}-style`);
+      style?.classList.remove("hidden");
+    }
   };
 
-  const hideUnselectedAlignment = (selected: HTMLInputElement) => {
+  const hideUnselectedBreed = (selected: HTMLInputElement) => {
     document.querySelectorAll("input[type=checkbox]").forEach((el) => {
       const option = el as HTMLInputElement;
       if (option !== selected) {
@@ -36,10 +57,10 @@ const AlignmentPage = () => {
   };
 
   const handleSubmit = () => {
-    if (alignment) {
+    if (selectedBreeds.length > 0) {
       navigate("/test/breeds");
     } else {
-      alert("Please select an alignment to continue");
+      alert("Select at least one breed to continue");
     }
   };
 
@@ -72,23 +93,23 @@ const AlignmentPage = () => {
               <div className="flex flex-col justify-center h-full">
                 <div>
                   <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
-                    Choose the statement that best aligns with your beliefs
+                    Select the breeds that you consider to be pit bulls
                   </h6>
                   <div className="mb-6 ml-6">
                     <label className="relative flex items-center gap-2 mb-4">
                       <input
                         className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
                         type="checkbox"
-                        id="pro-radio"
+                        id="apbt-radio"
                         name="field-radio"
-                        value="pro"
-                        checked={alignment === "pro"}
-                        onChange={() => handleSetAlignment("pro")}
+                        value="apbt"
+                        checked={selectedBreeds.includes("apbt")}
+                        onChange={handleSetBreeds}
                       />
                       <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
                         <svg
                           className="fill-current hidden"
-                          id="pro-style"
+                          id="apbt-style"
                           xmlns="http://www.w3.org/2000/svg"
                           width={15}
                           height={11}
@@ -112,24 +133,23 @@ const AlignmentPage = () => {
                         </svg>
                       </div>
                       <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
-                        "Pit bulls are just like any other dog, and it truly is
-                        all in how you raise them."
+                        American Pit Bull Terrier
                       </span>
                     </label>
                     <label className="relative flex items-center gap-2 mb-4">
                       <input
                         className="input-radio-2-06 opacity-0 absolute h-8 w-8 rounded-full"
                         type="checkbox"
-                        id="neutral-radio"
+                        id="amstaff-radio"
                         name="field-radio"
-                        value="neutral"
-                        checked={alignment === "neutral"}
-                        onChange={() => handleSetAlignment("neutral")}
+                        value="amstaff"
+                        checked={selectedBreeds.includes("amstaff")}
+                        onChange={handleSetBreeds}
                       />
                       <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
                         <svg
                           className="fill-current hidden"
-                          id="neutral-style"
+                          id="amstaff-style"
                           xmlns="http://www.w3.org/2000/svg"
                           width={15}
                           height={11}
@@ -153,25 +173,23 @@ const AlignmentPage = () => {
                         </svg>
                       </div>
                       <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
-                        "Pit Bulls are genetically inclined to be dog
-                        aggressive, but in the right hands, they can be amazing
-                        companions."
+                        American Staffordshire Terrier
                       </span>
                     </label>
                     <label className="relative flex items-center gap-2 mb-4">
                       <input
                         className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
                         type="checkbox"
-                        id="anti-radio"
+                        id="staffy-radio"
                         name="field-radio"
-                        value="anti"
-                        checked={alignment === "anti"}
-                        onChange={() => handleSetAlignment("anti")}
+                        value="staffy"
+                        checked={selectedBreeds.includes("staffy")}
+                        onChange={handleSetBreeds}
                       />
                       <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
                         <svg
                           className="fill-current hidden"
-                          id="anti-style"
+                          id="staffy-style"
                           xmlns="http://www.w3.org/2000/svg"
                           width={15}
                           height={11}
@@ -195,8 +213,47 @@ const AlignmentPage = () => {
                         </svg>
                       </div>
                       <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
-                        "Pit Bulls are dangerous and should be banned,
-                        regulated, or phased out of existence."
+                        Staffordshire Bull Terrier
+                      </span>
+                    </label>
+                    <label className="relative flex items-center gap-2 mb-4">
+                      <input
+                        className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
+                        type="checkbox"
+                        id="ambully-radio"
+                        name="field-radio"
+                        value="ambully"
+                        checked={selectedBreeds.includes("ambully")}
+                        onChange={handleSetBreeds}
+                      />
+                      <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
+                        <svg
+                          className="fill-current hidden"
+                          id="ambully-style"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width={15}
+                          height={11}
+                          viewBox="0 0 15 11"
+                          fill="none"
+                        >
+                          <line
+                            x1="0.353553"
+                            y1="5.64645"
+                            x2="4.35355"
+                            y2="9.64645"
+                            stroke="currentColor"
+                          />
+                          <line
+                            x1="14.3536"
+                            y1="0.353553"
+                            x2="4.35355"
+                            y2="10.3536"
+                            stroke="currentColor"
+                          />
+                        </svg>
+                      </div>
+                      <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
+                        American Bully
                       </span>
                     </label>
                   </div>
@@ -233,4 +290,4 @@ const AlignmentPage = () => {
   );
 };
 
-export default AlignmentPage;
+export default BreedsPage;
