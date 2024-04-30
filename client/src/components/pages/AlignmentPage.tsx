@@ -58,11 +58,17 @@ const AlignmentPage = () => {
                 />
                 <div className="mt-4 text-sm">
                   Photo by{" "}
-                  <a href="https://unsplash.com/@gixxerkidd?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+                  <a
+                    href="https://unsplash.com/@gixxerkidd?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+                    target="_blank"
+                  >
                     Karthegan Padmanaban
                   </a>{" "}
                   on{" "}
-                  <a href="https://unsplash.com/photos/white-and-brown-american-pitbull-terrier-puppy-on-green-grass-field-during-daytime-zLMkYi-3-W0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+                  <a
+                    href="https://unsplash.com/photos/white-and-brown-american-pitbull-terrier-puppy-on-green-grass-field-during-daytime-zLMkYi-3-W0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+                    target="_blank"
+                  >
                     Unsplash
                   </a>
                 </div>

@@ -10,50 +10,43 @@ import {
 import e from "cors";
 
 const BreedsPage = () => {
+  const allBreeds = [
+    "American Pit Bull Terrier",
+    "American Staffordshire Terrier",
+    "Staffordshire Bull Terrier",
+    "American Bully",
+  ];
+  const [selectedImage, setSelectedImage] = useState("pit-bull-02");
+  const [imageAuthor, setImageAuthor] = useState("Karthegan Padmanaban");
+  const [imageSource, setImageSource] = useState("Unsplash");
+  const [imageLinkPrimary, setImageLinkPrimary] = useState(
+    "https://unsplash.com/@gixxerkidd?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+  );
+  const [imageLinkSecondary, setImageLinkSecondary] = useState(
+    "https://unsplash.com/photos/white-and-brown-american-pitbull-terrier-puppy-on-green-grass-field-during-daytime-zLMkYi-3-W0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+  );
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const selectedBreeds = useSelector(
     (state: { user: IUserState }) => state.user.breeds
   );
 
-  const handleSetBreeds = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("e.target", e.target);
-    const { value, checked } = e.target as HTMLInputElement;
-    selectOrUnselectBreed(value);
-    if (checked) {
-      dispatch(addBreedAction(value));
+  const handleBreedChange = (breed: string) => {
+    const el = document.getElementById(breed);
+    console.log("el", el);
+    console.log("breed:", breed);
+    if (selectedBreeds.includes(breed)) {
+      console.log("remove breed");
+      dispatch(removeBreedAction(breed));
+      el?.removeAttribute("checked");
+      el?.classList.add("hidden");
     } else {
-      dispatch(removeBreedAction(value));
+      console.log("add breed");
+      dispatch(addBreedAction(breed));
+      el?.setAttribute("checked", "checked");
+      el?.classList.remove("hidden");
     }
-  };
-
-  const selectOrUnselectBreed = (value: string) => {
-    console.log("value", value);
-    const selected = document.getElementById(
-      `${value}-radio`
-    ) as HTMLInputElement;
-    if (selected.checked) {
-      selected.checked = false;
-      selected.removeAttribute("checked");
-      const style = document.getElementById(`${value}-style`);
-      style?.classList.add("hidden");
-    } else {
-      selected.checked = true;
-      selected.setAttribute("checked", "checked");
-      const style = document.getElementById(`${value}-style`);
-      style?.classList.remove("hidden");
-    }
-  };
-
-  const hideUnselectedBreed = (selected: HTMLInputElement) => {
-    document.querySelectorAll("input[type=checkbox]").forEach((el) => {
-      const option = el as HTMLInputElement;
-      if (option !== selected) {
-        option.removeAttribute("checked");
-        const style = document.getElementById(`${option.value}-style`);
-        style?.classList.add("hidden");
-      }
-    });
   };
 
   const handleSubmit = () => {
@@ -61,6 +54,56 @@ const BreedsPage = () => {
       navigate("/test/breeds");
     } else {
       alert("Select at least one breed to continue");
+    }
+  };
+
+  const handleChangeImageData = (image: string) => {
+    if ("pit-bull-02" === image) {
+      setSelectedImage("pit-bull-02");
+      setImageAuthor("Katie Bernotsky");
+      setImageSource("Unsplash");
+      setImageLinkPrimary(
+        "https://unsplash.com/@gixxerkidd?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+      );
+      setImageLinkSecondary(
+        "https://unsplash.com/photos/white-and-brown-american-pitbull-terrier-puppy-on-green-grass-field-during-daytime-zLMkYi-3-W0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+      );
+    } else if ("American Pit Bull Terrier" === image) {
+      setSelectedImage("American Pit Bull Terrier");
+      setImageAuthor("Unknown");
+      setImageSource("Pinterest");
+      setImageLinkPrimary("https://www.pinterest.com/pin/34973334599054212/");
+      setImageLinkSecondary(
+        "https://i.pinimg.com/originals/93/08/c8/9308c8aed4571ccd7a1ae0efaacd6fd4.jpg"
+      );
+    } else if ("American Staffordshire Terrier" === image) {
+      setSelectedImage("American Staffordshire Terrier");
+      setImageAuthor("Raya");
+      setImageSource("Pinterest");
+      setImageLinkPrimary(
+        "https://www.pinterest.com/4th3American Staffordshire Terrier/"
+      );
+      setImageLinkSecondary(
+        "https://www.pinterest.com/pin/1040120476434643492/"
+      );
+    } else if ("Staffordshire Bull Terrier" === image) {
+      setSelectedImage("Staffordshire Bull Terrier");
+      setImageAuthor("Rohan");
+      setImageSource("Unsplash");
+      setImageLinkPrimary(
+        "https://unsplash.com/@rohanphoto?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+      );
+      setImageLinkSecondary(
+        "https://unsplash.com/photos/black-short-coated-dog-on-green-grass-field-during-daytime-UxyBUbmBXIU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+      );
+    } else if ("American Bully" === image) {
+      setSelectedImage("American Bully");
+      setImageAuthor("Attitude Boy");
+      setImageSource("Pinterest");
+      setImageLinkPrimary("https://www.pinterest.com/aamirsohailkrk/");
+      setImageLinkSecondary(
+        "https://i.pinimg.com/originals/ff/5b/69/ff5b694c23003aa14aea8b166b2c96d7.jpg"
+      );
     }
   };
 
@@ -74,17 +117,17 @@ const BreedsPage = () => {
               <div className="overflow-hidden rounded-2xl">
                 <img
                   className="w-full h-full object-cover"
-                  src={require("../../assets/images/pit-bull-02.jpg")}
-                  alt="Photo by Katie Bernotsky"
+                  src={require(`../../assets/images/${selectedImage}.jpg`)}
+                  alt={`Photo by ${imageAuthor}`}
                 />
                 <div className="mt-4 text-sm">
                   Photo by{" "}
-                  <a href="https://unsplash.com/@gixxerkidd?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
-                    Karthegan Padmanaban
+                  <a href={imageLinkPrimary} target="_blank">
+                    {imageAuthor}
                   </a>{" "}
                   on{" "}
-                  <a href="https://unsplash.com/photos/white-and-brown-american-pitbull-terrier-puppy-on-green-grass-field-during-daytime-zLMkYi-3-W0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
-                    Unsplash
+                  <a href={imageLinkSecondary} target="_blank">
+                    {imageSource}
                   </a>
                 </div>
               </div>
@@ -96,166 +139,51 @@ const BreedsPage = () => {
                     Select the breeds that you consider to be pit bulls
                   </h6>
                   <div className="mb-6 ml-6">
-                    <label className="relative flex items-center gap-2 mb-4">
-                      <input
-                        className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
-                        type="checkbox"
-                        id="apbt-radio"
-                        name="field-radio"
-                        value="apbt"
-                        checked={selectedBreeds.includes("apbt")}
-                        onChange={handleSetBreeds}
-                      />
-                      <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
-                        <svg
-                          className="fill-current hidden"
-                          id="apbt-style"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={15}
-                          height={11}
-                          viewBox="0 0 15 11"
-                          fill="none"
-                        >
-                          <line
-                            x1="0.353553"
-                            y1="5.64645"
-                            x2="4.35355"
-                            y2="9.64645"
-                            stroke="currentColor"
-                          />
-                          <line
-                            x1="14.3536"
-                            y1="0.353553"
-                            x2="4.35355"
-                            y2="10.3536"
-                            stroke="currentColor"
-                          />
-                        </svg>
-                      </div>
-                      <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
-                        American Pit Bull Terrier
-                      </span>
-                    </label>
-                    <label className="relative flex items-center gap-2 mb-4">
-                      <input
-                        className="input-radio-2-06 opacity-0 absolute h-8 w-8 rounded-full"
-                        type="checkbox"
-                        id="amstaff-radio"
-                        name="field-radio"
-                        value="amstaff"
-                        checked={selectedBreeds.includes("amstaff")}
-                        onChange={handleSetBreeds}
-                      />
-                      <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
-                        <svg
-                          className="fill-current hidden"
-                          id="amstaff-style"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={15}
-                          height={11}
-                          viewBox="0 0 15 11"
-                          fill="none"
-                        >
-                          <line
-                            x1="0.353553"
-                            y1="5.64645"
-                            x2="4.35355"
-                            y2="9.64645"
-                            stroke="currentColor"
-                          />
-                          <line
-                            x1="14.3536"
-                            y1="0.353553"
-                            x2="4.35355"
-                            y2="10.3536"
-                            stroke="currentColor"
-                          />
-                        </svg>
-                      </div>
-                      <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
-                        American Staffordshire Terrier
-                      </span>
-                    </label>
-                    <label className="relative flex items-center gap-2 mb-4">
-                      <input
-                        className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
-                        type="checkbox"
-                        id="staffy-radio"
-                        name="field-radio"
-                        value="staffy"
-                        checked={selectedBreeds.includes("staffy")}
-                        onChange={handleSetBreeds}
-                      />
-                      <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
-                        <svg
-                          className="fill-current hidden"
-                          id="staffy-style"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={15}
-                          height={11}
-                          viewBox="0 0 15 11"
-                          fill="none"
-                        >
-                          <line
-                            x1="0.353553"
-                            y1="5.64645"
-                            x2="4.35355"
-                            y2="9.64645"
-                            stroke="currentColor"
-                          />
-                          <line
-                            x1="14.3536"
-                            y1="0.353553"
-                            x2="4.35355"
-                            y2="10.3536"
-                            stroke="currentColor"
-                          />
-                        </svg>
-                      </div>
-                      <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
-                        Staffordshire Bull Terrier
-                      </span>
-                    </label>
-                    <label className="relative flex items-center gap-2 mb-4">
-                      <input
-                        className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
-                        type="checkbox"
-                        id="ambully-radio"
-                        name="field-radio"
-                        value="ambully"
-                        checked={selectedBreeds.includes("ambully")}
-                        onChange={handleSetBreeds}
-                      />
-                      <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
-                        <svg
-                          className="fill-current hidden"
-                          id="ambully-style"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={15}
-                          height={11}
-                          viewBox="0 0 15 11"
-                          fill="none"
-                        >
-                          <line
-                            x1="0.353553"
-                            y1="5.64645"
-                            x2="4.35355"
-                            y2="9.64645"
-                            stroke="currentColor"
-                          />
-                          <line
-                            x1="14.3536"
-                            y1="0.353553"
-                            x2="4.35355"
-                            y2="10.3536"
-                            stroke="currentColor"
-                          />
-                        </svg>
-                      </div>
-                      <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
-                        American Bully
-                      </span>
-                    </label>
+                    {allBreeds.map((breed) => (
+                      <label
+                        key={breed}
+                        className="relative flex items-center gap-2 mb-4"
+                        onMouseEnter={() => handleChangeImageData(`${breed}`)}
+                      >
+                        <input
+                          className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
+                          type="checkbox"
+                          name="checkbox"
+                          value={breed}
+                          checked={selectedBreeds.includes(breed)}
+                          onChange={() => handleBreedChange(breed)}
+                        />
+                        <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
+                          <svg
+                            className="fill-current hidden"
+                            id={breed}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width={15}
+                            height={11}
+                            viewBox="0 0 15 11"
+                            fill="none"
+                          >
+                            <line
+                              x1="0.353553"
+                              y1="5.64645"
+                              x2="4.35355"
+                              y2="9.64645"
+                              stroke="currentColor"
+                            />
+                            <line
+                              x1="14.3536"
+                              y1="0.353553"
+                              x2="4.35355"
+                              y2="10.3536"
+                              stroke="currentColor"
+                            />
+                          </svg>
+                        </div>
+                        <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
+                          {breed}
+                        </span>
+                      </label>
+                    ))}
                   </div>
 
                   <div className="flex flex-wrap -m-4 justify-center">
