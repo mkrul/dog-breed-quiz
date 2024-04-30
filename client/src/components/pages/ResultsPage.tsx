@@ -12,24 +12,18 @@ const ResultsPage: React.FC = () => {
             </h2>
             <div className="mb-5 text-xl text-neutral-700 font-medium">
               <p className="mb-5">
-                Out of <span className="font-bold">50</span> dogs, you selected{" "}
-                <span className="font-bold">20</span> that appeared to be pit
-                bulls based on the criteria you set at the beginning of the test
+                You selected <span className="font-bold">20</span> dogs that
+                appeared to be pit bulls based on the criteria set at the
+                beginning of the test
               </p>
               <p className="mb-5">
-                Of the <span className="font-bold">20</span> that you selected,{" "}
-                only <span className="font-bold">17</span> would be classified
-                as pit bulls based on your identification criteria
+                Of the <span className="font-bold">20</span> dogs that were
+                selected, <span className="font-bold">10</span> were identified
+                incorrectly based on your critera
               </p>
               <p className="mb-5">
-                <span className="font-bold">10</span> out of the{" "}
-                <span className="font-bold">20</span> dogs that were shown were
-                identified incorrectly based on your critera
-              </p>
-              <p className="mb-5">
-                Of these, <span className="font-bold">5</span> were within{" "}
-                <span className="font-bold">10%</span> of the threshold for what
-                you classify as a pit bull
+                Of those 10 dogs, <span className="font-bold">2</span> of them
+                were within 10% of meeting your criteria
               </p>
               <p className="mb-5">
                 The average accuracy for all participants is currently{" "}
@@ -88,19 +82,19 @@ const ResultsPage: React.FC = () => {
             <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
               <thead>
                 <tr>
-                  <th className="py-2">Breed Selection</th>
+                  <th className="py-2">"What is a pit bull?"</th>
                   <th className="py-2">Count</th>
                   <th className="py-2">Avg. Accuracy</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="py-2">APBT</td>
+                  <td className="py-2">APBT only</td>
                   <td className="py-2">0</td>
                   <td className="py-2">0</td>
                 </tr>
                 <tr>
-                  <td className="py-2">All Breeds *</td>
+                  <td className="py-2">Multiple breeds</td>
                   <td className="py-2">0</td>
                   <td className="py-2">0</td>
                 </tr>
@@ -119,19 +113,19 @@ const ResultsPage: React.FC = () => {
             <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
               <thead>
                 <tr>
-                  <th className="py-2">Breed Selection</th>
+                  <th className="py-2">"What is a pit bull?"</th>
                   <th className="py-2">Count</th>
                   <th className="py-2">Avg. Accuracy</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="py-2">APBT</td>
+                  <td className="py-2">APBT only</td>
                   <td className="py-2">0</td>
                   <td className="py-2">0</td>
                 </tr>
                 <tr>
-                  <td className="py-2">All Breeds *</td>
+                  <td className="py-2">Multiple breeds</td>
                   <td className="py-2">0</td>
                   <td className="py-2">0</td>
                 </tr>
@@ -150,19 +144,19 @@ const ResultsPage: React.FC = () => {
             <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
               <thead>
                 <tr>
-                  <th className="py-2">Breed Selection</th>
+                  <th className="py-2">"What is a pit bull?"</th>
                   <th className="py-2">Count</th>
                   <th className="py-2">Avg. Accuracy</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="py-2">APBT</td>
+                  <td className="py-2">APBT only</td>
                   <td className="py-2">0</td>
                   <td className="py-2">0</td>
                 </tr>
                 <tr>
-                  <td className="py-2">All Breeds *</td>
+                  <td className="py-2">Multiple breeds</td>
                   <td className="py-2">0</td>
                   <td className="py-2">0</td>
                 </tr>
@@ -220,12 +214,6 @@ const ResultsPage: React.FC = () => {
           >
             Go Back
           </Link>
-
-          <div>
-            * All Breeds includes the American Pit Bull Terrier (APBT), American
-            Staffordshire Terrier, Staffordshire Bull Terrier, and American
-            Bully.
-          </div>
         </div>
       </section>
     </div>
