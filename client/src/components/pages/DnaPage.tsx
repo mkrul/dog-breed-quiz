@@ -1,14 +1,14 @@
+import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import Slider from "@mui/material/Slider";
 import { IUserState } from "../../interfaces/user";
-import { Slider } from "@mui/material";
 import {
   setPercentageAction,
   setBufferAction,
 } from "../../redux/features/userSlice";
-import e from "cors";
 
 const DnaPage = () => {
   const dispatch = useAppDispatch();
@@ -20,24 +20,23 @@ const DnaPage = () => {
     (state: { user: IUserState }) => state.user.useBuffer
   );
 
-  const handleBufferChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
-    dispatch(setBufferAction(e.target.checked));
-    if (e.target.checked) {
-      const el = document.getElementById("use-buffer");
-      el?.classList.remove("hidden");
-    } else {
-      const el = document.getElementById("use-buffer");
-      el?.classList.add("hidden");
-    }
+  const [showSvg, setShowSvg] = useState(false); // State to control SVG visibility
+
+  const handleBufferChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setBufferAction(event.target.checked));
+    setShowSvg(event.target.checked); // Control SVG visibility via state
+  };
+
+  const handlePercentageChange = (event: Event, value: number | number[]) => {
+    dispatch(setPercentageAction(value as number));
   };
 
   const handleSubmit = () => {
-    // if (selectedBreeds.length > 0) {
-    //   navigate("/test/dna");
-    // } else {
-    //   alert("Select at least one breed to continue");
-    // }
+    if (selectedPercentage < 20) {
+      alert("Please select a percentage.");
+    } else {
+      navigate("/test");
+    }
   };
 
   return (
@@ -80,10 +79,11 @@ const DnaPage = () => {
                   </p>
                   <div className="mb-2 ml-6">
                     <Slider
-                      aria-label="Temperature"
-                      defaultValue={selectedPercentage}
+                      aria-label="percentage"
+                      value={selectedPercentage}
                       valueLabelDisplay="auto"
                       shiftStep={30}
+                      onChange={handlePercentageChange}
                       step={10}
                       marks
                       min={20}
@@ -97,14 +97,14 @@ const DnaPage = () => {
                     </p>
                   </div>
                   <div className="flex justify-center">
-                    <p className="mb-6 text-xl text-neutral-700 font-medium flex justify-center">
+                    <div className="mb-6 text-xl text-neutral-700 font-medium flex justify-center">
                       <input
                         className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
                         type="checkbox"
-                        name="checkbox"
-                        value={1}
+                        id="use-buffer-radio"
+                        name="useBuffer"
                         checked={useBuffer}
-                        onChange={(e) => handleBufferChange(e)}
+                        onChange={handleBufferChange}
                       />
                       <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
                         <svg
@@ -135,7 +135,7 @@ const DnaPage = () => {
                       <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left ml-3 checkbox-line-height">
                         Use 10% buffer?
                       </span>
-                    </p>
+                    </div>
                   </div>
 
                   <div className="flex flex-wrap -m-4 justify-center">

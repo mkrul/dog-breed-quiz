@@ -599,6 +599,10 @@ video {
   margin-left: 0.5rem;
 }
 
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
 .ml-6 {
   margin-left: 1.5rem;
 }
@@ -1056,8 +1060,4 @@ video {
     font-size: 5.5rem;
     line-height: 1;
   }
-}
-
-.checkbox-line-height {
-  line-height: 2rem !important;
 }
