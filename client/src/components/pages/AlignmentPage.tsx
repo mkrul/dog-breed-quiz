@@ -1,17 +1,28 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../redux/hooks";
 import { setAlignmentAction } from "../../redux/features/userSlice";
+import { IUserState } from "../../interfaces/user";
 
 const AlignmentPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [alignment, setAlignment] = useState("");
+  const selectedAlignment = useSelector(
+    (state: { user: IUserState }) => state.user.alignment
+  );
+
+  useEffect(() => {
+    const radioInput = document.getElementById(`${selectedAlignment}-radio`);
+    if (radioInput && selectedAlignment.length > 0) {
+      radioInput.setAttribute("checked", "checked");
+      displayNewAlignment(selectedAlignment);
+    }
+  }, [selectedAlignment]);
 
   const handleSetAlignment = (value: string) => {
-    setAlignment(value);
-    displayNewAlignment(value);
     dispatch(setAlignmentAction(value));
+    displayNewAlignment(value);
   };
 
   const displayNewAlignment = (value: string) => {
@@ -36,7 +47,7 @@ const AlignmentPage = () => {
   };
 
   const handleSubmit = () => {
-    if (alignment) {
+    if (selectedAlignment.length > 0) {
       navigate("/test/breeds");
     } else {
       alert("Please select an alignment to continue");
@@ -88,7 +99,7 @@ const AlignmentPage = () => {
                         id="pro-radio"
                         name="field-radio"
                         value="pro"
-                        checked={alignment === "pro"}
+                        checked={selectedAlignment === "pro"}
                         onChange={() => handleSetAlignment("pro")}
                       />
                       <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
@@ -118,8 +129,8 @@ const AlignmentPage = () => {
                         </svg>
                       </div>
                       <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
-                        "Pit bulls are just like any other dog, and it truly is
-                        all in how you raise them."
+                        "Pit bulls are like any other dog! It's all in how you
+                        raise them."
                       </span>
                     </label>
                     <label className="relative flex items-center gap-2 mb-4">
@@ -129,7 +140,7 @@ const AlignmentPage = () => {
                         id="neutral-radio"
                         name="field-radio"
                         value="neutral"
-                        checked={alignment === "neutral"}
+                        checked={selectedAlignment === "neutral"}
                         onChange={() => handleSetAlignment("neutral")}
                       />
                       <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
@@ -171,7 +182,7 @@ const AlignmentPage = () => {
                         id="anti-radio"
                         name="field-radio"
                         value="anti"
-                        checked={alignment === "anti"}
+                        checked={selectedAlignment === "anti"}
                         onChange={() => handleSetAlignment("anti")}
                       />
                       <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">

@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Modal, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { Input } from "@mui/material";
-import { setUsernameAction } from "../../redux/features/userSlice";
+import {
+  setUsernameAction,
+  clearUserStoreAction,
+} from "../../redux/features/userSlice";
 
 import "../../assets/main.css";
 import "../../assets/homepage.css";
@@ -42,6 +45,7 @@ const HomePage = () => {
   const handleSubmit = () => {
     if (userNameInput.length > 0) {
       try {
+        dispatch(clearUserStoreAction());
         dispatch(setUsernameAction(userNameInput));
       } catch (error) {
         console.log(error);

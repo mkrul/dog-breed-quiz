@@ -11,6 +11,7 @@ import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/AboutPage";
 import ResultsPage from "./components/pages/ResultsPage";
 import BreedsPage from "./components/pages/BreedsPage";
+import DnaPage from "./components/pages/DnaPage";
 import AlignmentPage from "./components/pages/AlignmentPage";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/test/alignment" element={<AlignmentPage />} />
           <Route path="/test/breeds" element={<BreedsPage />} />
+          <Route path="/test/dna" element={<DnaPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

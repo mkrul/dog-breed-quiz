@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { useSelector, useDispatch } from "react-redux";
@@ -32,17 +32,26 @@ const BreedsPage = () => {
     (state: { user: IUserState }) => state.user.breeds
   );
 
+  useEffect(() => {
+    const svgs = document.querySelectorAll("svg");
+    if (svgs && selectedBreeds.length > 0) {
+      svgs.forEach((svg) => {
+        if (selectedBreeds.includes(svg.id)) {
+          svg.setAttribute("checked", "checked");
+          svg.classList.remove("hidden");
+        }
+      });
+    }
+  }, [selectedBreeds]);
+
   const handleBreedChange = (breed: string) => {
     const el = document.getElementById(breed);
-    console.log("el", el);
-    console.log("breed:", breed);
+    console.log(el);
     if (selectedBreeds.includes(breed)) {
-      console.log("remove breed");
       dispatch(removeBreedAction(breed));
       el?.removeAttribute("checked");
       el?.classList.add("hidden");
     } else {
-      console.log("add breed");
       dispatch(addBreedAction(breed));
       el?.setAttribute("checked", "checked");
       el?.classList.remove("hidden");
@@ -51,7 +60,7 @@ const BreedsPage = () => {
 
   const handleSubmit = () => {
     if (selectedBreeds.length > 0) {
-      navigate("/test/breeds");
+      navigate("/test/dna");
     } else {
       alert("Select at least one breed to continue");
     }
@@ -190,7 +199,7 @@ const BreedsPage = () => {
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
-                          onClick={() => navigate("/")}
+                          onClick={() => navigate("/test/alignment")}
                           className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
                           Back

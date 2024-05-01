@@ -8,6 +8,8 @@ const initialState: IUserState = {
   username: "",
   createdAt: "",
   alignment: "",
+  percentage: 0,
+  useBuffer: false,
   breeds: [],
   loading: false,
   error: "",
@@ -15,12 +17,19 @@ const initialState: IUserState = {
 
 // Action Types
 
+const CLEAR_USER_STORE = "CLEAR_USER_STORE";
 const SET_USERNAME = "SET_USERNAME";
 const SET_ALIGNMENT = "SET_ALIGNMENT";
 const ADD_BREED = "ADD_BREED";
 const REMOVE_BREED = "REMOVE_BREED";
+const SET_PERCENTAGE = "SET_PERCENTAGE";
+const SET_BUFFER = "SET_BUFFER";
 
 // Action Creators
+
+export const clearUserStore = () => ({
+  type: CLEAR_USER_STORE,
+});
 
 export const setUsername = (username: string) => ({
   type: SET_USERNAME,
@@ -39,6 +48,16 @@ export const addBreed = (value: string) => ({
 
 export const removeBreed = (value: string) => ({
   type: REMOVE_BREED,
+  payload: value,
+});
+
+export const setPercentage = (value: number) => ({
+  type: SET_PERCENTAGE,
+  payload: value,
+});
+
+export const setBuffer = (value: boolean) => ({
+  type: SET_BUFFER,
   payload: value,
 });
 
@@ -61,6 +80,9 @@ const userSlice = createSlice({
   name: "userData",
   initialState,
   reducers: {
+    clearUserStoreAction: (state) => {
+      return initialState;
+    },
     setUsernameAction: (state, action: PayloadAction<string>) => {
       return {
         ...state,
@@ -85,6 +107,18 @@ const userSlice = createSlice({
         breeds: state.breeds.filter((breed) => breed !== action.payload),
       }
     },
+    setPercentageAction: (state, action: PayloadAction<number>) => {
+      return {
+        ...state,
+        percentage: action.payload,
+      };
+    },
+    setBufferAction: (state, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        useBuffer: action.payload,
+      };
+    },
     updateUserAction: (state, action: PayloadAction<IUserState>) => {
       return action.payload;
     },
@@ -92,11 +126,14 @@ const userSlice = createSlice({
 });
 
 export const {
+  clearUserStoreAction,
   updateUserAction,
   setUsernameAction,
   setAlignmentAction,
   addBreedAction,
   removeBreedAction,
+  setPercentageAction,
+  setBufferAction,
 } = userSlice.actions;
 
 export default userSlice.reducer;
