@@ -170,7 +170,7 @@ const AlignmentPage = () => {
                         </svg>
                       </div>
                       <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
-                        "Pit Bulls are genetically inclined to be dog
+                        "Pit bulls are genetically inclined to be dog
                         aggressive, but in the right hands, they can be amazing
                         companions."
                       </span>
@@ -212,7 +212,7 @@ const AlignmentPage = () => {
                         </svg>
                       </div>
                       <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
-                        "Pit Bulls are dangerous and should be banned,
+                        "Pit bulls are dangerous and should be banned,
                         regulated, or phased out of existence."
                       </span>
                     </label>

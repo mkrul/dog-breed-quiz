@@ -13,3 +13,9 @@ exports.showBreedsPage = asyncHandler(async (req: any, res: any, next: any) => {
   });
 });
 
+exports.showDnaPage = asyncHandler(async (req: any, res: any, next: any) => {
+  res.status(200).json({
+    message: 'DNA page'
+  });
+});
+

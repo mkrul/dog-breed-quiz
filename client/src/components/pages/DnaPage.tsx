@@ -21,7 +21,15 @@ const DnaPage = () => {
   );
 
   const handleBufferChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e);
     dispatch(setBufferAction(e.target.checked));
+    if (e.target.checked) {
+      const el = document.getElementById("use-buffer");
+      el?.classList.remove("hidden");
+    } else {
+      const el = document.getElementById("use-buffer");
+      el?.classList.add("hidden");
+    }
   };
 
   const handleSubmit = () => {
@@ -61,14 +69,14 @@ const DnaPage = () => {
               <div className="flex flex-col justify-center h-full">
                 <div>
                   <h6 className="mb-10 text-4xl font-medium tracking-tight font-heading">
-                    What percentage of pit bull DNA do you use to classify an
-                    individual as a pit bull?
+                    What percentage of pit bull DNA would you use to classify a
+                    dog as a pit bull?
                   </h6>
                   <p className="mb-5 text-xl text-neutral-700 font-medium">
-                    Adjust the slider to set a percentage value. An optional 10%
+                    Adjust the slider to set a percentage. An optional 10%
                     buffer may be applied, meaning that any dog with a DNA match
                     within 10% of the selected percentage value will be counted
-                    on the results page.
+                    in your results.
                   </p>
                   <div className="mb-2 ml-6">
                     <Slider
@@ -124,8 +132,8 @@ const DnaPage = () => {
                           />
                         </svg>
                       </div>
-                      <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left ml-2">
-                        Use buffer? (10%)
+                      <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left ml-3 checkbox-line-height">
+                        Use 10% buffer?
                       </span>
                     </p>
                   </div>

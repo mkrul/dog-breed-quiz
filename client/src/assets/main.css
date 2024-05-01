@@ -583,10 +583,6 @@ video {
   margin-bottom: 5rem;
 }
 
-.mb-3 {
-  margin-bottom: 0.75rem;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -836,6 +832,11 @@ video {
   line-height: 1.33;
 }
 
+.text-4xl {
+  font-size: 2rem;
+  line-height: 1.25;
+}
+
 .text-5xl {
   font-size: 2.5rem;
   line-height: 1.2;
@@ -1055,4 +1056,8 @@ video {
     font-size: 5.5rem;
     line-height: 1;
   }
+}
+
+.checkbox-line-height {
+  line-height: 2rem !important;
 }

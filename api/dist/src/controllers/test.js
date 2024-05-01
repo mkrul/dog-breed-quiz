@@ -20,3 +20,8 @@ exports.showBreedsPage = asyncHandler((req, res, next) => __awaiter(void 0, void
         message: 'Breeds page'
     });
 }));
+exports.showDnaPage = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    res.status(200).json({
+        message: 'DNA page'
+    });
+}));

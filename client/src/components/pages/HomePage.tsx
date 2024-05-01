@@ -91,8 +91,8 @@ const HomePage = () => {
                     Proponents of breed-specific legislation (BSL) argue that
                     certain dog breeds should be banned or regulated based on
                     statistical data surrounding dog attacks. The most commonly
-                    targeted breeds are those labeled "pit bulls". For many,
-                    "pit bull" is used as a catch-all term for dogs with similar
+                    targeted breeds are those labeled "pit bulls". Many people
+                    use "pit bull" as a catch-all term for dogs with similar
                     physical characteristics or a certain amount of pit bull
                     heritage. For others, the term is used to describe a
                     specific breed of dog, the American Pit Bull Terrier.
@@ -100,11 +100,16 @@ const HomePage = () => {
                   <p className="mb-5 text-xl text-neutral-700 font-medium">
                     This project aims to test the assertion that pit bulls are
                     easy to identify by comparing the accuracy of visual
-                    identifications to DNA test results.
+                    identification to DNA test results.
                   </p>
                   <p className="mb-12 text-xl text-neutral-700 font-medium">
                     You can learn more about this test by clicking{" "}
-                    {<Link to="/about">here</Link>}.
+                    {
+                      <Link to="/about" className="font-bold">
+                        here
+                      </Link>
+                    }
+                    .
                   </p>
                   <div className="flex flex-wrap -m-4 justify-center">
                     <div className="w-full md:w-auto p-4">
@@ -133,11 +138,6 @@ const HomePage = () => {
                                 placeholder={"Type your name here"}
                                 className="mt-4 mb-4"
                               />
-                              <div className="mt-3 mb-3">
-                                <span className="font-semibold">NOTE:</span> You
-                                may lose your progress if you navigate away from
-                                this site before completing the test.
-                              </div>
                               <div className="flex justify-around">
                                 <button
                                   onClick={handleSubmit}
