@@ -4,7 +4,7 @@ export type IUserState = {
   createdAt: string
   alignment: string
   percentage: number
-  useBuffer: boolean
+  buffer: boolean
   breeds: string[]
   loading: boolean
   error: string

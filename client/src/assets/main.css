@@ -1061,3 +1061,8 @@ video {
     line-height: 1;
   }
 }
+
+.checkbox-label-height {
+  margin-top: 0.5rem !important;
+  height: 0.5rem !important;
+}

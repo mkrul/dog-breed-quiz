@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { useSelector } from "react-redux";
 import Slider from "@mui/material/Slider";
+import Checkbox from "@mui/material/Checkbox";
 import { IUserState } from "../../interfaces/user";
 import {
   setPercentageAction,
@@ -16,15 +17,12 @@ const DnaPage = () => {
   const selectedPercentage = useSelector(
     (state: { user: IUserState }) => state.user.percentage
   );
-  const useBuffer = useSelector(
-    (state: { user: IUserState }) => state.user.useBuffer
+  const buffer = useSelector(
+    (state: { user: IUserState }) => state.user.buffer
   );
-
-  const [showSvg, setShowSvg] = useState(false); // State to control SVG visibility
 
   const handleBufferChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setBufferAction(event.target.checked));
-    setShowSvg(event.target.checked); // Control SVG visibility via state
   };
 
   const handlePercentageChange = (event: Event, value: number | number[]) => {
@@ -84,9 +82,9 @@ const DnaPage = () => {
                       valueLabelDisplay="auto"
                       shiftStep={30}
                       onChange={handlePercentageChange}
-                      step={10}
+                      step={5}
                       marks
-                      min={20}
+                      min={25}
                       max={100}
                     />
                   </div>
@@ -98,43 +96,14 @@ const DnaPage = () => {
                   </div>
                   <div className="flex justify-center">
                     <div className="mb-6 text-xl text-neutral-700 font-medium flex justify-center">
-                      <input
-                        className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
-                        type="checkbox"
-                        id="use-buffer-radio"
-                        name="useBuffer"
-                        checked={useBuffer}
+                      <Checkbox
+                        checked={buffer}
                         onChange={handleBufferChange}
+                        inputProps={{ "aria-label": "buffer" }}
                       />
-                      <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
-                        <svg
-                          className="fill-current hidden"
-                          id="use-buffer"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={15}
-                          height={11}
-                          viewBox="0 0 15 11"
-                          fill="none"
-                        >
-                          <line
-                            x1="0.353553"
-                            y1="5.64645"
-                            x2="4.35355"
-                            y2="9.64645"
-                            stroke="currentColor"
-                          />
-                          <line
-                            x1="14.3536"
-                            y1="0.353553"
-                            x2="4.35355"
-                            y2="10.3536"
-                            stroke="currentColor"
-                          />
-                        </svg>
-                      </div>
-                      <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left ml-3 checkbox-line-height">
+                      <div className="w-5/6 text-neutral-600 font-medium tracking-tight text-left ml-1 checkbox-label-height">
                         Use 10% buffer?
-                      </span>
+                      </div>
                     </div>
                   </div>
 

@@ -9,7 +9,7 @@ const initialState: IUserState = {
   createdAt: "",
   alignment: "",
   percentage: 0,
-  useBuffer: false,
+  buffer: false,
   breeds: [],
   loading: false,
   error: "",
@@ -116,7 +116,7 @@ const userSlice = createSlice({
     setBufferAction: (state, action: PayloadAction<boolean>) => {
       return {
         ...state,
-        useBuffer: action.payload,
+        buffer: action.payload,
       };
     },
     updateUserAction: (state, action: PayloadAction<IUserState>) => {
