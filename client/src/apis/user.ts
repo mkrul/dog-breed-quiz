@@ -1,5 +1,5 @@
 import { current } from "@reduxjs/toolkit";
-import { IUserState } from "../interfaces/user";
+import { User } from "../interfaces/user";
 
 const userApi = {
   // getUser: async () => {
@@ -12,7 +12,7 @@ const userApi = {
   //     return error;
   //   }
   // },
-  updateUser: async (user: IUserState, data: any) => {
+  updateUser: async (user: User, data: any) => {
     console.log("in apis/user, user", user)
     try {
       const response = await fetch("http://localhost:5000/user/:uuid", {

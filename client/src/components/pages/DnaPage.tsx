@@ -1,24 +1,23 @@
 import React from "react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { useSelector } from "react-redux";
 import Slider from "@mui/material/Slider";
 import Checkbox from "@mui/material/Checkbox";
-import { IUserState } from "../../interfaces/user";
+import { Settings } from "../../interfaces/settings";
 import {
   setPercentageAction,
   setBufferAction,
-} from "../../redux/features/userSlice";
+} from "../../redux/features/settingsSlice";
 
 const DnaPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const selectedPercentage = useSelector(
-    (state: { user: IUserState }) => state.user.percentage
+    (state: { settings: Settings }) => state.settings.percentage
   );
   const buffer = useSelector(
-    (state: { user: IUserState }) => state.user.buffer
+    (state: { settings: Settings }) => state.settings.buffer
   );
 
   const handleBufferChange = (event: React.ChangeEvent<HTMLInputElement>) => {

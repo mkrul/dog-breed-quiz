@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { useSelector, useDispatch } from "react-redux";
-import { IUserState } from "../../interfaces/user";
+import { User } from "../../interfaces/user";
+import Checkbox from "@mui/material/Checkbox";
 import {
   addBreedAction,
   removeBreedAction,
-} from "../../redux/features/userSlice";
+} from "../../redux/features/breedSlice";
 import e from "cors";
 
 const BreedsPage = () => {
-  const allBreeds = [
+  const allBreeds: string[] = [
     "American Pit Bull Terrier",
     "American Staffordshire Terrier",
     "Staffordshire Bull Terrier",
@@ -29,7 +30,8 @@ const BreedsPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const selectedBreeds = useSelector(
-    (state: { user: IUserState }) => state.user.breeds
+    (state: { breeds: { name: string; selected: boolean }[] }) =>
+      state.breeds.map((breed) => breed.name)
   );
 
   useEffect(() => {

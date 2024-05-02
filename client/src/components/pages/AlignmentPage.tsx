@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../redux/hooks";
-import { setAlignmentAction } from "../../redux/features/userSlice";
-import { IUserState } from "../../interfaces/user";
+import { setAlignmentAction } from "../../redux/features/settingsSlice";
+import { Settings } from "../../interfaces/settings";
 
 const AlignmentPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const selectedAlignment = useSelector(
-    (state: { user: IUserState }) => state.user.alignment
+    (state: { settings: Settings }) => state.settings.alignment
   );
 
   useEffect(() => {

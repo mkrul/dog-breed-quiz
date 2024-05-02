@@ -1,11 +1,9 @@
-export type IUserState = {
+import { Settings } from './settings'
+
+export interface User {
   _id: string
   username: string
   createdAt: string
-  alignment: string
-  percentage: number
-  buffer: boolean
-  breeds: string[]
   loading: boolean
   error: string
 }
