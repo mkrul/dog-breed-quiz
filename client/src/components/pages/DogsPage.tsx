@@ -51,7 +51,7 @@ const DogsPage = () => {
   }, []);
 
   const handleNext = () => {
-    if (currentIndex >= dogData.length) {
+    if (currentIndex + 1 >= dogData.length) {
       navigate("/results");
     } else {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % dogData.length);
