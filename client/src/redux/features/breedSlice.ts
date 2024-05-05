@@ -26,8 +26,6 @@ const CLEAR_BREED_STORE = "CLEAR_BREED_STORE";
 const ADD_BREED = "ADD_BREED";
 const REMOVE_BREED = "REMOVE_BREED";
 
-// Action Creators
-
 export const clearBreedStore = () => ({
   type: CLEAR_BREED_STORE,
 });
@@ -46,7 +44,7 @@ const breedSlice = createSlice({
   name: "breedData",
   initialState,
   reducers: {
-    clearBreedStoreAction: (state) => {
+    clearBreedsAction: (state) => {
       return initialState;
     },
     addBreedAction: (state, action: PayloadAction<string>) => {
@@ -62,6 +60,6 @@ const breedSlice = createSlice({
   },
 });
 
-export const { clearBreedStoreAction, addBreedAction, removeBreedAction } = breedSlice.actions;
+export const { clearBreedsAction, addBreedAction, removeBreedAction } = breedSlice.actions;
 
 export default breedSlice.reducer;

@@ -9,8 +9,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { Carousel } from "react-responsive-carousel";
 import { Dog } from "../../interfaces/dog";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { current } from "@reduxjs/toolkit";
-import { handleItemSelection } from "@mui/base/useList";
+import { addScoreAction } from "../../redux/features/scoreSlice";
+import { RootState } from "../../redux/store";
 
 const DogsPage = () => {
   const [dogData, setDogData] = useState<Dog[]>([]);
@@ -18,6 +18,11 @@ const DogsPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  // get settings from redux store
+  const settings = useSelector((state: RootState) => state.settings);
+  const buffer = settings.buffer;
+  const percentage = settings.percentage;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,10 +39,66 @@ const DogsPage = () => {
     };
 
     fetchData();
+
+    window.onbeforeunload = () => {
+      return "";
+    };
+
+    // Unmount the window.onbeforeunload event
+    return () => {
+      window.onbeforeunload = null;
+    };
   }, []);
 
-  const handleNext = (value) => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % dogData.length);
+  const handleNext = () => {
+    if (currentIndex >= dogData.length) {
+      navigate("/results");
+    } else {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % dogData.length);
+    }
+  };
+
+  const handleAnswer = (isYesAnswer: boolean) => {
+    const { apbt, ast, sbt, ab } = currentDog;
+    const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
+    let sum = apbt + ast + sbt + ab;
+    let correctGuess = false;
+    let correctWithBuffer = false;
+
+    if (
+      (isYesAnswer && sum >= percentage) ||
+      (!isYesAnswer && sum < percentage)
+    ) {
+      correctGuess = true;
+    }
+
+    if (buffer) {
+      sum += 10;
+      if (
+        (isYesAnswer && sum >= percentage) ||
+        (!isYesAnswer && sum < percentage)
+      ) {
+        correctWithBuffer = true;
+      }
+    }
+
+    dispatch(
+      addScoreAction({
+        imageUrl,
+        correctGuess,
+        correctWithBuffer,
+      })
+    );
+
+    handleNext();
+  };
+
+  const handleAnswerNo = () => {
+    handleAnswer(false);
+  };
+
+  const handleAnswerYes = () => {
+    handleAnswer(true);
   };
 
   const currentDog = dogData[currentIndex] || [];
@@ -71,13 +132,13 @@ const DogsPage = () => {
                     <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
                       {currentIndex + 1} / 50
                     </h6>
-                    <div className="mb-6 ml-6">
-                      <div className="relative flex items-center gap-2 mb-4">
+                    <div className="mb-6">
+                      <div className="relative flex items-center justify-center gap-2 mb-4">
                         <div className="w-full md:w-auto p-4">
                           <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                             <button
-                              onClick={handleNext(true)}
-                              className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
+                              onClick={handleAnswerYes}
+                              className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-green-700 hover:bg-green-800 focus:bg-green-800 rounded-lg focus:ring-4 focus:ring-green-300 transition duration-200"
                             >
                               It's a Pit
                             </button>
@@ -86,8 +147,8 @@ const DogsPage = () => {
                         <div className="w-full md:w-auto p-4">
                           <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                             <button
-                              onClick={handleNext(false)}
-                              className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
+                              onClick={handleAnswerNo}
+                              className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-crimson-700 hover:bg-crimson-800 focus:bg-crimson-800 rounded-lg focus:ring-4 focus:ring-red-300 transition duration-200"
                             >
                               Not a Pit
                             </button>
@@ -95,29 +156,6 @@ const DogsPage = () => {
                         </div>
                       </div>
                     </div>
-
-                    {/* <div className="flex flex-wrap -m-4 justify-center">
-                    <div className="w-full md:w-auto p-4">
-                      <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
-                        <button
-                          onClick={() => navigate("/")}
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
-                        >
-                          Back
-                        </button>
-                      </p>
-                    </div>
-                    <div className="w-full md:w-auto p-4">
-                      <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
-                        <button
-                          onClick={handleSubmit}
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
-                        >
-                          Next
-                        </button>
-                      </p>
-                    </div>
-                  </div> */}
                   </div>
                 </div>
               </div>

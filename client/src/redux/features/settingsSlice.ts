@@ -42,7 +42,7 @@ const settingsSlice = createSlice({
   name: "settingsData",
   initialState,
   reducers: {
-    clearSettingsStoreAction: (state) => {
+    clearSettingsAction: (state) => {
       return initialState;
     },
     setAlignmentAction: (state, action: PayloadAction<string>) => {
@@ -66,7 +66,7 @@ const settingsSlice = createSlice({
   },
 });
 
-export const { clearSettingsStoreAction, setAlignmentAction, setPercentageAction, setBufferAction } =
+export const { clearSettingsAction, setAlignmentAction, setPercentageAction, setBufferAction } =
   settingsSlice.actions;
 
 export default settingsSlice.reducer;

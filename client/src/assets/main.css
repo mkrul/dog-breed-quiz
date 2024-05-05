@@ -595,10 +595,6 @@ video {
   margin-bottom: 1.5rem;
 }
 
-.ml-1 {
-  margin-left: 0.25rem;
-}
-
 .ml-2 {
   margin-left: 0.5rem;
 }
@@ -649,10 +645,6 @@ video {
 
 .h-full {
   height: 100%;
-}
-
-.w-5\/6 {
-  width: 83.333333%;
 }
 
 .w-full {
@@ -1036,11 +1028,4 @@ video {
     font-size: 5.5rem;
     line-height: 1;
   }
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
