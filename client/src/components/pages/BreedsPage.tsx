@@ -1,22 +1,19 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
-import { useSelector, useDispatch } from "react-redux";
-import { User } from "../../interfaces/user";
+import { useSelector } from "react-redux";
 import Checkbox from "@mui/material/Checkbox";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import {
   addBreedAction,
   removeBreedAction,
 } from "../../redux/features/breedSlice";
-import e from "cors";
+import { RootState } from "../../redux/store";
 
 const BreedsPage = () => {
-  const allBreeds: string[] = [
-    "American Pit Bull Terrier",
-    "American Staffordshire Terrier",
-    "Staffordshire Bull Terrier",
-    "American Bully",
-  ];
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState("pit-bull-02");
   const [imageAuthor, setImageAuthor] = useState("Karthegan Padmanaban");
   const [imageSource, setImageSource] = useState("Unsplash");
@@ -27,36 +24,13 @@ const BreedsPage = () => {
     "https://unsplash.com/photos/white-and-brown-american-pitbull-terrier-puppy-on-green-grass-field-during-daytime-zLMkYi-3-W0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
   );
 
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const selectedBreeds = useSelector(
-    (state: { breeds: { name: string; selected: boolean }[] }) =>
-      state.breeds.map((breed) => breed.name)
-  );
+  const selectedBreeds = useSelector((state: RootState) => state.breeds);
 
-  useEffect(() => {
-    const svgs = document.querySelectorAll("svg");
-    if (svgs && selectedBreeds.length > 0) {
-      svgs.forEach((svg) => {
-        if (selectedBreeds.includes(svg.id)) {
-          svg.setAttribute("checked", "checked");
-          svg.classList.remove("hidden");
-        }
-      });
-    }
-  }, [selectedBreeds]);
-
-  const handleBreedChange = (breed: string) => {
-    const el = document.getElementById(breed);
-    console.log(el);
-    if (selectedBreeds.includes(breed)) {
+  const handleSetBreed = (breed: string) => {
+    if (selectedBreeds.find((b) => b.selected === true && b.name === breed)) {
       dispatch(removeBreedAction(breed));
-      el?.removeAttribute("checked");
-      el?.classList.add("hidden");
     } else {
       dispatch(addBreedAction(breed));
-      el?.setAttribute("checked", "checked");
-      el?.classList.remove("hidden");
     }
   };
 
@@ -68,53 +42,59 @@ const BreedsPage = () => {
     }
   };
 
-  const handleChangeImageData = (image: string) => {
-    if ("pit-bull-02" === image) {
-      setSelectedImage("pit-bull-02");
-      setImageAuthor("Katie Bernotsky");
-      setImageSource("Unsplash");
-      setImageLinkPrimary(
-        "https://unsplash.com/@gixxerkidd?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-      );
-      setImageLinkSecondary(
-        "https://unsplash.com/photos/white-and-brown-american-pitbull-terrier-puppy-on-green-grass-field-during-daytime-zLMkYi-3-W0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-      );
-    } else if ("American Pit Bull Terrier" === image) {
-      setSelectedImage("American Pit Bull Terrier");
-      setImageAuthor("Unknown");
-      setImageSource("Pinterest");
-      setImageLinkPrimary("https://www.pinterest.com/pin/34973334599054212/");
-      setImageLinkSecondary(
-        "https://i.pinimg.com/originals/93/08/c8/9308c8aed4571ccd7a1ae0efaacd6fd4.jpg"
-      );
-    } else if ("American Staffordshire Terrier" === image) {
-      setSelectedImage("American Staffordshire Terrier");
-      setImageAuthor("Raya");
-      setImageSource("Pinterest");
-      setImageLinkPrimary(
-        "https://www.pinterest.com/4th3American Staffordshire Terrier/"
-      );
-      setImageLinkSecondary(
-        "https://www.pinterest.com/pin/1040120476434643492/"
-      );
-    } else if ("Staffordshire Bull Terrier" === image) {
-      setSelectedImage("Staffordshire Bull Terrier");
-      setImageAuthor("Rohan");
-      setImageSource("Unsplash");
-      setImageLinkPrimary(
-        "https://unsplash.com/@rohanphoto?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-      );
-      setImageLinkSecondary(
-        "https://unsplash.com/photos/black-short-coated-dog-on-green-grass-field-during-daytime-UxyBUbmBXIU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-      );
-    } else if ("American Bully" === image) {
-      setSelectedImage("American Bully");
-      setImageAuthor("Attitude Boy");
-      setImageSource("Pinterest");
-      setImageLinkPrimary("https://www.pinterest.com/aamirsohailkrk/");
-      setImageLinkSecondary(
-        "https://i.pinimg.com/originals/ff/5b/69/ff5b694c23003aa14aea8b166b2c96d7.jpg"
-      );
+  const handleChangeImageData = (breed: string) => {
+    switch (breed) {
+      case "American Pit Bull Terrier":
+        setImageAuthor("Unknown");
+        setImageSource("Pinterest");
+        setImageLinkPrimary("https://www.pinterest.com/pin/34973334599054212/");
+        setImageLinkSecondary(
+          "https://i.pinimg.com/originals/93/08/c8/9308c8aed4571ccd7a1ae0efaacd6fd4.jpg"
+        );
+        setSelectedImage("American Pit Bull Terrier");
+        break;
+      case "American Staffordshire Terrier":
+        setImageAuthor("Raya");
+        setImageSource("Pinterest");
+        setImageLinkPrimary(
+          "https://www.pinterest.com/4th3American Staffordshire Terrier/"
+        );
+        setImageLinkSecondary(
+          "https://www.pinterest.com/pin/1040120476434643492/"
+        );
+        setSelectedImage("American Staffordshire Terrier");
+        break;
+      case "Staffordshire Bull Terrier":
+        setImageAuthor("Rohan");
+        setImageSource("Unsplash");
+        setImageLinkPrimary(
+          "https://unsplash.com/@rohanphoto?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+        );
+        setImageLinkSecondary(
+          "https://unsplash.com/photos/black-short-coated-dog-on-green-grass-field-during-daytime-UxyBUbmBXIU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+        );
+        setSelectedImage("Staffordshire Bull Terrier");
+        break;
+      case "American Bully":
+        setImageAuthor("Attitude Boy");
+        setImageSource("Pinterest");
+        setImageLinkPrimary("https://www.pinterest.com/aamirsohailkrk/");
+        setImageLinkSecondary(
+          "https://i.pinimg.com/originals/ff/5b/69/ff5b694c23003aa14aea8b166b2c96d7.jpg"
+        );
+        setSelectedImage("American Bully");
+        break;
+      default:
+        setImageAuthor("Katie Bernotsky");
+        setImageSource("Unsplash");
+        setImageLinkPrimary(
+          "https://unsplash.com/@gixxerkidd?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+        );
+        setImageLinkSecondary(
+          "https://unsplash.com/photos/white-and-brown-american-pitbull-terrier-puppy-on-green-grass-field-during-daytime-zLMkYi-3-W0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+        );
+        setSelectedImage("pit-bull-02");
+        break;
     }
   };
 
@@ -150,53 +130,25 @@ const BreedsPage = () => {
                     Select the breeds that you consider to be pit bulls
                   </h6>
                   <div className="mb-6 ml-6">
-                    {allBreeds.map((breed) => (
-                      <label
-                        key={breed}
-                        className="relative flex items-center gap-2 mb-4"
-                        onMouseEnter={() => handleChangeImageData(`${breed}`)}
-                      >
-                        <input
-                          className="input-radio-1-06 opacity-0 absolute h-8 w-8 rounded-full"
-                          type="checkbox"
-                          name="checkbox"
-                          value={breed}
-                          checked={selectedBreeds.includes(breed)}
-                          onChange={() => handleBreedChange(breed)}
+                    {selectedBreeds.map((breed) => (
+                      <FormGroup key={breed.name}>
+                        <FormControlLabel
+                          className="text-neutral-600 text-lg font-medium tracking-tight text-left ml-2 relative flex items-center gap-2 mb-2"
+                          onMouseEnter={() => handleChangeImageData(breed.name)}
+                          control={
+                            <Checkbox
+                              checked={breed.selected}
+                              onChange={() => handleSetBreed(breed.name)}
+                              inputProps={{
+                                "aria-label": breed.name,
+                              }}
+                            />
+                          }
+                          label={breed.name}
                         />
-                        <div className="border border-neutral-600 w-8 h-8 flex justify-center items-center rounded-full">
-                          <svg
-                            className="fill-current hidden"
-                            id={breed}
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={15}
-                            height={11}
-                            viewBox="0 0 15 11"
-                            fill="none"
-                          >
-                            <line
-                              x1="0.353553"
-                              y1="5.64645"
-                              x2="4.35355"
-                              y2="9.64645"
-                              stroke="currentColor"
-                            />
-                            <line
-                              x1="14.3536"
-                              y1="0.353553"
-                              x2="4.35355"
-                              y2="10.3536"
-                              stroke="currentColor"
-                            />
-                          </svg>
-                        </div>
-                        <span className="w-5/6 text-neutral-600 text-lg font-medium tracking-tight text-left  ml-2">
-                          {breed}
-                        </span>
-                      </label>
+                      </FormGroup>
                     ))}
                   </div>
-
                   <div className="flex flex-wrap -m-4 justify-center">
                     <div className="w-full md:w-auto p-4">
                       <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">

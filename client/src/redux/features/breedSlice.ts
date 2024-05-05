@@ -1,39 +1,22 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Breed } from "../../interfaces/breed";
-import { RootState } from "../store";
 
 const initialState: Breed[] = [
   {
     name: "American Pit Bull Terrier",
     selected: false,
-    imageAuthor: "Unknown",
-    imageSource: "Pinterest",
-    imageLinkPrimary: "https://www.pinterest.com/pin/34973334599054212/",
-    imageLinkSecondary: "https://i.pinimg.com/originals/93/08/c8/9308c8aed4571ccd7a1ae0efaacd6fd4.jpg"
   },
   {
     name: "American Staffordshire Terrier",
     selected: false,
-    imageAuthor: "Raya",
-    imageSource: "Pinterest",
-    imageLinkPrimary: "https://www.pinterest.com/4th3American Staffordshire Terrier/",
-    imageLinkSecondary: "https://www.pinterest.com/pin/1040120476434643492/"
   },
   {
     name: "Staffordshire Bull Terrier",
     selected: false,
-    imageAuthor: "Rohan",
-    imageSource: "Unsplash",
-    imageLinkPrimary: "https://unsplash.com/@rohanphoto?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
-    imageLinkSecondary: "https://unsplash.com/photos/black-short-coated-dog-on-green-grass-field-during-daytime-UxyBUbmBXIU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
   },
   {
     name: "American Bully",
     selected: false,
-    imageAuthor: "Attitude Boy",
-    imageSource: "Pinterest",
-    imageLinkPrimary: "https://www.pinterest.com/aamirsohailkrk/",
-    imageLinkSecondary: "https://i.pinimg.com/originals/ff/5b/69/ff5b694c23003aa14aea8b166b2c96d7.jpg"
   },
 ];
 
@@ -67,16 +50,14 @@ const breedSlice = createSlice({
       return initialState;
     },
     addBreedAction: (state, action: PayloadAction<string>) => {
-      const breed = state.find((breed: Breed) => breed.name === action.payload);
-      if (breed) {
-        breed.selected = true;
-      }
+      return state.map(breed =>
+        breed.name === action.payload ? { ...breed, selected: true } : breed
+      );
     },
     removeBreedAction: (state, action: PayloadAction<string>) => {
-      const breed = state.find((breed: Breed) => breed.name === action.payload);
-      if (breed) {
-        breed.selected = false;
-      }
+      return state.map(breed =>
+        breed.name === action.payload ? { ...breed, selected: false } : breed
+      );
     },
   },
 });

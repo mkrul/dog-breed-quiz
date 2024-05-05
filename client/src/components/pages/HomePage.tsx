@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Modal, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { Input } from "@mui/material";
+import { Input, Typography } from "@mui/material";
 import {
   setUsernameAction,
   clearUserStoreAction,
 } from "../../redux/features/userSlice";
+import { clearBreedStoreAction } from "../../redux/features/breedSlice";
+import { clearSettingsStoreAction } from "../../redux/features/settingsSlice";
 
 import "../../assets/main.css";
 import "../../assets/homepage.css";
@@ -46,6 +48,8 @@ const HomePage = () => {
     if (userNameInput.length > 0) {
       try {
         dispatch(clearUserStoreAction());
+        dispatch(clearBreedStoreAction());
+        dispatch(clearSettingsStoreAction());
         dispatch(setUsernameAction(userNameInput));
       } catch (error) {
         console.log(error);
@@ -87,7 +91,7 @@ const HomePage = () => {
                   <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
                     Why "ban this breed"?
                   </h6>
-                  <p className="mb-5 text-xl text-neutral-700 font-medium">
+                  <Typography className="mb-4">
                     Proponents of breed-specific legislation (BSL) argue that
                     certain dog breeds should be banned or regulated based on
                     statistical data surrounding dog attacks. The most commonly
@@ -96,13 +100,13 @@ const HomePage = () => {
                     physical characteristics or a certain amount of pit bull
                     heritage. For others, the term is used to describe a
                     specific breed of dog, the American Pit Bull Terrier.
-                  </p>
-                  <p className="mb-5 text-xl text-neutral-700 font-medium">
+                  </Typography>
+                  <Typography className="mb-4">
                     This project aims to test the assertion that pit bulls are
                     easy to identify by comparing the accuracy of visual
                     identification to DNA test results.
-                  </p>
-                  <p className="mb-12 text-xl text-neutral-700 font-medium">
+                  </Typography>
+                  <Typography className="mb-6">
                     You can learn more about this test by clicking{" "}
                     {
                       <Link to="/about" className="font-bold">
@@ -110,7 +114,7 @@ const HomePage = () => {
                       </Link>
                     }
                     .
-                  </p>
+                  </Typography>
                   <div className="flex flex-wrap -m-4 justify-center">
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">

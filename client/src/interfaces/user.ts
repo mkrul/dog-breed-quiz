@@ -1,5 +1,3 @@
-import { Settings } from './settings'
-
 export interface User {
   _id: string
   username: string

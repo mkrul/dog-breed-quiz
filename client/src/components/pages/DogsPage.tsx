@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../redux/hooks";
@@ -6,25 +7,33 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { setAlignmentAction } from "../../redux/features/settingsSlice";
 import { Settings } from "../../interfaces/settings";
+import { current } from "@reduxjs/toolkit";
 
-const AlignmentPage = () => {
+const DogsPage = () => {
+  const [data, setData] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const selectedAlignment = useSelector(
-    (state: { settings: Settings }) => state.settings.alignment
-  );
 
-  const handleSetAlignment = (value: string) => {
-    dispatch(setAlignmentAction(value));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("api/dogs");
+        console.log(response);
+        // setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
   };
 
-  const handleSubmit = () => {
-    if (selectedAlignment.length > 0) {
-      navigate("/test/breeds");
-    } else {
-      alert("Please select an alignment to continue");
-    }
-  };
+  const currentImageData = data[currentIndex] || [];
 
   return (
     <div className="antialiased bg-body text-body font-body">
@@ -61,53 +70,37 @@ const AlignmentPage = () => {
               <div className="flex flex-col justify-center h-full">
                 <div>
                   <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
-                    Choose the statement that best aligns with your beliefs
+                    Dogs
                   </h6>
                   <div className="mb-6">
                     <div className="relative flex items-center gap-2 mb-4">
-                      <FormGroup>
-                        <FormControlLabel
-                          className="text-neutral-600 text-lg font-medium tracking-tight text-left ml-2 relative flex items-center gap-2 mb-4"
-                          control={
-                            <Checkbox
-                              checked={selectedAlignment === "pro"}
-                              onChange={() => handleSetAlignment("pro")}
-                              inputProps={{ "aria-label": "pro" }}
+                      <div>
+                        {/* {Object.keys(currentImageData).length > 0 && (
+                          <div>
+                            <img
+                              src={`../../assets/images/dogs/${
+                                currentIndex + 1
+                              }.jpg`} // assuming images are stored in the public directory
+                              alt={`Image ${currentIndex + 1}`}
+                              style={{ maxWidth: "100%" }}
                             />
-                          }
-                          label="Pit bulls are like any other dog! It's all in how you
-                          raise them."
-                        />
-                        <FormControlLabel
-                          className="text-neutral-600 text-lg font-medium tracking-tight text-left ml-2 relative flex items-center gap-2 mb-4"
-                          control={
-                            <Checkbox
-                              checked={selectedAlignment === "neutral"}
-                              onChange={() => handleSetAlignment("neutral")}
-                              inputProps={{ "aria-label": "neutral" }}
-                            />
-                          }
-                          label="Pit bulls are genetically inclined to be dog
-                        aggressive, but in the right hands, they can be amazing
-                        companions."
-                        />
-                        <FormControlLabel
-                          className="text-neutral-600 text-lg font-medium tracking-tight text-left ml-2 relative flex items-center gap-2 mb-4"
-                          control={
-                            <Checkbox
-                              checked={selectedAlignment === "anti"}
-                              onChange={() => handleSetAlignment("anti")}
-                              inputProps={{ "aria-label": "anti" }}
-                            />
-                          }
-                          label="Pit bulls are dangerous and should be banned,
-                          regulated, or phased out of existence."
-                        />
-                      </FormGroup>
+                            <div>
+                              {Object.entries(currentImageData).map(
+                                ([breed, value]) => (
+                                  <p key={breed}>
+                                    {breed}: {value}
+                                  </p>
+                                )
+                              )}
+                            </div>
+                          </div>
+                        )} */}
+                        <button onClick={handleNext}>Next</button>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap -m-4 justify-center">
+                  {/* <div className="flex flex-wrap -m-4 justify-center">
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
@@ -128,7 +121,7 @@ const AlignmentPage = () => {
                         </button>
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -139,4 +132,4 @@ const AlignmentPage = () => {
   );
 };
 
-export default AlignmentPage;
+export default DogsPage;

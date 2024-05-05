@@ -7,7 +7,7 @@ import { rootReducer, RootReducer } from './rootReducer'
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user'],
+  whitelist: ['user', 'breeds', 'settings'],
   stateReconciler: autoMergeLevel2,
 }
 

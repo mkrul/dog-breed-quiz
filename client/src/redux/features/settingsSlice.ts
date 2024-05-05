@@ -66,7 +66,7 @@ const settingsSlice = createSlice({
   },
 });
 
-export const { setAlignmentAction, setPercentageAction, setBufferAction } =
+export const { clearSettingsStoreAction, setAlignmentAction, setPercentageAction, setBufferAction } =
   settingsSlice.actions;
 
 export default settingsSlice.reducer;
