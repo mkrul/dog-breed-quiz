@@ -72,7 +72,7 @@ const DnaPage = () => {
                 <img
                   className="w-full h-full object-cover"
                   src={require("../../assets/images/pit-bull-03.jpg")}
-                  alt="Photo by Katie Bernotsky"
+                  alt="Photo by Dogs In The World"
                 />
                 <div className="mt-4 text-sm">
                   Photo by{" "}
@@ -167,11 +167,8 @@ const DnaPage = () => {
                                 Attention
                               </h2>
                               <Typography className="mb-4 mt-3">
-                                You will now be shown photos of 50 random dogs
-                                for you to identify.
-                              </Typography>
-                              <Typography className="mb-4">
-                                Once you begin the test, you will{" "}
+                                You will now be shown 50 random dogs to
+                                identify. Once you begin the test, you will{" "}
                                 <strong>not</strong> be able to modify your
                                 settings.
                               </Typography>

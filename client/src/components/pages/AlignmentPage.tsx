@@ -37,7 +37,7 @@ const AlignmentPage = () => {
                 <img
                   className="w-full h-full object-cover"
                   src={require("../../assets/images/pit-bull-02.jpg")}
-                  alt="Photo by Katie Bernotsky"
+                  alt="Photo by Karthegan Padmanaban"
                 />
                 <div className="mt-4 text-sm">
                   Photo by{" "}
