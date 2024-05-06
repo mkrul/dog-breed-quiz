@@ -18,7 +18,7 @@ import {
   addTotalIncorrectGuessesAction,
   addTotalIncorrectWithBufferAction,
   addTotalSkippedAction,
-  addUserAccuracyAction,
+  updateUserAccuracyAction,
   addTotalDogs,
 } from "../../redux/features/scoreSlice";
 
@@ -38,7 +38,6 @@ const DogsPage = () => {
   const settings = useSelector((state: RootState) => state.settings);
   const buffer = settings.buffer;
   const percentage = settings.percentage;
-  const currentDog = dogData[currentIndex] || [];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,22 +65,14 @@ const DogsPage = () => {
     };
   }, []);
 
-  const calculateCurrentUserAccuracy = () => {
-    const totalDogs = resultData.length;
-    const dogsSelected = resultData.filter(
-      (result) => result.selected === true
-    );
-    const numTotalDogsSelected = dogsSelected.length;
+  const calculateTotalDogs = async () => {
+    return scoreData.totalDogs + 1;
+  };
 
-    const incorrectGuesses = dogsSelected.filter(
-      (result) => result.correctGuess === false
-    );
-    const numTotalIncorrectGuesses = incorrectGuesses.length;
+  const calculateCurrentUserAccuracy = (totalDogs: number) => {
+    const userAccuracy = (scoreData.totalCorrectGuesses / totalDogs) * 100;
 
-    const userAccuracy =
-      (totalDogs - numTotalIncorrectGuesses / totalDogs) * 100;
-
-    dispatch(addUserAccuracyAction(userAccuracy));
+    return Math.round(userAccuracy * 100) / 100;
   };
 
   const handleNext = async () => {
@@ -100,7 +91,8 @@ const DogsPage = () => {
     let guessResult = 0;
     let resultWithBuffer = 0;
 
-    dispatch(addTotalDogsAction(scoreData.totalDogs + selected));
+    const totalDogs = await calculateTotalDogs();
+    dispatch(addTotalDogsAction(totalDogs));
     dispatch(
       addTotalDogsSelectedAction(scoreData.totalDogsSelected + selected)
     );
@@ -144,8 +136,6 @@ const DogsPage = () => {
       }
     }
 
-    calculateCurrentUserAccuracy();
-
     await dispatch(
       addResultAsync({
         imageUrl,
@@ -154,6 +144,11 @@ const DogsPage = () => {
         correctWithBuffer: resultWithBuffer === 1,
       })
     );
+
+    const accuracy = calculateCurrentUserAccuracy(totalDogs);
+    dispatch(updateUserAccuracyAction(accuracy));
+
+    handleNext();
   };
 
   const handleAnswerNo = async () => {
@@ -164,10 +159,9 @@ const DogsPage = () => {
     let guessResult = 0;
     let resultWithBuffer = 0;
 
-    dispatch(addTotalDogsAction(scoreData.totalDogs + selected));
-    dispatch(
-      addTotalDogsSelectedAction(scoreData.totalDogsSelected + selected)
-    );
+    const totalDogs = await calculateTotalDogs();
+    dispatch(addTotalDogsAction(totalDogs));
+    dispatch(addTotalSkippedAction(scoreData.totalSkipped + 1));
 
     if (
       sumOfBreedPercentages >= percentage ||
@@ -208,8 +202,6 @@ const DogsPage = () => {
       }
     }
 
-    calculateCurrentUserAccuracy();
-
     await dispatch(
       addResultAsync({
         imageUrl,
@@ -218,7 +210,14 @@ const DogsPage = () => {
         correctWithBuffer: resultWithBuffer === 1,
       })
     );
+
+    const accuracy = calculateCurrentUserAccuracy(totalDogs);
+    dispatch(updateUserAccuracyAction(accuracy));
+
+    handleNext();
   };
+
+  const currentDog = dogData[currentIndex] || [];
 
   return (
     <div className="antialiased bg-body text-body font-body">

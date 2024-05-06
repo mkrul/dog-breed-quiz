@@ -55,7 +55,7 @@ export const addTotalSkipped = (totalSkipped: number) => ({
   payload: totalSkipped,
 });
 
-export const addUserAccuracy = (userAccuracy: number) => ({
+export const updateUserAccuracy = (userAccuracy: number) => ({
   type: ADD_USER_ACCURACY,
   payload: userAccuracy,
 });
@@ -104,12 +104,12 @@ const scoreSlice = createSlice({
     addTotalSkippedAction: (state, action: PayloadAction<number>) => {
       state.totalSkipped = action.payload;
     },
-    addUserAccuracyAction: (state, action: PayloadAction<number>) => {
+    updateUserAccuracyAction: (state, action: PayloadAction<number>) => {
       state.userAccuracy = action.payload;
     },
   },
 });
 
-export const { clearScoreAction, addTotalDogsAction, addTotalDogsSelectedAction, addTotalCorrectGuessesAction, addtotalCorrectWithBufferAction, addTotalIncorrectGuessesAction, addTotalIncorrectWithBufferAction, addTotalSkippedAction, addUserAccuracyAction } = scoreSlice.actions;
+export const { clearScoreAction, addTotalDogsAction, addTotalDogsSelectedAction, addTotalCorrectGuessesAction, addtotalCorrectWithBufferAction, addTotalIncorrectGuessesAction, addTotalIncorrectWithBufferAction, addTotalSkippedAction, updateUserAccuracyAction } = scoreSlice.actions;
 
 export default scoreSlice.reducer;
