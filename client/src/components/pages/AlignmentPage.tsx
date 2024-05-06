@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { setAlignmentAction } from "../../redux/features/settingsSlice";
+import { setAlignmentAction } from "../../redux/features/settingSlice";
 import { Settings } from "../../interfaces/settings";
 
 const AlignmentPage = () => {
@@ -111,20 +111,20 @@ const AlignmentPage = () => {
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
-                          onClick={() => navigate("/")}
+                          onClick={handleSubmit}
                           className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
-                          Back
+                          Next
                         </button>
                       </p>
                     </div>
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
-                          onClick={handleSubmit}
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
+                          onClick={() => navigate("/")}
+                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
-                          Next
+                          Back
                         </button>
                       </p>
                     </div>

@@ -11,7 +11,7 @@ import { Modal, Box, Typography } from "@mui/material";
 import {
   setPercentageAction,
   setBufferAction,
-} from "../../redux/features/settingsSlice";
+} from "../../redux/features/settingSlice";
 
 const DnaPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -140,18 +140,8 @@ const DnaPage = () => {
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
-                          onClick={() => navigate("/test/breeds")}
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
-                        >
-                          Back
-                        </button>
-                      </p>
-                    </div>
-                    <div className="w-full md:w-auto p-4">
-                      <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
-                        <button
                           onClick={handleOpenModal}
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
+                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
                           Next
                         </button>
@@ -194,6 +184,16 @@ const DnaPage = () => {
                             </Box>
                           </Modal>
                         )}
+                      </p>
+                    </div>
+                    <div className="w-full md:w-auto p-4">
+                      <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
+                        <button
+                          onClick={() => navigate("/test/breeds")}
+                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
+                        >
+                          Back
+                        </button>
                       </p>
                     </div>
                   </div>

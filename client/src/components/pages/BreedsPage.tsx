@@ -153,20 +153,20 @@ const BreedsPage = () => {
                     <div className="w-full md:w-auto p-4">
                       <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
-                          onClick={() => navigate("/test/alignment")}
+                          onClick={handleSubmit}
                           className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
-                          Back
+                          Next
                         </button>
                       </div>
                     </div>
                     <div className="w-full md:w-auto p-4">
                       <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
-                          onClick={handleSubmit}
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
+                          onClick={() => navigate("/test/alignment")}
+                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
-                          Next
+                          Back
                         </button>
                       </div>
                     </div>

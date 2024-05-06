@@ -38,7 +38,7 @@ export const setBuffer = (value: boolean) => ({
 
 // Reducers
 
-const settingsSlice = createSlice({
+const settingSlice = createSlice({
   name: "settingsData",
   initialState,
   reducers: {
@@ -67,6 +67,6 @@ const settingsSlice = createSlice({
 });
 
 export const { clearSettingsAction, setAlignmentAction, setPercentageAction, setBufferAction } =
-  settingsSlice.actions;
+  settingSlice.actions;
 
-export default settingsSlice.reducer;
+export default settingSlice.reducer;

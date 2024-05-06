@@ -8,10 +8,10 @@ import {
   setUsernameAction,
   clearUserStoreAction,
 } from "../../redux/features/userSlice";
-import { clearScoresAction } from "../../redux/features/scoreSlice";
+import { clearResultsAction } from "../../redux/features/resultSlice";
 import { clearBreedsAction } from "../../redux/features/breedSlice";
-import { clearSettingsAction } from "../../redux/features/settingsSlice";
-
+import { clearSettingsAction } from "../../redux/features/settingSlice";
+import { clearScoreAction } from "../../redux/features/scoreSlice";
 import "../../assets/main.css";
 import "../../assets/homepage.css";
 
@@ -48,10 +48,11 @@ const HomePage = () => {
   const handleSubmit = () => {
     if (userNameInput.length > 0) {
       try {
+        dispatch(clearScoreAction());
         dispatch(clearUserStoreAction());
         dispatch(clearBreedsAction());
         dispatch(clearSettingsAction());
-        dispatch(clearScoresAction());
+        dispatch(clearResultsAction());
         dispatch(setUsernameAction(userNameInput));
       } catch (error) {
         console.log(error);

@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Settings } from "../../interfaces/settings";
+import { Result } from "../../interfaces/result";
+import { RootState } from "../../redux/store";
+import { Score } from "../../interfaces/score";
 
-const ResultsPage: React.FC = () => {
+const ResultsPage = () => {
+  const navigate = useNavigate();
+
+  const settingData = useSelector(
+    (state: RootState) => state.settings as Settings
+  );
+  const scoreData = useSelector((state: RootState) => state.score as Score);
+
   return (
     <div className="antialiased bg-body text-body font-body">
       <section className="mt-4 pt-6 py-12 md:py-2">
@@ -12,25 +25,44 @@ const ResultsPage: React.FC = () => {
             </h2>
             <div className="mb-5 text-xl text-neutral-700 font-medium">
               <p className="mb-5">
-                You selected <span className="font-bold">20</span> dogs that
-                appeared to be pit bulls based on the criteria set at the
-                beginning of the test
+                You selected{" "}
+                <span className="font-bold">{scoreData.totalDogsSelected}</span>{" "}
+                dogs that appeared to be pit bulls based on the{" "}
+                <span className="font-bold">{settingData.percentage}%</span>{" "}
+                criteria you set at the beginning of the test
               </p>
               <p className="mb-5">
-                Of the <span className="font-bold">20</span> dogs that were
-                selected, <span className="font-bold">10</span> were identified
-                incorrectly based on your critera
+                Out of all the dogs that you selected,{" "}
+                <span className="font-bold">
+                  {scoreData.totalIncorrectGuesses === 0
+                    ? "all"
+                    : scoreData.totalIncorrectGuesses}
+                </span>{" "}
+                were identified{" "}
+                {scoreData.totalIncorrectGuesses === 0
+                  ? "correctly"
+                  : "incorrectly"}{" "}
+                based on your critera
               </p>
               <p className="mb-5">
-                Of those 10 dogs, <span className="font-bold">2</span> of them
-                were within 10% of meeting your criteria
+                <span className="font-bold">
+                  {scoreData.totalCorrectWithBuffer}
+                </span>{" "}
+                of the
+                <span className="font-bold">
+                  {" "}
+                  {scoreData.totalIncorrectGuesses}
+                </span>{" "}
+                dogs incorrectly identified were within 10% of matching your
+                criteria
               </p>
               <p className="mb-5">
                 The average accuracy for all participants is currently{" "}
                 <span className="font-bold">45.3%</span>
               </p>
               <p className="mb-5">
-                Your overall accuracy was <span className="font-bold">33%</span>
+                Your overall accuracy was{" "}
+                <span className="font-bold">{scoreData.userAccuracy}%</span>
               </p>
             </div>
           </div>
@@ -163,10 +195,10 @@ const ResultsPage: React.FC = () => {
               </tbody>
             </table>
 
-            {/* top scores */}
+            {/* top results */}
 
             <h2 className="pt-6 text-5xl font-semibold font-subheading">
-              Top Scores
+              Top Results
             </h2>
             <h6 className="mb-5 font-bold">(All Participants)</h6>
 
