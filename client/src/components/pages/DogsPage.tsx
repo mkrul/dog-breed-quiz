@@ -30,6 +30,7 @@ const DogsPage = () => {
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const selectedBreeds = useSelector((state: RootState) => state.breeds);
   const scoreData = useSelector((state: RootState) => state.score as Score);
   const resultData = useSelector(
     (state: RootState) => state.result as Result[]
@@ -84,12 +85,35 @@ const DogsPage = () => {
   };
 
   const handleAnswerYes = async () => {
-    const { apbt, ast, sbt, ab } = currentDog;
+    const apbtPercentage = currentDog.apbt;
+    const astPercentage = currentDog.ast;
+    const sbtPercentage = currentDog.sbt;
+    const abPercentage = currentDog.ab;
+    let bufferValue = 10;
+    let userSelectedApbt = false;
+    let userSelectedAst = false;
+    let userSelectedSbt = false;
+    let userSelectedAb = false;
     let selected = 1;
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
-    let sumOfBreedPercentages = apbt + ast + sbt + ab;
     let guessResult = 0;
     let resultWithBuffer = 0;
+
+    // iterate through selectedBreeds and determine which breeds the user selected
+    selectedBreeds.forEach((breed) => {
+      if (breed.name === "American Pit Bull Terrier" && breed.selected) {
+        userSelectedApbt = true;
+      }
+      if (breed.name === "American Staffordshire Terrier" && breed.selected) {
+        userSelectedAst = true;
+      }
+      if (breed.name === "Staffordshire Bull Terrier" && breed.selected) {
+        userSelectedSbt = true;
+      }
+      if (breed.name === "American Bully" && breed.selected) {
+        userSelectedAb = true;
+      }
+    });
 
     const totalDogs = await calculateTotalDogs();
     dispatch(addTotalDogsAction(totalDogs));
@@ -97,9 +121,17 @@ const DogsPage = () => {
       addTotalDogsSelectedAction(scoreData.totalDogsSelected + selected)
     );
 
+    console.log("userSelectedAb", userSelectedAb);
+    console.log("abPercentage", abPercentage);
+    console.log(
+      "userSelectedAb && abPercentage >= percentage",
+      userSelectedAb && abPercentage >= percentage
+    );
     if (
-      sumOfBreedPercentages >= percentage ||
-      sumOfBreedPercentages < percentage
+      (userSelectedApbt && apbtPercentage >= percentage) ||
+      (userSelectedAst && astPercentage >= percentage) ||
+      (userSelectedSbt && sbtPercentage >= percentage) ||
+      (userSelectedAb && abPercentage >= percentage)
     ) {
       guessResult = 1;
       dispatch(
@@ -116,10 +148,11 @@ const DogsPage = () => {
     }
 
     if (buffer) {
-      sumOfBreedPercentages += 10;
       if (
-        sumOfBreedPercentages >= percentage ||
-        sumOfBreedPercentages < percentage
+        (userSelectedApbt && apbtPercentage + bufferValue >= percentage) ||
+        (userSelectedAst && astPercentage + bufferValue >= percentage) ||
+        (userSelectedSbt && sbtPercentage + bufferValue >= percentage) ||
+        (userSelectedAb && abPercentage + bufferValue >= percentage)
       ) {
         resultWithBuffer = 1;
         dispatch(
@@ -152,10 +185,34 @@ const DogsPage = () => {
   };
 
   const handleAnswerNo = async () => {
-    const { apbt, ast, sbt, ab } = currentDog;
+    const apbtPercentage = currentDog.apbt;
+    const astPercentage = currentDog.ast;
+    const sbtPercentage = currentDog.sbt;
+    const abPercentage = currentDog.ab;
+    let bufferValue = 10;
+    let userSelectedApbt = false;
+    let userSelectedAst = false;
+    let userSelectedSbt = false;
+    let userSelectedAb = false;
+
+    // iterate through selectedBreeds and determine which breeds the user selected
+    selectedBreeds.forEach((breed) => {
+      if (breed.name === "American Pit Bull Terrier" && breed.selected) {
+        userSelectedApbt = true;
+      }
+      if (breed.name === "American Staffordshire Terrier" && breed.selected) {
+        userSelectedAst = true;
+      }
+      if (breed.name === "Staffordshire Bull Terrier" && breed.selected) {
+        userSelectedSbt = true;
+      }
+      if (breed.name === "American Bully" && breed.selected) {
+        userSelectedAb = true;
+      }
+    });
+
     let selected = 0;
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
-    let sumOfBreedPercentages = apbt + ast + sbt + ab;
     let guessResult = 0;
     let resultWithBuffer = 0;
 
@@ -164,16 +221,18 @@ const DogsPage = () => {
     dispatch(addTotalSkippedAction(scoreData.totalSkipped + 1));
 
     if (
-      sumOfBreedPercentages >= percentage ||
-      sumOfBreedPercentages < percentage
+      (userSelectedApbt && apbtPercentage < percentage) ||
+      (userSelectedAst && astPercentage < percentage) ||
+      (userSelectedSbt && sbtPercentage < percentage) ||
+      (userSelectedAb && abPercentage < percentage)
     ) {
+      guessResult = 1;
       dispatch(
         addTotalCorrectGuessesAction(
           scoreData.totalCorrectGuesses + guessResult
         )
       );
     } else {
-      guessResult = 1;
       dispatch(
         addTotalIncorrectGuessesAction(
           scoreData.totalIncorrectGuesses + guessResult
@@ -182,18 +241,19 @@ const DogsPage = () => {
     }
 
     if (buffer) {
-      sumOfBreedPercentages += 10;
       if (
-        sumOfBreedPercentages >= percentage ||
-        sumOfBreedPercentages < percentage
+        (userSelectedApbt && apbtPercentage + bufferValue < percentage) ||
+        (userSelectedAst && astPercentage + bufferValue < percentage) ||
+        (userSelectedSbt && sbtPercentage + bufferValue < percentage) ||
+        (userSelectedAb && abPercentage + bufferValue < percentage)
       ) {
+        resultWithBuffer = 1;
         dispatch(
           addtotalCorrectWithBufferAction(
             scoreData.totalCorrectWithBuffer + resultWithBuffer
           )
         );
       } else {
-        resultWithBuffer = 1;
         dispatch(
           addTotalIncorrectWithBufferAction(
             scoreData.totalIncorrectWithBuffer + resultWithBuffer
