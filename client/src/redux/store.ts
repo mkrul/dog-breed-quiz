@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import { rootReducer, RootReducer } from './rootReducer'
+import { thunk } from "redux-thunk";
 
 const persistConfig = {
   key: 'root',
@@ -18,8 +19,8 @@ export const store = configureStore({
   middleware: getDefaultMiddleware => getDefaultMiddleware(
     {
       serializableCheck: false,
-    }
-  ),
+    },
+  ).concat(thunk)
 });
 
 export const persistor = persistStore(store);

@@ -19,7 +19,6 @@ import {
   addTotalIncorrectWithBufferAction,
   addTotalSkippedAction,
   updateUserAccuracyAction,
-  addTotalDogs,
 } from "../../redux/features/scoreSlice";
 
 const DogsPage = () => {
@@ -32,13 +31,11 @@ const DogsPage = () => {
 
   const selectedBreeds = useSelector((state: RootState) => state.breeds);
   const scoreData = useSelector((state: RootState) => state.score as Score);
-  const resultData = useSelector(
-    (state: RootState) => state.result as Result[]
-  );
+
   // get settings from redux store
   const settings = useSelector((state: RootState) => state.settings);
   const buffer = settings.buffer;
-  const percentage = settings.percentage;
+  const userSelectedPercentage = settings.percentage;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,14 +63,29 @@ const DogsPage = () => {
     };
   }, []);
 
-  const calculateTotalDogs = async () => {
-    return scoreData.totalDogs + 1;
-  };
-
-  const calculateCurrentUserAccuracy = (totalDogs: number) => {
-    const userAccuracy = (scoreData.totalCorrectGuesses / totalDogs) * 100;
+  const calculateCurrentUserAccuracy = (
+    totalDogs: number,
+    correctGuesses: number
+  ) => {
+    const userAccuracy = (correctGuesses / totalDogs) * 100;
 
     return Math.round(userAccuracy * 100) / 100;
+  };
+
+  const calculateTotalCorrectGuesses = async (num: number) => {
+    return scoreData.totalCorrectGuesses + num;
+  };
+
+  const calculateTotalIncorrectGuesses = async (num: number) => {
+    return scoreData.totalIncorrectGuesses + num;
+  };
+
+  const calculateTotalCorrectWithBuffer = async (num: number) => {
+    return scoreData.totalCorrectWithBuffer + num;
+  };
+
+  const calculateTotalIncorrectWithBuffer = async (num: number) => {
+    return scoreData.totalIncorrectWithBuffer + num;
   };
 
   const handleNext = async () => {
@@ -85,193 +97,102 @@ const DogsPage = () => {
   };
 
   const handleAnswerYes = async () => {
-    const apbtPercentage = currentDog.apbt;
-    const astPercentage = currentDog.ast;
-    const sbtPercentage = currentDog.sbt;
-    const abPercentage = currentDog.ab;
+    const { apbt, ast, sbt, ab } = currentDog;
+
     let bufferValue = 10;
-    let userSelectedApbt = false;
-    let userSelectedAst = false;
-    let userSelectedSbt = false;
-    let userSelectedAb = false;
-    let selected = 1;
+    let totalBreedPercentages = apbt + ast + sbt + ab;
+
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
-    let guessResult = 0;
-    let resultWithBuffer = 0;
 
-    // iterate through selectedBreeds and determine which breeds the user selected
-    selectedBreeds.forEach((breed) => {
-      if (breed.name === "American Pit Bull Terrier" && breed.selected) {
-        userSelectedApbt = true;
-      }
-      if (breed.name === "American Staffordshire Terrier" && breed.selected) {
-        userSelectedAst = true;
-      }
-      if (breed.name === "Staffordshire Bull Terrier" && breed.selected) {
-        userSelectedSbt = true;
-      }
-      if (breed.name === "American Bully" && breed.selected) {
-        userSelectedAb = true;
-      }
-    });
+    dispatch(addTotalDogsAction(scoreData.totalDogs + 1));
+    dispatch(addTotalDogsSelectedAction(scoreData.totalDogsSelected + 1));
 
-    const totalDogs = await calculateTotalDogs();
-    dispatch(addTotalDogsAction(totalDogs));
-    dispatch(
-      addTotalDogsSelectedAction(scoreData.totalDogsSelected + selected)
-    );
-
-    console.log("userSelectedAb", userSelectedAb);
-    console.log("abPercentage", abPercentage);
-    console.log(
-      "userSelectedAb && abPercentage >= percentage",
-      userSelectedAb && abPercentage >= percentage
-    );
-    if (
-      (userSelectedApbt && apbtPercentage >= percentage) ||
-      (userSelectedAst && astPercentage >= percentage) ||
-      (userSelectedSbt && sbtPercentage >= percentage) ||
-      (userSelectedAb && abPercentage >= percentage)
-    ) {
-      guessResult = 1;
-      dispatch(
-        addTotalCorrectGuessesAction(
-          scoreData.totalCorrectGuesses + guessResult
-        )
-      );
+    if (totalBreedPercentages >= userSelectedPercentage) {
+      dispatch(addTotalCorrectGuessesAction(scoreData.totalCorrectGuesses + 1));
     } else {
       dispatch(
-        addTotalIncorrectGuessesAction(
-          scoreData.totalIncorrectGuesses + guessResult
-        )
+        addTotalIncorrectGuessesAction(scoreData.totalIncorrectGuesses + 1)
       );
     }
 
     if (buffer) {
-      if (
-        (userSelectedApbt && apbtPercentage + bufferValue >= percentage) ||
-        (userSelectedAst && astPercentage + bufferValue >= percentage) ||
-        (userSelectedSbt && sbtPercentage + bufferValue >= percentage) ||
-        (userSelectedAb && abPercentage + bufferValue >= percentage)
-      ) {
-        resultWithBuffer = 1;
+      if (totalBreedPercentages + bufferValue >= userSelectedPercentage) {
         dispatch(
-          addtotalCorrectWithBufferAction(
-            scoreData.totalCorrectWithBuffer + resultWithBuffer
-          )
+          addtotalCorrectWithBufferAction(scoreData.totalCorrectWithBuffer + 1)
         );
       } else {
         dispatch(
           addTotalIncorrectWithBufferAction(
-            scoreData.totalIncorrectWithBuffer + resultWithBuffer
+            scoreData.totalIncorrectWithBuffer + 1
           )
         );
       }
     }
 
-    await dispatch(
-      addResultAsync({
-        imageUrl,
-        selected: selected === 1,
-        correctGuess: guessResult === 1,
-        correctWithBuffer: resultWithBuffer === 1,
-      })
-    );
+    // await dispatch(
+    //   addResultAsync({
+    //     imageUrl,
+    //     selected: selected === 1,
+    //     correctGuess: guessResult === 1,
+    //     correctWithBuffer: resultWithBuffer === 1,
+    //   })
+    // );
 
-    const accuracy = calculateCurrentUserAccuracy(totalDogs);
+    const accuracy = calculateCurrentUserAccuracy(
+      scoreData.totalDogs + 1,
+      scoreData.totalCorrectGuesses
+    );
     dispatch(updateUserAccuracyAction(accuracy));
 
     handleNext();
   };
 
   const handleAnswerNo = async () => {
-    const apbtPercentage = currentDog.apbt;
-    const astPercentage = currentDog.ast;
-    const sbtPercentage = currentDog.sbt;
-    const abPercentage = currentDog.ab;
+    const { apbt, ast, sbt, ab } = currentDog;
+
     let bufferValue = 10;
-    let userSelectedApbt = false;
-    let userSelectedAst = false;
-    let userSelectedSbt = false;
-    let userSelectedAb = false;
+    let totalBreedPercentages = apbt + ast + sbt + ab;
 
-    // iterate through selectedBreeds and determine which breeds the user selected
-    selectedBreeds.forEach((breed) => {
-      if (breed.name === "American Pit Bull Terrier" && breed.selected) {
-        userSelectedApbt = true;
-      }
-      if (breed.name === "American Staffordshire Terrier" && breed.selected) {
-        userSelectedAst = true;
-      }
-      if (breed.name === "Staffordshire Bull Terrier" && breed.selected) {
-        userSelectedSbt = true;
-      }
-      if (breed.name === "American Bully" && breed.selected) {
-        userSelectedAb = true;
-      }
-    });
-
-    let selected = 0;
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
-    let guessResult = 0;
-    let resultWithBuffer = 0;
 
-    const totalDogs = await calculateTotalDogs();
-    dispatch(addTotalDogsAction(totalDogs));
+    dispatch(addTotalDogsAction(scoreData.totalDogs + 1));
     dispatch(addTotalSkippedAction(scoreData.totalSkipped + 1));
 
-    if (
-      (userSelectedApbt && apbtPercentage < percentage) ||
-      (userSelectedAst && astPercentage < percentage) ||
-      (userSelectedSbt && sbtPercentage < percentage) ||
-      (userSelectedAb && abPercentage < percentage)
-    ) {
-      guessResult = 1;
-      dispatch(
-        addTotalCorrectGuessesAction(
-          scoreData.totalCorrectGuesses + guessResult
-        )
-      );
+    if (totalBreedPercentages < userSelectedPercentage) {
+      dispatch(addTotalCorrectGuessesAction(scoreData.totalCorrectGuesses + 1));
     } else {
       dispatch(
-        addTotalIncorrectGuessesAction(
-          scoreData.totalIncorrectGuesses + guessResult
-        )
+        addTotalIncorrectGuessesAction(scoreData.totalIncorrectGuesses + 1)
       );
     }
 
     if (buffer) {
-      if (
-        (userSelectedApbt && apbtPercentage + bufferValue < percentage) ||
-        (userSelectedAst && astPercentage + bufferValue < percentage) ||
-        (userSelectedSbt && sbtPercentage + bufferValue < percentage) ||
-        (userSelectedAb && abPercentage + bufferValue < percentage)
-      ) {
-        resultWithBuffer = 1;
+      if (totalBreedPercentages + bufferValue < userSelectedPercentage) {
         dispatch(
-          addtotalCorrectWithBufferAction(
-            scoreData.totalCorrectWithBuffer + resultWithBuffer
-          )
+          addtotalCorrectWithBufferAction(scoreData.totalCorrectWithBuffer + 1)
         );
       } else {
         dispatch(
           addTotalIncorrectWithBufferAction(
-            scoreData.totalIncorrectWithBuffer + resultWithBuffer
+            scoreData.totalIncorrectWithBuffer + 1
           )
         );
       }
     }
 
-    await dispatch(
-      addResultAsync({
-        imageUrl,
-        selected: selected === 0,
-        correctGuess: guessResult === 1,
-        correctWithBuffer: resultWithBuffer === 1,
-      })
-    );
+    // await dispatch(
+    //   addResultAsync({
+    //     imageUrl,
+    //     selected: selected === 0,
+    //     correctGuess: guessResult === 1,
+    //     correctWithBuffer: resultWithBuffer === 1,
+    //   })
+    // );
 
-    const accuracy = calculateCurrentUserAccuracy(totalDogs);
+    const accuracy = calculateCurrentUserAccuracy(
+      scoreData.totalDogs + 1,
+      scoreData.totalCorrectGuesses
+    );
     dispatch(updateUserAccuracyAction(accuracy));
 
     handleNext();
