@@ -8,7 +8,7 @@ import { thunk } from "redux-thunk";
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user', 'breeds', 'settings'],
+  whitelist: ['user', 'breeds', 'settings', 'results'],
   stateReconciler: autoMergeLevel2,
 }
 

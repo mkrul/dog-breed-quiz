@@ -8,10 +8,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { Settings } from "../../interfaces/settings";
 import { Modal, Box, Typography } from "@mui/material";
-import {
-  setPercentageAction,
-  setBufferAction,
-} from "../../redux/features/settingSlice";
+import { setPercentageAction } from "../../redux/features/settingSlice";
 
 const DnaPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -33,13 +30,6 @@ const DnaPage = () => {
   const selectedPercentage = useSelector(
     (state: { settings: Settings }) => state.settings.percentage
   );
-  const buffer = useSelector(
-    (state: { settings: Settings }) => state.settings.buffer
-  );
-
-  const handleBufferChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setBufferAction(event.target.checked));
-  };
 
   const handlePercentageChange = (event: Event, value: number | number[]) => {
     dispatch(setPercentageAction(value as number));
@@ -94,10 +84,10 @@ const DnaPage = () => {
                     dog as a pit bull?
                   </h6>
                   <p className="mb-5 text-xl text-neutral-700 font-medium">
-                    Adjust the slider to set a percentage. An optional 10%
-                    buffer may be applied, meaning that any dog with a DNA match
-                    within 10% of the selected percentage value will be counted
-                    in your results.
+                    Adjust the slider to set a percentage. A 10% buffer will be
+                    applied, meaning that any dog with a DNA match within 10% of
+                    the selected percentage value will be counted in your
+                    results.
                   </p>
                   <div className="mb-2 ml-6">
                     <Slider
@@ -117,23 +107,6 @@ const DnaPage = () => {
                       Selected value:{" "}
                       <span className="font-bold">{selectedPercentage}%</span>
                     </p>
-                  </div>
-                  <div className="flex justify-center">
-                    <div className="mb-6 text-xl text-neutral-700 font-medium flex justify-center">
-                      <FormGroup>
-                        <FormControlLabel
-                          className="text-neutral-600 text-lg font-medium tracking-tight text-left ml-2 relative flex items-center gap-2 mb-2"
-                          control={
-                            <Checkbox
-                              checked={buffer}
-                              onChange={handleBufferChange}
-                              inputProps={{ "aria-label": "buffer" }}
-                            />
-                          }
-                          label={"Use 10% buffer?"}
-                        />
-                      </FormGroup>
-                    </div>
                   </div>
 
                   <div className="flex flex-wrap -m-4 justify-center">

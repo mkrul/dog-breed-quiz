@@ -6,20 +6,18 @@ import { CircularProgress } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import { Dog } from "../../interfaces/dog";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { addResultAsync } from "../../redux/features/resultSlice";
 import { RootState } from "../../redux/store";
+import { Selection } from "../../interfaces/selection";
 import { Result } from "../../interfaces/result";
-import { Score } from "../../interfaces/score";
 import {
   addTotalDogsAction,
   addTotalDogsSelectedAction,
   addTotalCorrectGuessesAction,
-  addtotalCorrectWithBufferAction,
   addTotalIncorrectGuessesAction,
-  addTotalIncorrectWithBufferAction,
   addTotalSkippedAction,
   updateUserAccuracyAsync,
-} from "../../redux/features/scoreSlice";
+  updateSelectionsAction,
+} from "../../redux/features/resultsSlice";
 
 const DogsPage = () => {
   const dispatch = useAppDispatch();
@@ -29,12 +27,9 @@ const DogsPage = () => {
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const selectedBreeds = useSelector((state: RootState) => state.breeds);
-  const scoreData = useSelector((state: RootState) => state.score as Score);
+  const resultData = useSelector((state: RootState) => state.results as Result);
 
-  // get settings from redux store
   const settings = useSelector((state: RootState) => state.settings);
-  const buffer = settings.buffer;
   const userSelectedPercentage = settings.percentage;
 
   useEffect(() => {
@@ -57,36 +52,10 @@ const DogsPage = () => {
       return "";
     };
 
-    // Unmount the window.onbeforeunload event
     return () => {
       window.onbeforeunload = null;
     };
   }, []);
-
-  const calculateCurrentUserAccuracy = (
-    totalDogs: number,
-    correctGuesses: number
-  ) => {
-    const userAccuracy = (correctGuesses / totalDogs) * 100;
-
-    return Math.round(userAccuracy * 100) / 100;
-  };
-
-  const calculateTotalCorrectGuesses = async (num: number) => {
-    return scoreData.totalCorrectGuesses + num;
-  };
-
-  const calculateTotalIncorrectGuesses = async (num: number) => {
-    return scoreData.totalIncorrectGuesses + num;
-  };
-
-  const calculateTotalCorrectWithBuffer = async (num: number) => {
-    return scoreData.totalCorrectWithBuffer + num;
-  };
-
-  const calculateTotalIncorrectWithBuffer = async (num: number) => {
-    return scoreData.totalIncorrectWithBuffer + num;
-  };
 
   const handleNext = async () => {
     if (currentIndex >= dogData.length - 1) {
@@ -96,93 +65,76 @@ const DogsPage = () => {
     }
   };
 
-  const handleAnswerYes = async () => {
+  const handleAnswerYes = () => {
     const { apbt, ast, sbt, ab } = currentDog;
 
+    let correctGuess = 0;
     let bufferValue = 10;
     let totalBreedPercentages = apbt + ast + sbt + ab;
 
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
 
-    dispatch(addTotalDogsAction(scoreData.totalDogs + 1));
-    dispatch(addTotalDogsSelectedAction(scoreData.totalDogsSelected + 1));
+    dispatch(addTotalDogsAction(resultData.totalDogs + 1));
+    dispatch(addTotalDogsSelectedAction(resultData.totalSelected + 1));
 
-    if (totalBreedPercentages >= userSelectedPercentage) {
-      dispatch(addTotalCorrectGuessesAction(scoreData.totalCorrectGuesses + 1));
+    if (userSelectedPercentage + bufferValue >= totalBreedPercentages) {
+      correctGuess = 1;
+      dispatch(
+        addTotalCorrectGuessesAction(resultData.totalCorrectGuesses + 1)
+      );
     } else {
       dispatch(
-        addTotalIncorrectGuessesAction(scoreData.totalIncorrectGuesses + 1)
+        addTotalIncorrectGuessesAction(resultData.totalIncorrectGuesses + 1)
       );
     }
 
-    if (buffer) {
-      if (totalBreedPercentages + bufferValue >= userSelectedPercentage) {
-        dispatch(
-          addtotalCorrectWithBufferAction(scoreData.totalCorrectWithBuffer + 1)
-        );
-      } else {
-        dispatch(
-          addTotalIncorrectWithBufferAction(
-            scoreData.totalIncorrectWithBuffer + 1
-          )
-        );
-      }
-    }
+    dispatch(updateUserAccuracyAsync());
 
-    // await dispatch(
-    //   addResultAsync({
-    //     imageUrl,
-    //     selected: selected === 1,
-    //     correctGuess: guessResult === 1,
-    //     correctWithBuffer: resultWithBuffer === 1,
-    //   })
-    // );
+    const selection: Selection = {
+      imageUrl,
+      correctGuess: correctGuess === 1,
+      dir: currentDog.dir,
+      image: currentDog.images[0],
+    };
+
+    dispatch(updateSelectionsAction(selection));
 
     handleNext();
   };
 
-  const handleAnswerNo = async () => {
+  const handleAnswerNo = () => {
     const { apbt, ast, sbt, ab } = currentDog;
 
+    let correctGuess = 0;
     let bufferValue = 10;
     let totalBreedPercentages = apbt + ast + sbt + ab;
 
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
 
-    dispatch(addTotalDogsAction(scoreData.totalDogs + 1));
-    dispatch(addTotalSkippedAction(scoreData.totalSkipped + 1));
+    dispatch(addTotalDogsAction(resultData.totalDogs + 1));
+    dispatch(addTotalSkippedAction(resultData.totalSkipped + 1));
 
-    if (totalBreedPercentages < userSelectedPercentage) {
-      dispatch(addTotalCorrectGuessesAction(scoreData.totalCorrectGuesses + 1));
+    if (userSelectedPercentage + bufferValue < totalBreedPercentages) {
+      correctGuess = 1;
+      dispatch(
+        addTotalCorrectGuessesAction(resultData.totalCorrectGuesses + 1)
+      );
     } else {
       dispatch(
-        addTotalIncorrectGuessesAction(scoreData.totalIncorrectGuesses + 1)
+        addTotalIncorrectGuessesAction(resultData.totalIncorrectGuesses + 1)
       );
     }
 
-    if (buffer) {
-      if (totalBreedPercentages + bufferValue < userSelectedPercentage) {
-        dispatch(
-          addtotalCorrectWithBufferAction(scoreData.totalCorrectWithBuffer + 1)
-        );
-      } else {
-        dispatch(
-          addTotalIncorrectWithBufferAction(
-            scoreData.totalIncorrectWithBuffer + 1
-          )
-        );
-      }
-    }
-
-    // await dispatch(
-    //   addResultAsync({
-    //     imageUrl,
-    //     selected: selected === 0,
-    //     correctGuess: guessResult === 1,
-    //     correctWithBuffer: resultWithBuffer === 1,
-    //   })
-    // );
     dispatch(updateUserAccuracyAsync());
+
+    const selection: Selection = {
+      imageUrl,
+      correctGuess: correctGuess === 1,
+      dir: currentDog.dir,
+      image: currentDog.images[0],
+    };
+
+    dispatch(updateSelectionsAction(selection));
 
     handleNext();
   };

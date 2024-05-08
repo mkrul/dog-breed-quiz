@@ -2,59 +2,49 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Settings } from "../../interfaces/settings";
-import { Result } from "../../interfaces/result";
+import { Carousel } from "react-responsive-carousel";
 import { RootState } from "../../redux/store";
-import { Score } from "../../interfaces/score";
+import { Result } from "../../interfaces/result";
+import { Selection } from "../../interfaces/selection";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ResultsPage = () => {
-  const navigate = useNavigate();
+  const [showDogs, setShowDogs] = useState(false);
+  const resultData = useSelector((state: RootState) => state.results as Result);
+  const word1 = resultData.totalSelected === 1 ? "dog" : "dogs";
+  const word2 = resultData.totalSelected === 1 ? "a pit bull" : "pit bulls";
+  const word3 = resultData.totalIncorrectGuesses === 1 ? "was" : "were";
 
-  const settingData = useSelector(
-    (state: RootState) => state.settings as Settings
+  const incorrectGuesses = resultData.selections.filter(
+    (selection: Selection) => selection.correctGuess === false
   );
-  const scoreData = useSelector((state: RootState) => state.score as Score);
+
+  console.log(incorrectGuesses);
+  const handleShowSelections = () => {
+    setShowDogs(!showDogs);
+  };
 
   return (
     <div className="antialiased bg-body text-body font-body">
       <section className="mt-4 pt-6 py-12 md:py-2">
         <div className="container mx-auto px-4 pb-5">
-          <div className="mb-20">
+          <div className="mb-15">
             <h2 className="mb-12 text-5xl font-semibold font-subheading">
               Your Results
             </h2>
             <div className="mb-5 text-xl text-neutral-700 font-medium">
               <p className="mb-5">
                 You selected{" "}
-                <span className="font-bold">{scoreData.totalDogsSelected}</span>{" "}
-                dogs that appeared to be pit bulls based on the{" "}
-                <span className="font-bold">{settingData.percentage}%</span>{" "}
-                criteria you set at the beginning of the test
+                <span className="font-bold">{resultData.totalSelected}</span>{" "}
+                {word1} that appeared to be {word2} based on the criteria you
+                set at the beginning of the test
               </p>
               <p className="mb-5">
-                Out of all the dogs that you selected,{" "}
+                Out of all dogs selected,{" "}
                 <span className="font-bold">
-                  {scoreData.totalIncorrectGuesses === 0
-                    ? "all"
-                    : scoreData.totalIncorrectGuesses}
+                  {resultData.totalIncorrectGuesses}
                 </span>{" "}
-                were identified{" "}
-                {scoreData.totalIncorrectGuesses === 0
-                  ? "correctly"
-                  : "incorrectly"}{" "}
-                based on your critera
-              </p>
-              <p className="mb-5">
-                <span className="font-bold">
-                  {scoreData.totalCorrectWithBuffer}
-                </span>{" "}
-                of the
-                <span className="font-bold">
-                  {" "}
-                  {scoreData.totalIncorrectGuesses}
-                </span>{" "}
-                dogs incorrectly identified were within 10% of matching your
-                criteria
+                {word3} identified incorrectly based on your criteria
               </p>
               <p className="mb-5">
                 The average accuracy for all participants is currently{" "}
@@ -62,11 +52,37 @@ const ResultsPage = () => {
               </p>
               <p className="mb-5">
                 Your overall accuracy was{" "}
-                <span className="font-bold">{scoreData.userAccuracy}%</span>
+                <span className="font-bold">{resultData.userAccuracy}%</span>
               </p>
             </div>
           </div>
-          <div className="mb-20">
+          <div>
+            <button
+              onClick={handleShowSelections}
+              className="mb-3 inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-md text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-3"
+            >
+              {!showDogs ? "View" : "Hide"} incorrect guesses
+            </button>
+            {showDogs && (
+              <div className="inline-flex justify-center">
+                <div className="w-full md:w-1/2 p-5 mt-6">
+                  <div className="overflow-hidden rounded-2xl">
+                    <Carousel>
+                      {incorrectGuesses &&
+                        incorrectGuesses.map((selection, index) => (
+                          <img
+                            key={index}
+                            className="w-full h-full object-cover"
+                            src={`/assets/images/dogs/${selection.dir}/${selection.image}`}
+                          />
+                        ))}
+                    </Carousel>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="mb-20 mt-6">
             <h2 className="text-5xl font-semibold font-subheading">
               Total Results
             </h2>

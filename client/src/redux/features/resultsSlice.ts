@@ -1,35 +1,33 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Score } from "../../interfaces/score";
+import { Result } from "../../interfaces/result";
+import { Selection } from "../../interfaces/selection";
 import { RootState } from "../store";
 
-const initialState: Score = {
+const initialState: Result = {
   totalDogs: 0,
-  totalDogsSelected: 0,
+  totalSelected: 0,
   totalCorrectGuesses: 0,
-  totalCorrectWithBuffer: 0,
   totalIncorrectGuesses: 0,
-  totalIncorrectWithBuffer: 0,
   totalSkipped: 0,
   userAccuracy: 0,
+  selections: [],
 };
 
 // Action Types
 
-const CLEAR_SCORE = "CLEAR_SCORE";
+const CLEAR_RESULT = "CLEAR_RESULT";
 const UPDATE_TOTAL_DOGS = "UPDATE_TOTAL_DOGS";
-const UPDATE_TOTAL_DOGS_SELECTED = "UPDATE_TOTAL_DOGS_SELECTED";
+const UPDATE_TOTAL_SELECTED = "UPDATE_TOTAL_SELECTED";
 const UPDATE_TOTAL_CORRECT_GUESSES = "UPDATE_TOTAL_CORRECT_GUESSES";
-const UPDATE_TOTAL_CORRECT_WITH_BUFFER = "UPDATE_TOTAL_CORRECT_WITH_BUFFER";
 const UPDATE_TOTAL_INCORRECT_GUESSES = "UPDATE_TOTAL_INCORRECT_GUESSES";
-const UPDATE_TOTAL_INCORRECT_WITH_BUFFER =
-  "UPDATE_TOTAL_INCORRECT_WITH_BUFFER";
 const UPDATE_TOTAL_SKIPPED = "UPDATE_TOTAL_SKIPPED";
 const UPDATE_USER_ACCURACY = "UPDATE_USER_ACCURACY";
+const UPDATE_SELECTIONS = "UPDATE_SELECTIONS";
 
 // Action Creators
 
-export const clearScore = () => ({
-  type: CLEAR_SCORE,
+export const clearResult = () => ({
+  type: CLEAR_RESULT,
 });
 
 export const addTotalDogs = (totalDogs: number) => ({
@@ -37,9 +35,9 @@ export const addTotalDogs = (totalDogs: number) => ({
   payload: totalDogs,
 });
 
-export const addTotalDogsSelected = (totalDogsSelected: number) => ({
-  type: UPDATE_TOTAL_DOGS_SELECTED,
-  payload: totalDogsSelected,
+export const addTotalDogsSelected = (totalSelected: number) => ({
+  type: UPDATE_TOTAL_SELECTED,
+  payload: totalSelected,
 });
 
 export const addTotalCorrectGuesses = (totalCorrectGuesses: number) => ({
@@ -47,22 +45,11 @@ export const addTotalCorrectGuesses = (totalCorrectGuesses: number) => ({
   payload: totalCorrectGuesses,
 });
 
-export const addtotalCorrectWithBuffer = (totalCorrectWithBuffer: number) => ({
-  type: UPDATE_TOTAL_CORRECT_WITH_BUFFER,
-  payload: totalCorrectWithBuffer,
-});
-
 export const addTotalIncorrectGuesses = (totalIncorrectGuesses: number) => ({
   type: UPDATE_TOTAL_INCORRECT_GUESSES,
   payload: totalIncorrectGuesses,
 });
 
-export const addTotalIncorrectWithBuffer = (
-  totalIncorrectWithBuffer: number
-) => ({
-  type: UPDATE_TOTAL_INCORRECT_WITH_BUFFER,
-  payload: totalIncorrectWithBuffer,
-});
 
 export const addTotalSkipped = (totalSkipped: number) => ({
   type: UPDATE_TOTAL_SKIPPED,
@@ -74,10 +61,15 @@ export const updateUserAccuracy = (userAccuracy: number) => ({
   payload: userAccuracy,
 });
 
+export const updateSelections = (selection: Selection) => ({
+  type: UPDATE_SELECTIONS,
+  payload: selection,
+});
+
 // Async Thunks
 
 export const updateTotalDogsAsync = createAsyncThunk(
-  "score/updateTotalDogs",
+  "result/updateTotalDogs",
   async (totalDogs: number, { dispatch }) => {
     dispatch(addTotalDogsAction(totalDogs));
 
@@ -86,7 +78,7 @@ export const updateTotalDogsAsync = createAsyncThunk(
 );
 
 export const updateTotalCorrectGuessesAsync = createAsyncThunk(
-  "score/updateTotalCorrectGuesses",
+  "result/updateTotalCorrectGuesses",
   async (totalCorrectGuesses: number, { dispatch }) => {
     dispatch(addTotalCorrectGuessesAction(totalCorrectGuesses));
 
@@ -95,7 +87,7 @@ export const updateTotalCorrectGuessesAsync = createAsyncThunk(
 );
 
 export const updateTotalIncorrectGuessesAsync = createAsyncThunk(
-  "score/updateTotalIncorrectGuesses",
+  "result/updateTotalIncorrectGuesses",
   async (totalIncorrectGuesses: number, { dispatch }) => {
     dispatch(addTotalIncorrectGuessesAction(totalIncorrectGuesses));
 
@@ -103,26 +95,8 @@ export const updateTotalIncorrectGuessesAsync = createAsyncThunk(
   }
 );
 
-export const updateTotalCorrectWithBufferAsync = createAsyncThunk(
-  "score/updateTotalCorrectWithBuffer",
-  async (totalCorrectWithBuffer: number, { dispatch }) => {
-    dispatch(addtotalCorrectWithBufferAction(totalCorrectWithBuffer));
-
-    return totalCorrectWithBuffer;
-  }
-);
-
-export const updateTotalIncorrectWithBufferAsync = createAsyncThunk(
-  "score/updateTotalIncorrectWithBuffer",
-  async (totalIncorrectWithBuffer: number, { dispatch }) => {
-    dispatch(addTotalIncorrectWithBufferAction(totalIncorrectWithBuffer));
-
-    return totalIncorrectWithBuffer;
-  }
-);
-
 export const updateTotalSkippedAsync = createAsyncThunk(
-  "score/updateTotalSkipped",
+  "result/updateTotalSkipped",
   async (totalSkipped: number, { dispatch }) => {
     dispatch(addTotalSkippedAction(totalSkipped));
 
@@ -131,11 +105,11 @@ export const updateTotalSkippedAsync = createAsyncThunk(
 );
 
 export const updateUserAccuracyAsync = createAsyncThunk(
-  "score/updateUserAccuracy",
+  "result/updateUserAccuracy",
   async (_, { dispatch, getState }) => {
     const state = getState() as RootState;
-    const totalDogs = state.score.totalDogs;
-    const totalCorrectGuesses = state.score.totalCorrectGuesses;
+    const totalDogs = state.results.totalDogs;
+    const totalCorrectGuesses = state.results.totalCorrectGuesses;
 
     const userAccuracy = (totalCorrectGuesses / totalDogs) * 100;
     const roundedAccuracy = Math.round(userAccuracy * 100) / 100;
@@ -146,13 +120,22 @@ export const updateUserAccuracyAsync = createAsyncThunk(
   }
 );
 
+export const updateSelectionsAsync = createAsyncThunk(
+  "result/updateSelections",
+  async (selection: Selection, { dispatch }) => {
+    dispatch(updateSelections(selection));
+
+    return selection;
+  }
+);
+
 // Reducer
 
-const scoreSlice = createSlice({
-  name: "scoreData",
+const resultsSlice = createSlice({
+  name: "resultData",
   initialState,
   reducers: {
-    clearScoreAction(state) {
+    clearResultAction(state) {
       return initialState;
     },
     addTotalDogsAction(state, action: PayloadAction<number>) {
@@ -162,22 +145,19 @@ const scoreSlice = createSlice({
       state.userAccuracy = action.payload;
     },
     addTotalDogsSelectedAction(state, action: PayloadAction<number>) {
-      state.totalDogsSelected = action.payload;
+      state.totalSelected = action.payload;
     },
     addTotalCorrectGuessesAction(state, action: PayloadAction<number>) {
       state.totalCorrectGuesses = action.payload;
     },
-    addtotalCorrectWithBufferAction(state, action: PayloadAction<number>) {
-      state.totalCorrectWithBuffer = action.payload;
-    },
     addTotalIncorrectGuessesAction(state, action: PayloadAction<number>) {
       state.totalIncorrectGuesses = action.payload;
     },
-    addTotalIncorrectWithBufferAction(state, action: PayloadAction<number>) {
-      state.totalIncorrectWithBuffer = action.payload;
-    },
     addTotalSkippedAction(state, action: PayloadAction<number>) {
       state.totalSkipped = action.payload;
+    },
+    updateSelectionsAction(state, action: PayloadAction<Selection>) {
+      state.selections.push(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -201,18 +181,6 @@ const scoreSlice = createSlice({
         }
       )
       .addCase(
-        updateTotalCorrectWithBufferAsync.fulfilled,
-        (state, action: PayloadAction<number>) => {
-          state.totalCorrectWithBuffer = action.payload;
-        }
-      )
-      .addCase(
-        updateTotalIncorrectWithBufferAsync.fulfilled,
-        (state, action: PayloadAction<number>) => {
-          state.totalIncorrectWithBuffer = action.payload;
-        }
-      )
-      .addCase(
         updateTotalSkippedAsync.fulfilled,
         (state, action: PayloadAction<number>) => {
           state.totalSkipped = action.payload;
@@ -223,20 +191,25 @@ const scoreSlice = createSlice({
         (state, action: PayloadAction<number>) => {
           state.userAccuracy = action.payload;
         }
+      )
+      .addCase(
+        updateSelectionsAsync.fulfilled,
+        (state, action: PayloadAction<Selection>) => {
+          state.selections.push(action.payload);
+        }
       );
   },
 });
 
 export const {
-  clearScoreAction,
+  clearResultAction,
   addTotalDogsAction,
   addTotalDogsSelectedAction,
   addTotalCorrectGuessesAction,
-  addtotalCorrectWithBufferAction,
   addTotalIncorrectGuessesAction,
-  addTotalIncorrectWithBufferAction,
   addTotalSkippedAction,
   updateUserAccuracyAction,
-} = scoreSlice.actions;
+  updateSelectionsAction,
+} = resultsSlice.actions;
 
-export default scoreSlice.reducer;
+export default resultsSlice.reducer;

@@ -44,7 +44,7 @@ const AboutPage: React.FC = () => {
                       The purpose of this test is to provide participants with
                       an opportunity to learn more about the limitations of
                       visual breed identification, as well as how individual
-                      biases can influence the way we perceive dogs.
+                      biases can influence the way that we perceive dogs.
                     </div>
                   )}
                 </div>
@@ -60,8 +60,8 @@ const AboutPage: React.FC = () => {
                       This test is designed to measure how accurately pit bulls
                       can be identified based on observed physical
                       characteristics. The assessment relies on how individual
-                      participants categorize pit bulls, as well as DNA results
-                      curated from public sources.
+                      participants categorize pit bulls, as well as DNA test
+                      results.
                     </div>
                   )}
                 </div>
@@ -138,8 +138,7 @@ const AboutPage: React.FC = () => {
                       This project was developed by a private third party and is
                       not a part of any official government or academic
                       research. The results of this test are not intended to
-                      promote any specific breed or type of dog, or to promote
-                      any scientific or political agenda.
+                      promote any specific breed or type of dog.
                     </div>
                   )}
                 </div>

@@ -1,6 +1,11 @@
+import { Selection } from './selection';
+
 export interface Result {
-  imageUrl: string;
-  selected: boolean;
-  correctGuess: boolean;
-  correctWithBuffer: boolean;
+  totalDogs: number;
+  totalSelected: number;
+  totalCorrectGuesses: number;
+  totalIncorrectGuesses: number;
+  totalSkipped: number;
+  userAccuracy: number;
+  selections: Selection[];
 }

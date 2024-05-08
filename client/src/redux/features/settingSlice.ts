@@ -5,7 +5,6 @@ import { RootState } from "../store";
 const initialState: Settings = {
   alignment: "",
   percentage: 25,
-  buffer: false,
 };
 
 // Action Types
@@ -13,7 +12,6 @@ const initialState: Settings = {
 const CLEAR_SETTINGS_STORE = "CLEAR_SETTINGS_STORE";
 const SET_ALIGNMENT = "SET_ALIGNMENT";
 const SET_PERCENTAGE = "SET_PERCENTAGE";
-const SET_BUFFER = "SET_BUFFER";
 
 // Action Creators
 
@@ -28,11 +26,6 @@ export const setAlignment = (alignment: string) => ({
 
 export const setPercentage = (value: number) => ({
   type: SET_PERCENTAGE,
-  payload: value,
-});
-
-export const setBuffer = (value: boolean) => ({
-  type: SET_BUFFER,
   payload: value,
 });
 
@@ -57,16 +50,10 @@ const settingSlice = createSlice({
         percentage: action.payload,
       };
     },
-    setBufferAction: (state, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        buffer: action.payload,
-      };
-    },
   },
 });
 
-export const { clearSettingsAction, setAlignmentAction, setPercentageAction, setBufferAction } =
+export const { clearSettingsAction, setAlignmentAction, setPercentageAction } =
   settingSlice.actions;
 
 export default settingSlice.reducer;
