@@ -75,7 +75,7 @@ const AlignmentPage = () => {
                               inputProps={{ "aria-label": "pro" }}
                             />
                           }
-                          label="Pit bulls are like any other dog! It's all in how you
+                          label="Pit bulls are like any other dog - it's all in how you
                           raise them."
                         />
                         <FormControlLabel

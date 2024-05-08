@@ -42,8 +42,9 @@ const AboutPage: React.FC = () => {
                   {divVisibility["q1"] && (
                     <div className="mt-5 text-left">
                       The purpose of this test is to provide participants with
-                      an opportunity to learn more about the accuracy and
-                      limitations of visual breed identification.
+                      an opportunity to learn more about the limitations of
+                      visual breed identification, as well as how individual
+                      biases can influence the way we perceive dogs.
                     </div>
                   )}
                 </div>
@@ -74,15 +75,8 @@ const AboutPage: React.FC = () => {
                   {divVisibility["q3"] && (
                     <div className="mt-5 text-left">
                       Data used in this assessment were gathered at random from
-                      the public Reddit community{" "}
-                      <a
-                        href="https://www.reddit.com/r/DoggyDNA/"
-                        target="_blank"
-                      >
-                        r/DoggyDNA
-                      </a>
-                      . Some of the companies that provide DNA testing services
-                      for dogs include{" "}
+                      public sources . Some of the companies that provide DNA
+                      testing services for dogs include{" "}
                       <a href="https://shop.embarkvet.com" target="_blank">
                         Embark
                       </a>
@@ -141,11 +135,11 @@ const AboutPage: React.FC = () => {
                   </div>
                   {divVisibility["q5"] && (
                     <div className="mt-5 text-left">
-                      This project was created for educational and entertainment
-                      purposes only. It has been developed by a private third
-                      party and is not a part of any official government or
-                      academic research. The results of this test are not
-                      intended to promote any specific breed or breed type.
+                      This project was developed by a private third party and is
+                      not a part of any official government or academic
+                      research. The results of this test are not intended to
+                      promote any specific breed or type of dog, or to promote
+                      any scientific or political agenda.
                     </div>
                   )}
                 </div>

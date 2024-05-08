@@ -18,7 +18,7 @@ import {
   addTotalIncorrectGuessesAction,
   addTotalIncorrectWithBufferAction,
   addTotalSkippedAction,
-  updateUserAccuracyAction,
+  updateUserAccuracyAsync,
 } from "../../redux/features/scoreSlice";
 
 const DogsPage = () => {
@@ -138,12 +138,6 @@ const DogsPage = () => {
     //   })
     // );
 
-    const accuracy = calculateCurrentUserAccuracy(
-      scoreData.totalDogs + 1,
-      scoreData.totalCorrectGuesses
-    );
-    dispatch(updateUserAccuracyAction(accuracy));
-
     handleNext();
   };
 
@@ -188,12 +182,7 @@ const DogsPage = () => {
     //     correctWithBuffer: resultWithBuffer === 1,
     //   })
     // );
-
-    const accuracy = calculateCurrentUserAccuracy(
-      scoreData.totalDogs + 1,
-      scoreData.totalCorrectGuesses
-    );
-    dispatch(updateUserAccuracyAction(accuracy));
+    dispatch(updateUserAccuracyAsync());
 
     handleNext();
   };

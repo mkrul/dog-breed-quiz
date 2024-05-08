@@ -132,10 +132,17 @@ export const updateTotalSkippedAsync = createAsyncThunk(
 
 export const updateUserAccuracyAsync = createAsyncThunk(
   "score/updateUserAccuracy",
-  async (userAccuracy: number, { dispatch }) => {
-    dispatch(updateUserAccuracyAction(userAccuracy));
+  async (_, { dispatch, getState }) => {
+    const state = getState() as RootState;
+    const totalDogs = state.score.totalDogs;
+    const totalCorrectGuesses = state.score.totalCorrectGuesses;
 
-    return userAccuracy;
+    const userAccuracy = (totalCorrectGuesses / totalDogs) * 100;
+    const roundedAccuracy = Math.round(userAccuracy * 100) / 100;
+
+    dispatch(updateUserAccuracyAction(roundedAccuracy));
+
+    return roundedAccuracy;
   }
 );
 

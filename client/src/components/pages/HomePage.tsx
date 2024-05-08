@@ -99,15 +99,16 @@ const HomePage = () => {
                     certain dog breeds should be banned or regulated based on
                     statistical data surrounding dog attacks. The most commonly
                     targeted breeds are those labeled "pit bulls". Many people
-                    use "pit bull" as a catch-all term for dogs with similar
+                    use "pit bull" as an umbrella term for dogs with similar
                     physical characteristics or a certain amount of pit bull
                     heritage. For others, the term is used to describe a
                     specific breed of dog, the American Pit Bull Terrier.
                   </Typography>
                   <Typography className="mb-4">
-                    This project aims to test the assertion that pit bulls are
-                    easy to identify by comparing the accuracy of visual
-                    identification to DNA test results.
+                    This project aims to measure the accuracy of visual breed
+                    identification, as well as how different groups of people
+                    identify dogs as pit bulls, taking their personal biases
+                    into account.
                   </Typography>
                   <Typography className="mb-6">
                     You can learn more about this test by clicking{" "}
