@@ -65,7 +65,7 @@ const ResultsPage = () => {
           <div>
             {showDogs && (
               <div className="inline-flex justify-center">
-                <div className="w-full p-5 mt-3">
+                <div className="w-full md:w-1/2 p-5">
                   <div className="overflow-hidden rounded-2xl">
                     <Carousel>
                       {incorrectGuesses &&
