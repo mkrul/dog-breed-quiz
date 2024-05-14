@@ -77,7 +77,7 @@ const DogsPage = () => {
     dispatch(addTotalDogsAction(resultData.totalDogs + 1));
     dispatch(addTotalDogsSelectedAction(resultData.totalSelected + 1));
 
-    if (userSelectedPercentage + bufferValue >= totalBreedPercentages) {
+    if (totalBreedPercentages >= userSelectedPercentage + bufferValue) {
       correctGuess = 1;
       dispatch(
         addTotalCorrectGuessesAction(resultData.totalCorrectGuesses + 1)
@@ -114,7 +114,7 @@ const DogsPage = () => {
     dispatch(addTotalDogsAction(resultData.totalDogs + 1));
     dispatch(addTotalSkippedAction(resultData.totalSkipped + 1));
 
-    if (userSelectedPercentage + bufferValue < totalBreedPercentages) {
+    if (totalBreedPercentages < userSelectedPercentage + bufferValue) {
       correctGuess = 1;
       dispatch(
         addTotalCorrectGuessesAction(resultData.totalCorrectGuesses + 1)

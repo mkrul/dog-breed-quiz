@@ -41,7 +41,7 @@ const AboutPage: React.FC = () => {
                   </div>
                   {divVisibility["q1"] && (
                     <div className="mt-5 text-left">
-                      The purpose of this test is to provide participants with
+                      This assessment is intended to provide participants with
                       an opportunity to learn more about the limitations of
                       visual breed identification, as well as how individual
                       biases can influence the way that we perceive dogs.
@@ -135,10 +135,12 @@ const AboutPage: React.FC = () => {
                   </div>
                   {divVisibility["q5"] && (
                     <div className="mt-5 text-left">
-                      This project was developed by a private third party and is
-                      not a part of any official government or academic
-                      research. The results of this test are not intended to
-                      promote any specific breed or type of dog.
+                      This project was developed for entertainment purposes by a
+                      private third party and is not a part of any official
+                      government or academic research. It is not affiliated with
+                      Embark or any other DNA testing service. The results of
+                      this test are not intended to promote any specific breed
+                      or type of dog.
                     </div>
                   )}
                 </div>

@@ -56,16 +56,16 @@ const ResultsPage = () => {
               </p>
             </div>
           </div>
+          <button
+            onClick={handleShowSelections}
+            className="inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-md text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-3"
+          >
+            {!showDogs ? "View" : "Hide"} incorrect guesses
+          </button>
           <div>
-            <button
-              onClick={handleShowSelections}
-              className="mb-3 inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-md text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-3"
-            >
-              {!showDogs ? "View" : "Hide"} incorrect guesses
-            </button>
             {showDogs && (
               <div className="inline-flex justify-center">
-                <div className="w-full md:w-1/2 p-5 mt-6">
+                <div className="w-full p-5 mt-3">
                   <div className="overflow-hidden rounded-2xl">
                     <Carousel>
                       {incorrectGuesses &&
