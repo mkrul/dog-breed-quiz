@@ -59,13 +59,39 @@ const DogsPage = () => {
 
   const handleNext = async () => {
     if (currentIndex >= dogData.length - 1) {
+      await handleSaveUserData();
+
       navigate("/results");
     } else {
       setCurrentIndex((prevIndex) => prevIndex + 1);
     }
   };
 
-  const handleAnswerYes = () => {
+  const handleSaveUserData = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: "Test User",
+          alignment: "Good",
+          percentage: 50,
+          breeds: [],
+          settings: "61f4b0a5d5a7c9f3e3a2b1e2",
+          results: [],
+        }),
+      });
+
+      const res = await response.json();
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAnswerYes = async () => {
     const { apbt, ast, sbt, ab } = currentDog;
 
     let correctGuess = 0;
@@ -102,7 +128,7 @@ const DogsPage = () => {
     handleNext();
   };
 
-  const handleAnswerNo = () => {
+  const handleAnswerNo = async () => {
     const { apbt, ast, sbt, ab } = currentDog;
 
     let correctGuess = 0;

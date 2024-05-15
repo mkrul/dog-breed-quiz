@@ -1,25 +1,62 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
 import { RootState } from "../../redux/store";
 import { Result } from "../../interfaces/result";
 import { Selection } from "../../interfaces/selection";
+import { CircularProgress } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ResultsPage = () => {
   const [showDogs, setShowDogs] = useState(false);
+  const [loading, setLoading] = useState(true);
   const resultData = useSelector((state: RootState) => state.results as Result);
   const word1 = resultData.totalSelected === 1 ? "dog" : "dogs";
   const word2 = resultData.totalSelected === 1 ? "a pit bull" : "pit bulls";
   const word3 = resultData.totalIncorrectGuesses === 1 ? "was" : "were";
+  const imageRefs = useRef(new Map());
 
   const incorrectGuesses = resultData.selections.filter(
-    (selection: Selection) => selection.correctGuess === false
+    (selection: Selection) => !selection.correctGuess
   );
 
-  console.log(incorrectGuesses);
+  useEffect(() => {
+    if (incorrectGuesses.length > 0) {
+      setLoading(true);
+      let loadedImages = 0;
+      incorrectGuesses.forEach((selection, index) => {
+        const imgKey = `${selection.dir}/${selection.image}`;
+        if (!imageRefs.current.has(imgKey)) {
+          const img = new Image();
+          img.src = `/assets/images/dogs/${selection.dir}/${selection.image}`;
+          img.onload = () => {
+            loadedImages++;
+            console.log(`Loaded ${img.src}`);
+            if (loadedImages === incorrectGuesses.length) {
+              setLoading(false);
+            }
+          };
+          img.onerror = () => {
+            console.error(`Failed to load image at ${img.src}`);
+            loadedImages++;
+            if (loadedImages === incorrectGuesses.length) {
+              setLoading(false);
+            }
+          };
+          imageRefs.current.set(imgKey, img);
+        } else {
+          loadedImages++;
+          if (loadedImages === incorrectGuesses.length) {
+            setLoading(false);
+          }
+        }
+      });
+    } else {
+      setLoading(false);
+    }
+  }, [incorrectGuesses]);
+
   const handleShowSelections = () => {
     setShowDogs(!showDogs);
   };
@@ -65,20 +102,26 @@ const ResultsPage = () => {
           <div>
             {showDogs && (
               <div className="inline-flex justify-center">
-                <div className="w-full md:w-1/2 p-5">
-                  <div className="overflow-hidden rounded-2xl">
-                    <Carousel>
-                      {incorrectGuesses &&
-                        incorrectGuesses.map((selection, index) => (
+                {loading ? (
+                  <div className="mt-3 w-full p-5">
+                    <CircularProgress />
+                  </div>
+                ) : (
+                  <div className="w-full md:w-1/2 p-5">
+                    <div className="overflow-hidden rounded-2xl">
+                      <Carousel>
+                        {incorrectGuesses.map((selection, index) => (
                           <img
                             key={index}
                             className="w-full h-full object-cover"
-                            src={`/assets/images/dogs/${selection.dir}/${selection.image}`}
+                            src={require(`../../assets/images/dogs/${selection.dir}/${selection.image}`)}
+                            alt="Dog"
                           />
                         ))}
-                    </Carousel>
+                      </Carousel>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             )}
           </div>
