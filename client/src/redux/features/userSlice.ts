@@ -1,7 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../../interfaces/user";
-import userApi from "../../apis/user";
-import { RootState } from "../store";
 
 const initialState: User = {
   _id: "",
@@ -26,21 +24,6 @@ export const setUsername = (username: string) => ({
   type: SET_USERNAME,
   payload: username,
 });
-
-// Thunks
-
-export const updateUser = createAsyncThunk(
-  "user/updateUser",
-  async (data: any, thunkApi) => {
-    try {
-      // get persisted user state
-      const user = (thunkApi.getState() as RootState).user as any;
-      return await userApi.updateUser(user.user, data);
-    } catch (error) {
-      return thunkApi.rejectWithValue({ error: "user not updated" });
-    }
-  }
-);
 
 const userSlice = createSlice({
   name: "userData",

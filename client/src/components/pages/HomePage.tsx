@@ -51,7 +51,6 @@ const HomePage = () => {
         dispatch(clearUserStoreAction());
         dispatch(clearBreedsAction());
         dispatch(clearSettingsAction());
-        dispatch(clearResultAction());
         dispatch(setUsernameAction(userNameInput));
       } catch (error) {
         console.log(error);

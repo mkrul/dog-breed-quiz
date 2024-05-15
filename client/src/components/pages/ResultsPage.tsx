@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Breakdown } from "../../interfaces/breakdown";
+import { TopUser } from "../../interfaces/topUser";
 import { Carousel } from "react-responsive-carousel";
 import { RootState } from "../../redux/store";
 import { Result } from "../../interfaces/result";
@@ -11,6 +13,29 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 const ResultsPage = () => {
   const [showDogs, setShowDogs] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loadingBreakdown, setLoadingBreakdown] = useState(false);
+  const [showBreakdown, setShowBreakdown] = useState(false);
+
+  const [proAccuracy, setProAccuracy] = useState(0);
+  const [modAccuracy, setModerateAccuracy] = useState(0);
+  const [antiAccuracy, setAntiAccuracy] = useState(0);
+  const [proCount, setProCount] = useState(0);
+  const [modCount, setModerateCount] = useState(0);
+  const [antiCount, setAntiCount] = useState(0);
+  const [proApbtCount, setProApbtCount] = useState(0);
+  const [proApbtAccuracy, setProApbtAccuracy] = useState(0);
+  const [proMultiCount, setProMultiCount] = useState(0);
+  const [proMultiAccuracy, setProMultiAccuracy] = useState(0);
+  const [modApbtCount, setModerateApbtCount] = useState(0);
+  const [modApbtAccuracy, setModerateApbtAccuracy] = useState(0);
+  const [modMultiCount, setModerateMultiCount] = useState(0);
+  const [modMultiAccuracy, setModerateMultiAccuracy] = useState(0);
+  const [antiApbtCount, setAntiApbtCount] = useState(0);
+  const [antiApbtAccuracy, setAntiApbtAccuracy] = useState(0);
+  const [antiMultiCount, setAntiMultiCount] = useState(0);
+  const [antiMultiAccuracy, setAntiMultiAccuracy] = useState(0);
+  const [topUsers, setTopUsers] = useState<TopUser[]>([]);
+
   const resultData = useSelector((state: RootState) => state.results as Result);
   const word1 = resultData.totalSelected === 1 ? "dog" : "dogs";
   const word2 = resultData.totalSelected === 1 ? "a pit bull" : "pit bulls";
@@ -20,6 +45,38 @@ const ResultsPage = () => {
   const incorrectGuesses = resultData.selections.filter(
     (selection: Selection) => !selection.correctGuess
   );
+
+  const fetchAllUserData = async () => {
+    try {
+      setLoadingBreakdown(true);
+      const response = await fetch("http://localhost:5000/api/users");
+      response.json().then((res) => {
+        const breakdown = res.data as Breakdown;
+        setLoadingBreakdown(false);
+        setShowBreakdown(true);
+        setProAccuracy(breakdown.proAccuracy);
+        setModerateAccuracy(breakdown.moderateAccuracy);
+        setAntiAccuracy(breakdown.antiAccuracy);
+        setProCount(breakdown.proCount);
+        setModerateCount(breakdown.moderateCount);
+        setAntiCount(breakdown.antiCount);
+        setProApbtCount(breakdown.proApbtCount);
+        setProApbtAccuracy(breakdown.proApbtAccuracy);
+        setProMultiCount(breakdown.proMultiCount);
+        setProMultiAccuracy(breakdown.proMultiAccuracy);
+        setModerateApbtCount(breakdown.moderateApbtCount);
+        setModerateApbtAccuracy(breakdown.moderateApbtAccuracy);
+        setModerateMultiCount(breakdown.moderateMultiCount);
+        setModerateMultiAccuracy(breakdown.moderateMultiAccuracy);
+        setAntiApbtCount(breakdown.antiApbtCount);
+        setAntiApbtAccuracy(breakdown.antiApbtAccuracy);
+        setAntiMultiCount(breakdown.antiMultiCount);
+        setAntiMultiAccuracy(breakdown.antiMultiAccuracy);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (incorrectGuesses.length > 0) {
@@ -93,12 +150,14 @@ const ResultsPage = () => {
               </p>
             </div>
           </div>
-          <button
-            onClick={handleShowSelections}
-            className="inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-md text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-3"
-          >
-            {!showDogs ? "View" : "Hide"} incorrect guesses
-          </button>
+          {resultData.totalIncorrectGuesses > 0 && (
+            <button
+              onClick={handleShowSelections}
+              className="inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-md text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-3"
+            >
+              {!showDogs ? "View" : "Hide"} incorrect guesses
+            </button>
+          )}
           <div>
             {showDogs && (
               <div className="inline-flex justify-center">
@@ -125,187 +184,260 @@ const ResultsPage = () => {
               </div>
             )}
           </div>
-          <div className="mb-20 mt-6">
-            <h2 className="text-5xl font-semibold font-subheading">
-              Total Results
-            </h2>
-            <h6 className="mb-5 font-bold">(All Participants)</h6>
-            <p className="mb-6">
-              These results are based on the criteria set by all participants
-              and broken down based on how participants identified themselves.
-            </p>
-            <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
-              <thead>
-                <tr>
-                  <th className="py-2">Alignment</th>
-                  <th className="py-2">Count</th>
-                  <th className="py-2">Avg. Accuracy</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="py-2">Pro-pit bull</td>
-                  <td className="py-2">0</td>
-                  <td className="py-2">0</td>
-                </tr>
-                <tr>
-                  <td className="py-2">Moderate</td>
-                  <td className="py-2">0</td>
-                  <td className="py-2">0</td>
-                </tr>
-                <tr>
-                  <td className="py-2">Anti-pit bull</td>
-                  <td className="py-2">0</td>
-                  <td className="py-2">0</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="mb-20">
-            <h2 className="text-5xl font-semibold font-subheading">
-              Breakdown
-            </h2>
-            <h6 className="mb-5 font-bold">(Pro-pit bull)</h6>
-            <p className="mb-6">
-              These results are based on the criteria set by participants who
-              identified as pro-pit bull.
-            </p>
-            <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
-              <thead>
-                <tr>
-                  <th className="py-2">"What is a pit bull?"</th>
-                  <th className="py-2">Count</th>
-                  <th className="py-2">Avg. Accuracy</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="py-2">APBT only</td>
-                  <td className="py-2">0</td>
-                  <td className="py-2">0</td>
-                </tr>
-                <tr>
-                  <td className="py-2">Multiple breeds</td>
-                  <td className="py-2">0</td>
-                  <td className="py-2">0</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="mb-20">
-            <h2 className="text-5xl font-semibold font-subheading">
-              Breakdown
-            </h2>
-            <h6 className="mb-5 font-bold">(Moderate)</h6>
-            <p className="mb-6">
-              These results are based on the criteria set by participants who
-              identified as moderate.
-            </p>
-            <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
-              <thead>
-                <tr>
-                  <th className="py-2">"What is a pit bull?"</th>
-                  <th className="py-2">Count</th>
-                  <th className="py-2">Avg. Accuracy</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="py-2">APBT only</td>
-                  <td className="py-2">0</td>
-                  <td className="py-2">0</td>
-                </tr>
-                <tr>
-                  <td className="py-2">Multiple breeds</td>
-                  <td className="py-2">0</td>
-                  <td className="py-2">0</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="mb-20">
-            <h2 className="text-5xl font-semibold font-subheading">
-              Breakdown
-            </h2>
-            <h6 className="mb-5 font-bold">(Anti-pit bull)</h6>
-            <p className="mb-6">
-              These results are based on the criteria set by participants who
-              identified as anti-pit bull.
-            </p>
-            <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
-              <thead>
-                <tr>
-                  <th className="py-2">"What is a pit bull?"</th>
-                  <th className="py-2">Count</th>
-                  <th className="py-2">Avg. Accuracy</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="py-2">APBT only</td>
-                  <td className="py-2">0</td>
-                  <td className="py-2">0</td>
-                </tr>
-                <tr>
-                  <td className="py-2">Multiple breeds</td>
-                  <td className="py-2">0</td>
-                  <td className="py-2">0</td>
-                </tr>
-              </tbody>
-            </table>
+          {loadingBreakdown && !showBreakdown && (
+            <div className="mt-6 mb-5">
+              <CircularProgress />
+            </div>
+          )}
+          {!loadingBreakdown && !showBreakdown && (
+            <button
+              onClick={fetchAllUserData}
+              className="inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-md text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-5"
+            >
+              View All Results
+            </button>
+          )}
+          {!loadingBreakdown && showBreakdown && (
+            <div>
+              <div className="mb-20 mt-6">
+                <h2 className="text-5xl font-semibold font-subheading">
+                  Total Results
+                </h2>
+                <h6 className="mb-5 font-bold">(All Participants)</h6>
+                <p className="mb-6">
+                  These results are based on the criteria set by all
+                  participants and broken down based on how participants
+                  identified themselves.
+                </p>
+                <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
+                  <thead>
+                    <tr>
+                      <th className="py-2">Alignment</th>
+                      <th className="py-2">Count</th>
+                      <th className="py-2">Avg. Accuracy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2">Pro-pit bull</td>
+                      <td className="py-2">{proCount}</td>
+                      <td className="py-2">
+                        {proCount > 0 ? `${proAccuracy}%` : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Moderate</td>
+                      <td className="py-2">{modCount}</td>
+                      <td className="py-2">
+                        {modCount > 0 ? `${modAccuracy}%` : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Anti-pit bull</td>
+                      <td className="py-2">{antiCount}</td>
+                      <td className="py-2">
+                        {antiCount > 0 ? `${antiAccuracy}%` : "0%"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mb-20">
+                <h2 className="text-5xl font-semibold font-subheading">
+                  Breakdown
+                </h2>
+                <h6 className="mb-5 font-bold">(Pro-pit bull)</h6>
+                <p className="mb-6">
+                  These results are based on the criteria set by participants
+                  who identified as pro-pit bull.
+                </p>
+                <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
+                  <thead>
+                    <tr>
+                      <th className="py-2">"What is a pit bull?"</th>
+                      <th className="py-2">Count</th>
+                      <th className="py-2">Avg. Accuracy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2">APBT only</td>
+                      <td className="py-2">{proApbtCount}</td>
+                      <td className="py-2">
+                        {proApbtCount > 0 ? `${proApbtAccuracy}%` : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Multiple breeds</td>
+                      <td className="py-2">{proMultiCount}</td>
+                      <td className="py-2">
+                        {proMultiCount > 0 ? `${proMultiAccuracy}%` : "0%"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mb-20">
+                <h2 className="text-5xl font-semibold font-subheading">
+                  Breakdown
+                </h2>
+                <h6 className="mb-5 font-bold">(Moderate)</h6>
+                <p className="mb-6">
+                  These results are based on the criteria set by participants
+                  who identified as moderate.
+                </p>
+                <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
+                  <thead>
+                    <tr>
+                      <th className="py-2">"What is a pit bull?"</th>
+                      <th className="py-2">Count</th>
+                      <th className="py-2">Avg. Accuracy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2">APBT only</td>
+                      <td className="py-2">{modApbtCount}</td>
+                      <td className="py-2">
+                        {modApbtCount > 0 ? `${modApbtAccuracy}%` : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Multiple breeds</td>
+                      <td className="py-2">{modMultiCount}</td>
+                      <td className="py-2">
+                        {modMultiCount > 0 ? `${modMultiAccuracy}%` : "0%"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mb-20">
+                <h2 className="text-5xl font-semibold font-subheading">
+                  Breakdown
+                </h2>
+                <h6 className="mb-5 font-bold">(Anti-pit bull)</h6>
+                <p className="mb-6">
+                  These results are based on the criteria set by participants
+                  who identified as anti-pit bull.
+                </p>
+                <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
+                  <thead>
+                    <tr>
+                      <th className="py-2">"What is a pit bull?"</th>
+                      <th className="py-2">Count</th>
+                      <th className="py-2">Avg. Accuracy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2">APBT only</td>
+                      <td className="py-2">{antiApbtCount}</td>
+                      <td className="py-2">
+                        {antiApbtCount > 0 ? `${antiApbtAccuracy}%` : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">Multiple breeds</td>
+                      <td className="py-2">{antiMultiCount}</td>
+                      <td className="py-2">
+                        {antiMultiCount > 0 ? `${antiMultiAccuracy}%` : "0%"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
 
-            {/* top results */}
+                <h2 className="pt-6 text-5xl font-semibold font-subheading">
+                  Top Results
+                </h2>
+                <h6 className="mb-5 font-bold">(All Participants)</h6>
 
-            <h2 className="pt-6 text-5xl font-semibold font-subheading">
-              Top Results
-            </h2>
-            <h6 className="mb-5 font-bold">(All Participants)</h6>
-
-            <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
-              <thead>
-                <tr>
-                  <th className="py-2">Username</th>
-                  <th className="py-2">Alignment</th>
-                  <th className="py-2">Accuracy</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="py-2">User1</td>
-                  <td className="py-2">Moderate</td>
-                  <td className="py-2">48%</td>
-                </tr>
-                <tr>
-                  <td className="py-2">User2</td>
-                  <td className="py-2">Moderate</td>
-                  <td className="py-2">47%</td>
-                </tr>
-                <tr>
-                  <td className="py-2">User3</td>
-                  <td className="py-2">Pro-pit bull</td>
-                  <td className="py-2">45%</td>
-                </tr>
-                <tr>
-                  <td className="py-2">User4</td>
-                  <td className="py-2">Anti-pit bull</td>
-                  <td className="py-2">44%</td>
-                </tr>
-                <tr>
-                  <td className="py-2">User5</td>
-                  <td className="py-2">Pro-pit bull</td>
-                  <td className="py-2">43%</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <Link
-            to="/1"
-            className="mb-6 inline-flex items-center justify-center text-center h-16 p-5 font-semibold text-lg text-white tracking-tight bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
-          >
-            Go Back
-          </Link>
+                <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
+                  <thead>
+                    <tr>
+                      <th className="py-2">Username</th>
+                      <th className="py-2">Alignment</th>
+                      <th className="py-2">Accuracy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2">
+                        {topUsers[0]?.username ? topUsers[0].username : "N/A"}
+                      </td>
+                      <td className="py-2">
+                        {topUsers[0]?.alignment ? topUsers[0].alignment : "N/A"}
+                      </td>
+                      <td className="py-2">
+                        {topUsers[0]?.accuracy
+                          ? `${topUsers[0].accuracy}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">
+                        {topUsers[1]?.username ? topUsers[1].username : "N/A"}
+                      </td>
+                      <td className="py-2">
+                        {topUsers[1]?.alignment ? topUsers[1].alignment : "N/A"}
+                      </td>
+                      <td className="py-2">
+                        {topUsers[1]?.accuracy
+                          ? `${topUsers[1].accuracy}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">
+                        {topUsers[2]?.username ? topUsers[2].username : "N/A"}
+                      </td>
+                      <td className="py-2">
+                        {topUsers[2]?.alignment ? topUsers[2].alignment : "N/A"}
+                      </td>
+                      <td className="py-2">
+                        {topUsers[2]?.accuracy
+                          ? `${topUsers[2].accuracy}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">
+                        {topUsers[3]?.username ? topUsers[3].username : "N/A"}
+                      </td>
+                      <td className="py-2">
+                        {topUsers[3]?.alignment ? topUsers[3].alignment : "N/A"}
+                      </td>
+                      <td className="py-2">
+                        {topUsers[3]?.accuracy
+                          ? `${topUsers[3].accuracy}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">
+                        {topUsers[4]?.username ? topUsers[4].username : "N/A"}
+                      </td>
+                      <td className="py-2">
+                        {topUsers[4]?.alignment ? topUsers[4].alignment : "N/A"}
+                      </td>
+                      <td className="py-2">
+                        {topUsers[4]?.accuracy
+                          ? `${topUsers[4].accuracy}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
+        <Link
+          to="/1"
+          className="mb-6 inline-flex items-center justify-center text-center h-16 p-5 font-semibold text-lg text-white tracking-tight bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
+        >
+          Go Back
+        </Link>
       </section>
     </div>
   );

@@ -10,13 +10,9 @@ import { RootState } from "../../redux/store";
 import { Selection } from "../../interfaces/selection";
 import { Result } from "../../interfaces/result";
 import {
-  addTotalDogsAction,
-  addTotalDogsSelectedAction,
-  addTotalCorrectGuessesAction,
-  addTotalIncorrectGuessesAction,
-  addTotalSkippedAction,
+  incrementFieldAsync,
+  updateSelectionsAsync,
   updateUserAccuracyAsync,
-  updateSelectionsAction,
 } from "../../redux/features/resultsSlice";
 
 const DogsPage = () => {
@@ -26,8 +22,12 @@ const DogsPage = () => {
   const [dogData, setDogData] = useState<Dog[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showFinalLoading, setShowFinalLoading] = useState(false);
 
   const resultData = useSelector((state: RootState) => state.results as Result);
+  const userData = useSelector((state: RootState) => state.user);
+  const breedData = useSelector((state: RootState) => state.breeds);
+  const settingsData = useSelector((state: RootState) => state.settings);
 
   const settings = useSelector((state: RootState) => state.settings);
   const userSelectedPercentage = settings.percentage;
@@ -59,9 +59,13 @@ const DogsPage = () => {
 
   const handleNext = async () => {
     if (currentIndex >= dogData.length - 1) {
-      await handleSaveUserData();
-
-      navigate("/results");
+      setShowFinalLoading(true);
+      setTimeout(() => {
+        console.log("in setTimeout, resultData:", resultData); // Still may log stale data due to closure
+        handleSaveUserData();
+        setShowFinalLoading(false);
+        navigate("/results");
+      }, 3000);
     } else {
       setCurrentIndex((prevIndex) => prevIndex + 1);
     }
@@ -75,12 +79,15 @@ const DogsPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: "Test User",
-          alignment: "Good",
-          percentage: 50,
-          breeds: [],
-          settings: "61f4b0a5d5a7c9f3e3a2b1e2",
-          results: [],
+          data: {
+            username: userData.username,
+            alignment: settingsData.alignment,
+            percentage: settingsData.percentage,
+            breeds: breedData,
+            settings: settingsData,
+            results: resultData.selections,
+            accuracy: resultData.userAccuracy,
+          },
         }),
       });
 
@@ -93,86 +100,81 @@ const DogsPage = () => {
 
   const handleAnswerYes = async () => {
     const { apbt, ast, sbt, ab } = currentDog;
-
-    let correctGuess = 0;
-    let bufferValue = 10;
-    let totalBreedPercentages = apbt + ast + sbt + ab;
-
+    let correctGuess =
+      apbt + ast + sbt + ab >= userSelectedPercentage + 10 ? 1 : 0;
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
 
-    dispatch(addTotalDogsAction(resultData.totalDogs + 1));
-    dispatch(addTotalDogsSelectedAction(resultData.totalSelected + 1));
-
-    if (totalBreedPercentages >= userSelectedPercentage + bufferValue) {
-      correctGuess = 1;
+    await Promise.all([
+      dispatch(incrementFieldAsync({ field: "totalDogs", increment: 1 })),
+      dispatch(incrementFieldAsync({ field: "totalSelected", increment: 1 })),
       dispatch(
-        addTotalCorrectGuessesAction(resultData.totalCorrectGuesses + 1)
-      );
-    } else {
+        incrementFieldAsync({
+          field: correctGuess ? "totalCorrectGuesses" : "totalIncorrectGuesses",
+          increment: 1,
+        })
+      ),
       dispatch(
-        addTotalIncorrectGuessesAction(resultData.totalIncorrectGuesses + 1)
-      );
-    }
-
-    dispatch(updateUserAccuracyAsync());
-
-    const selection: Selection = {
-      imageUrl,
-      correctGuess: correctGuess === 1,
-      dir: currentDog.dir,
-      image: currentDog.images[0],
-    };
-
-    dispatch(updateSelectionsAction(selection));
-
-    handleNext();
+        updateSelectionsAsync({
+          imageUrl,
+          correctGuess: !!correctGuess,
+          dir: currentDog.dir,
+          image: currentDog.images[0],
+        })
+      ),
+      dispatch(updateUserAccuracyAsync()),
+    ]).finally(() => {
+      handleNext();
+    });
   };
 
   const handleAnswerNo = async () => {
     const { apbt, ast, sbt, ab } = currentDog;
-
-    let correctGuess = 0;
-    let bufferValue = 10;
-    let totalBreedPercentages = apbt + ast + sbt + ab;
-
+    let correctGuess =
+      apbt + ast + sbt + ab < userSelectedPercentage + 10 ? 1 : 0;
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
 
-    dispatch(addTotalDogsAction(resultData.totalDogs + 1));
-    dispatch(addTotalSkippedAction(resultData.totalSkipped + 1));
-
-    if (totalBreedPercentages < userSelectedPercentage + bufferValue) {
-      correctGuess = 1;
+    await Promise.all([
+      dispatch(incrementFieldAsync({ field: "totalDogs", increment: 1 })),
+      dispatch(incrementFieldAsync({ field: "totalSkipped", increment: 1 })),
       dispatch(
-        addTotalCorrectGuessesAction(resultData.totalCorrectGuesses + 1)
-      );
-    } else {
+        incrementFieldAsync({
+          field: correctGuess ? "totalCorrectGuesses" : "totalIncorrectGuesses",
+          increment: 1,
+        })
+      ),
       dispatch(
-        addTotalIncorrectGuessesAction(resultData.totalIncorrectGuesses + 1)
-      );
-    }
-
-    dispatch(updateUserAccuracyAsync());
-
-    const selection: Selection = {
-      imageUrl,
-      correctGuess: correctGuess === 1,
-      dir: currentDog.dir,
-      image: currentDog.images[0],
-    };
-
-    dispatch(updateSelectionsAction(selection));
-
-    handleNext();
+        updateSelectionsAsync({
+          imageUrl,
+          correctGuess: !!correctGuess,
+          dir: currentDog.dir,
+          image: currentDog.images[0],
+        })
+      ),
+      dispatch(updateUserAccuracyAsync()),
+    ]).finally(() => {
+      handleNext();
+    });
   };
 
   const currentDog = dogData[currentIndex] || [];
+
+  if (showFinalLoading === true) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <CircularProgress size={75} />
+        <h2 className="mt-10 text-3xl font-semibold font-heading">
+          Calculating Results...
+        </h2>
+      </div>
+    );
+  }
 
   return (
     <div className="antialiased bg-body text-body font-body">
       <section className="pt-8 py-12 md:py-24">
         <div className={loading ? "loading" : "container mx-auto px-4"}>
           <h2 className="mb-10 md:mb-20 text-5xl sm:text-6xl md:text-9xl xl:text-10xl font-semibold font-heading"></h2>
-          {!loading && currentDog?.images?.length > 0 ? (
+          {!loading && currentDog.images && currentDog.images.length > 0 ? (
             <div className="flex flex-wrap -m-5">
               <div className="w-full md:w-1/2 p-5">
                 <div className="overflow-hidden rounded-2xl">

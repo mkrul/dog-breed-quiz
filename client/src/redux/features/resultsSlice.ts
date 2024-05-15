@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Result } from "../../interfaces/result";
-import { Selection } from "../../interfaces/selection";
-import { RootState } from "../store";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { Result } from '../../interfaces/result';
+import { Selection } from '../../interfaces/selection';
+import { RootState } from '../store';
 
 const initialState: Result = {
   totalDogs: 0,
@@ -13,94 +13,29 @@ const initialState: Result = {
   selections: [],
 };
 
-// Action Types
+// Actions
 
-const CLEAR_RESULT = "CLEAR_RESULT";
-const UPDATE_TOTAL_DOGS = "UPDATE_TOTAL_DOGS";
-const UPDATE_TOTAL_SELECTED = "UPDATE_TOTAL_SELECTED";
-const UPDATE_TOTAL_CORRECT_GUESSES = "UPDATE_TOTAL_CORRECT_GUESSES";
-const UPDATE_TOTAL_INCORRECT_GUESSES = "UPDATE_TOTAL_INCORRECT_GUESSES";
-const UPDATE_TOTAL_SKIPPED = "UPDATE_TOTAL_SKIPPED";
-const UPDATE_USER_ACCURACY = "UPDATE_USER_ACCURACY";
-const UPDATE_SELECTIONS = "UPDATE_SELECTIONS";
-
-// Action Creators
-
-export const clearResult = () => ({
-  type: CLEAR_RESULT,
-});
-
-export const addTotalDogs = (totalDogs: number) => ({
-  type: UPDATE_TOTAL_DOGS,
-  payload: totalDogs,
-});
-
-export const addTotalDogsSelected = (totalSelected: number) => ({
-  type: UPDATE_TOTAL_SELECTED,
-  payload: totalSelected,
-});
-
-export const addTotalCorrectGuesses = (totalCorrectGuesses: number) => ({
-  type: UPDATE_TOTAL_CORRECT_GUESSES,
-  payload: totalCorrectGuesses,
-});
-
-export const addTotalIncorrectGuesses = (totalIncorrectGuesses: number) => ({
-  type: UPDATE_TOTAL_INCORRECT_GUESSES,
-  payload: totalIncorrectGuesses,
-});
+export const updateUserAccuracy = (accuracy: number) => {
+  return {
+    type: 'results/updateUserAccuracy',
+    payload: accuracy
+  };
+};
 
 
-export const addTotalSkipped = (totalSkipped: number) => ({
-  type: UPDATE_TOTAL_SKIPPED,
-  payload: totalSkipped,
-});
 
-export const updateUserAccuracy = (userAccuracy: number) => ({
-  type: UPDATE_USER_ACCURACY,
-  payload: userAccuracy,
-});
-
-export const updateSelections = (selection: Selection) => ({
-  type: UPDATE_SELECTIONS,
-  payload: selection,
-});
-
-// Async Thunks
-
-export const updateTotalDogsAsync = createAsyncThunk(
-  "result/updateTotalDogs",
-  async (totalDogs: number, { dispatch }) => {
-    dispatch(addTotalDogsAction(totalDogs));
-
-    return totalDogs;
+// Thunks
+export const incrementFieldAsync = createAsyncThunk(
+  'results/incrementField',
+  async ({ field, increment }: { field: keyof Omit<Result, 'selections'>; increment: number }, { dispatch }) => {
+    dispatch(resultsSlice.actions.incrementField({ field, increment }));
   }
 );
 
-export const updateTotalCorrectGuessesAsync = createAsyncThunk(
-  "result/updateTotalCorrectGuesses",
-  async (totalCorrectGuesses: number, { dispatch }) => {
-    dispatch(addTotalCorrectGuessesAction(totalCorrectGuesses));
-
-    return totalCorrectGuesses;
-  }
-);
-
-export const updateTotalIncorrectGuessesAsync = createAsyncThunk(
-  "result/updateTotalIncorrectGuesses",
-  async (totalIncorrectGuesses: number, { dispatch }) => {
-    dispatch(addTotalIncorrectGuessesAction(totalIncorrectGuesses));
-
-    return totalIncorrectGuesses;
-  }
-);
-
-export const updateTotalSkippedAsync = createAsyncThunk(
-  "result/updateTotalSkipped",
-  async (totalSkipped: number, { dispatch }) => {
-    dispatch(addTotalSkippedAction(totalSkipped));
-
-    return totalSkipped;
+export const updateSelectionsAsync = createAsyncThunk(
+  'results/updateSelections',
+  async (selection: Selection, { dispatch }) => {
+    dispatch(resultsSlice.actions.addSelection(selection));
   }
 );
 
@@ -114,102 +49,33 @@ export const updateUserAccuracyAsync = createAsyncThunk(
     const userAccuracy = (totalCorrectGuesses / totalDogs) * 100;
     const roundedAccuracy = Math.round(userAccuracy * 100) / 100;
 
-    dispatch(updateUserAccuracyAction(roundedAccuracy));
-
-    return roundedAccuracy;
+    dispatch(updateUserAccuracy(roundedAccuracy));
   }
 );
 
-export const updateSelectionsAsync = createAsyncThunk(
-  "result/updateSelections",
-  async (selection: Selection, { dispatch }) => {
-    dispatch(updateSelections(selection));
-
-    return selection;
-  }
-);
-
-// Reducer
-
+// Slice
 const resultsSlice = createSlice({
-  name: "resultData",
+  name: 'results',
   initialState,
   reducers: {
-    clearResultAction(state) {
-      return initialState;
+    incrementField: (state, action: { payload: { field: keyof Omit<Result, 'selections'>, increment: number }}) => {
+      const { field, increment } = action.payload;
+      state[field] += increment;
     },
-    addTotalDogsAction(state, action: PayloadAction<number>) {
-      state.totalDogs = action.payload;
-    },
-    updateUserAccuracyAction(state, action: PayloadAction<number>) {
-      state.userAccuracy = action.payload;
-    },
-    addTotalDogsSelectedAction(state, action: PayloadAction<number>) {
-      state.totalSelected = action.payload;
-    },
-    addTotalCorrectGuessesAction(state, action: PayloadAction<number>) {
-      state.totalCorrectGuesses = action.payload;
-    },
-    addTotalIncorrectGuessesAction(state, action: PayloadAction<number>) {
-      state.totalIncorrectGuesses = action.payload;
-    },
-    addTotalSkippedAction(state, action: PayloadAction<number>) {
-      state.totalSkipped = action.payload;
-    },
-    updateSelectionsAction(state, action: PayloadAction<Selection>) {
+    addSelection: (state, action: { payload: Selection }) => {
       state.selections.push(action.payload);
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(
-        updateTotalDogsAsync.fulfilled,
-        (state, action: PayloadAction<number>) => {
-          state.totalDogs = action.payload;
-        }
-      )
-      .addCase(
-        updateTotalCorrectGuessesAsync.fulfilled,
-        (state, action: PayloadAction<number>) => {
-          state.totalCorrectGuesses = action.payload;
-        }
-      )
-      .addCase(
-        updateTotalIncorrectGuessesAsync.fulfilled,
-        (state, action: PayloadAction<number>) => {
-          state.totalIncorrectGuesses = action.payload;
-        }
-      )
-      .addCase(
-        updateTotalSkippedAsync.fulfilled,
-        (state, action: PayloadAction<number>) => {
-          state.totalSkipped = action.payload;
-        }
-      )
-      .addCase(
-        updateUserAccuracyAsync.fulfilled,
-        (state, action: PayloadAction<number>) => {
-          state.userAccuracy = action.payload;
-        }
-      )
-      .addCase(
-        updateSelectionsAsync.fulfilled,
-        (state, action: PayloadAction<Selection>) => {
-          state.selections.push(action.payload);
-        }
-      );
-  },
+    updateUserAccuracy: (state, action: { payload: number }) => {
+      state.userAccuracy = action.payload;
+    },
+    clearResultAction: () => initialState
+  }
 });
 
 export const {
-  clearResultAction,
-  addTotalDogsAction,
-  addTotalDogsSelectedAction,
-  addTotalCorrectGuessesAction,
-  addTotalIncorrectGuessesAction,
-  addTotalSkippedAction,
-  updateUserAccuracyAction,
-  updateSelectionsAction,
+  incrementField,
+  addSelection,
+  clearResultAction
 } = resultsSlice.actions;
 
 export default resultsSlice.reducer;
