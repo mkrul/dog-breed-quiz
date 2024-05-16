@@ -75,7 +75,7 @@ const AlignmentPage = () => {
                               inputProps={{ "aria-label": "pro" }}
                             />
                           }
-                          label="Pit bulls make wonderful pets as long as they have a good owner to train and socialize them."
+                          label="Pit bulls make wonderful pets if they have a good owner to train and socialize them."
                         />
                         <FormControlLabel
                           className="text-neutral-600 text-lg font-medium tracking-tight text-left ml-2 relative flex items-center gap-2 mb-4"

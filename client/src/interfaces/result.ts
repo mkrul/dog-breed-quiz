@@ -8,4 +8,5 @@ export interface Result {
   totalSkipped: number;
   userAccuracy: number;
   selections: Selection[];
+  completed: number;
 }

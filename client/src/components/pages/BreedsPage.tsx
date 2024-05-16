@@ -35,7 +35,8 @@ const BreedsPage = () => {
   };
 
   const handleSubmit = () => {
-    if (selectedBreeds.length > 0) {
+    const selected = selectedBreeds.filter((breed) => breed.selected);
+    if (selected.length > 0) {
       navigate("/test/dna");
     } else {
       alert("Select at least one breed to continue");

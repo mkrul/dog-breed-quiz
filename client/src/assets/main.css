@@ -603,6 +603,10 @@ video {
   margin-left: 1.5rem;
 }
 
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -649,6 +653,10 @@ video {
 
 .h-full {
   height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .w-full {
@@ -819,6 +827,11 @@ video {
 .text-2xl {
   font-size: 1.5rem;
   line-height: 1.33;
+}
+
+.text-3xl {
+  font-size: 1.75rem;
+  line-height: 1.14;
 }
 
 .text-4xl {

@@ -7,7 +7,6 @@ import { Carousel } from "react-responsive-carousel";
 import { Dog } from "../../interfaces/dog";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { RootState } from "../../redux/store";
-import { Selection } from "../../interfaces/selection";
 import { Result } from "../../interfaces/result";
 import {
   incrementFieldAsync,
@@ -23,14 +22,26 @@ const DogsPage = () => {
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showFinalLoading, setShowFinalLoading] = useState(false);
+  const [endOfTest, setEndOfTest] = useState(false);
 
-  const resultData = useSelector((state: RootState) => state.results as Result);
   const userData = useSelector((state: RootState) => state.user);
   const breedData = useSelector((state: RootState) => state.breeds);
   const settingsData = useSelector((state: RootState) => state.settings);
+  const resultData = useSelector((state: RootState) => state.results as Result);
 
   const settings = useSelector((state: RootState) => state.settings);
   const userSelectedPercentage = settings.percentage;
+
+  useEffect(() => {
+    if (endOfTest) {
+      setShowFinalLoading(true);
+      handleSaveUserData();
+      setTimeout(() => {
+        setShowFinalLoading(false);
+        navigate("/results");
+      }, 1000);
+    }
+  }, [resultData]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,14 +69,9 @@ const DogsPage = () => {
   }, []);
 
   const handleNext = async () => {
-    if (currentIndex >= dogData.length - 1) {
-      setShowFinalLoading(true);
-      setTimeout(() => {
-        console.log("in setTimeout, resultData:", resultData); // Still may log stale data due to closure
-        handleSaveUserData();
-        setShowFinalLoading(false);
-        navigate("/results");
-      }, 3000);
+    if (currentIndex === dogData.length - 1) {
+      setEndOfTest(true);
+      dispatch(incrementFieldAsync({ field: "completed", increment: 1 }));
     } else {
       setCurrentIndex((prevIndex) => prevIndex + 1);
     }

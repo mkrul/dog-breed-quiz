@@ -44,9 +44,7 @@ const breedSlice = createSlice({
   name: "breedData",
   initialState,
   reducers: {
-    clearBreedsAction: (state) => {
-      return initialState;
-    },
+    clearBreedsAction: () => initialState,
     addBreedAction: (state, action: PayloadAction<string>) => {
       return state.map(breed =>
         breed.name === action.payload ? { ...breed, selected: true } : breed

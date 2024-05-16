@@ -11,6 +11,7 @@ const initialState: Result = {
   totalSkipped: 0,
   userAccuracy: 0,
   selections: [],
+  completed: 0
 };
 
 // Actions
