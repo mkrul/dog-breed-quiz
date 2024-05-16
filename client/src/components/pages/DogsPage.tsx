@@ -106,8 +106,21 @@ const DogsPage = () => {
 
   const handleAnswerYes = async () => {
     const { apbt, ast, sbt, ab } = currentDog;
-    let correctGuess =
-      apbt + ast + sbt + ab >= userSelectedPercentage + 10 ? 1 : 0;
+    // get the breeds that the user selected
+    const selectedBreeds = breedData.filter((breed) => breed.selected);
+    // check if the current dog has any keys that match the selected breeds
+    let currentDogHasApbt = currentDog.apbt > 0;
+    let currentDogHasAst = currentDog.ast > 0;
+    let currentDogHasSbt = currentDog.sbt > 0;
+    let currentDogHasAb = currentDog.ab > 0;
+
+    // check if the user selected any breeds that match the current dog
+    let userSelectedApbt = selectedBreeds.find(
+      (breed) => breed.label === "apbt"
+    );
+
+    // let correctGuess =
+    //   apbt + ast + sbt + ab >= userSelectedPercentage + 10 ? 1 : 0;
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
 
     await Promise.all([

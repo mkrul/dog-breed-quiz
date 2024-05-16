@@ -135,24 +135,16 @@ const AboutPage: React.FC = () => {
                   </div>
                   {divVisibility["q5"] && (
                     <div className="mt-5 text-left">
-                      This project was developed for entertainment purposes by a
-                      private third party and is not a part of any official
-                      government or academic research. It is not affiliated with
-                      Embark or any other DNA testing service. The results of
-                      this test are not intended to promote any specific breed
-                      or type of dog.
+                      This project was developed for educational and
+                      entertainment purposes by a private third party and is not
+                      a part of any official government or academic research. It
+                      is not affiliated with Embark or any other DNA testing
+                      service. The results of this test are not intended to
+                      promote any specific breed or type of dog.
                     </div>
                   )}
                 </div>
-                <div className="container w-full">
-                  <div className="pt-4 pb-8 w-full mx-auto">
-                    <div className="flex text-neutral-400 justify-center m-auto px-4">
-                      If you have any questions that are not answered in our
-                      FAQ, please feel free to contact us at
-                      banthisbreed@gmail.com.
-                    </div>
-                  </div>
-
+                <div className="container w-full mt-6">
                   <Link
                     to="/1"
                     className="inline-flex items-center justify-center text-center h-16 p-5 font-semibold text-lg text-white tracking-tight bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"

@@ -4,18 +4,22 @@ import { Breed } from "../../interfaces/breed";
 const initialState: Breed[] = [
   {
     name: "American Pit Bull Terrier",
+    label: "apbt",
     selected: false,
   },
   {
     name: "American Staffordshire Terrier",
+    label: "ast",
     selected: false,
   },
   {
     name: "Staffordshire Bull Terrier",
+    label: "sbt",
     selected: false,
   },
   {
     name: "American Bully",
+    label: "ab",
     selected: false,
   },
 ];
@@ -47,12 +51,12 @@ const breedSlice = createSlice({
     clearBreedsAction: () => initialState,
     addBreedAction: (state, action: PayloadAction<string>) => {
       return state.map(breed =>
-        breed.name === action.payload ? { ...breed, selected: true } : breed
+        breed.label === action.payload ? { ...breed, selected: true } : breed
       );
     },
     removeBreedAction: (state, action: PayloadAction<string>) => {
       return state.map(breed =>
-        breed.name === action.payload ? { ...breed, selected: false } : breed
+        breed.label === action.payload ? { ...breed, selected: false } : breed
       );
     },
   },

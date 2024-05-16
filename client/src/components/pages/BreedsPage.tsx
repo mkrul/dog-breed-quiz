@@ -43,8 +43,8 @@ const BreedsPage = () => {
     }
   };
 
-  const handleChangeImageData = (breed: string) => {
-    switch (breed) {
+  const handleChangeImageData = (name: string) => {
+    switch (name) {
       case "American Pit Bull Terrier":
         setImageAuthor("Unknown");
         setImageSource("Pinterest");
@@ -52,7 +52,7 @@ const BreedsPage = () => {
         setImageLinkSecondary(
           "https://i.pinimg.com/originals/93/08/c8/9308c8aed4571ccd7a1ae0efaacd6fd4.jpg"
         );
-        setSelectedImage("American Pit Bull Terrier");
+        setSelectedImage("apbt");
         break;
       case "American Staffordshire Terrier":
         setImageAuthor("Raya");
@@ -63,7 +63,7 @@ const BreedsPage = () => {
         setImageLinkSecondary(
           "https://www.pinterest.com/pin/1040120476434643492/"
         );
-        setSelectedImage("American Staffordshire Terrier");
+        setSelectedImage("ast");
         break;
       case "Staffordshire Bull Terrier":
         setImageAuthor("Rohan");
@@ -74,7 +74,7 @@ const BreedsPage = () => {
         setImageLinkSecondary(
           "https://unsplash.com/photos/black-short-coated-dog-on-green-grass-field-during-daytime-UxyBUbmBXIU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
         );
-        setSelectedImage("Staffordshire Bull Terrier");
+        setSelectedImage("sbt");
         break;
       case "American Bully":
         setImageAuthor("Attitude Boy");
@@ -83,7 +83,7 @@ const BreedsPage = () => {
         setImageLinkSecondary(
           "https://i.pinimg.com/originals/ff/5b/69/ff5b694c23003aa14aea8b166b2c96d7.jpg"
         );
-        setSelectedImage("American Bully");
+        setSelectedImage("ab");
         break;
       default:
         setImageAuthor("Katie Bernotsky");
@@ -132,16 +132,16 @@ const BreedsPage = () => {
                   </h6>
                   <div className="mb-6 ml-6">
                     {selectedBreeds.map((breed) => (
-                      <FormGroup key={breed.name}>
+                      <FormGroup key={breed.label}>
                         <FormControlLabel
                           className="text-neutral-600 text-lg font-medium tracking-tight text-left ml-2 relative flex items-center gap-2 mb-2"
                           onMouseEnter={() => handleChangeImageData(breed.name)}
                           control={
                             <Checkbox
                               checked={breed.selected}
-                              onChange={() => handleSetBreed(breed.name)}
+                              onChange={() => handleSetBreed(breed.label)}
                               inputProps={{
-                                "aria-label": breed.name,
+                                "aria-label": breed.label,
                               }}
                             />
                           }
