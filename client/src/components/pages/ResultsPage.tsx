@@ -72,6 +72,7 @@ const ResultsPage = () => {
         setAntiApbtAccuracy(breakdown.antiApbtAccuracy);
         setAntiMultiCount(breakdown.antiMultiCount);
         setAntiMultiAccuracy(breakdown.antiMultiAccuracy);
+        setTopUsers(breakdown.topUsers);
       });
     } catch (error) {
       console.log(error);
@@ -146,7 +147,9 @@ const ResultsPage = () => {
               </p>
               <p className="mb-5">
                 Your overall accuracy was{" "}
-                <span className="font-bold">{resultData.userAccuracy}%</span>
+                <span className="font-bold">
+                  {resultData.userAccuracy.toFixed(1)}%
+                </span>
               </p>
             </div>
           </div>
@@ -222,21 +225,21 @@ const ResultsPage = () => {
                       <td className="py-2">Pro-pit bull</td>
                       <td className="py-2">{proCount}</td>
                       <td className="py-2">
-                        {proCount > 0 ? `${proAccuracy}%` : "0%"}
+                        {proCount > 0 ? `${proAccuracy.toFixed(1)}%` : "0%"}
                       </td>
                     </tr>
                     <tr>
                       <td className="py-2">Moderate</td>
                       <td className="py-2">{modCount}</td>
                       <td className="py-2">
-                        {modCount > 0 ? `${modAccuracy}%` : "0%"}
+                        {modCount > 0 ? `${modAccuracy.toFixed(1)}%` : "0%"}
                       </td>
                     </tr>
                     <tr>
                       <td className="py-2">Anti-pit bull</td>
                       <td className="py-2">{antiCount}</td>
                       <td className="py-2">
-                        {antiCount > 0 ? `${antiAccuracy}%` : "0%"}
+                        {antiCount > 0 ? `${antiAccuracy.toFixed(1)}%` : "0%"}
                       </td>
                     </tr>
                   </tbody>
@@ -264,14 +267,18 @@ const ResultsPage = () => {
                       <td className="py-2">APBT only</td>
                       <td className="py-2">{proApbtCount}</td>
                       <td className="py-2">
-                        {proApbtCount > 0 ? `${proApbtAccuracy}%` : "0%"}
+                        {proApbtCount > 0
+                          ? `${proApbtAccuracy.toFixed(1)}%`
+                          : "0%"}
                       </td>
                     </tr>
                     <tr>
                       <td className="py-2">Multiple breeds</td>
                       <td className="py-2">{proMultiCount}</td>
                       <td className="py-2">
-                        {proMultiCount > 0 ? `${proMultiAccuracy}%` : "0%"}
+                        {proMultiCount > 0
+                          ? `${proMultiAccuracy.toFixed(1)}%`
+                          : "0%"}
                       </td>
                     </tr>
                   </tbody>
@@ -299,14 +306,18 @@ const ResultsPage = () => {
                       <td className="py-2">APBT only</td>
                       <td className="py-2">{modApbtCount}</td>
                       <td className="py-2">
-                        {modApbtCount > 0 ? `${modApbtAccuracy}%` : "0%"}
+                        {modApbtCount > 0
+                          ? `${modApbtAccuracy.toFixed(1)}%`
+                          : "0%"}
                       </td>
                     </tr>
                     <tr>
                       <td className="py-2">Multiple breeds</td>
                       <td className="py-2">{modMultiCount}</td>
                       <td className="py-2">
-                        {modMultiCount > 0 ? `${modMultiAccuracy}%` : "0%"}
+                        {modMultiCount > 0
+                          ? `${modMultiAccuracy.toFixed(1)}%`
+                          : "0%"}
                       </td>
                     </tr>
                   </tbody>
@@ -334,14 +345,18 @@ const ResultsPage = () => {
                       <td className="py-2">APBT only</td>
                       <td className="py-2">{antiApbtCount}</td>
                       <td className="py-2">
-                        {antiApbtCount > 0 ? `${antiApbtAccuracy}%` : "0%"}
+                        {antiApbtCount > 0
+                          ? `${antiApbtAccuracy.toFixed(1)}%`
+                          : "0%"}
                       </td>
                     </tr>
                     <tr>
                       <td className="py-2">Multiple breeds</td>
                       <td className="py-2">{antiMultiCount}</td>
                       <td className="py-2">
-                        {antiMultiCount > 0 ? `${antiMultiAccuracy}%` : "0%"}
+                        {antiMultiCount > 0
+                          ? `${antiMultiAccuracy.toFixed(1)}%`
+                          : "0%"}
                       </td>
                     </tr>
                   </tbody>
@@ -361,71 +376,15 @@ const ResultsPage = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="py-2">
-                        {topUsers[0]?.username ? topUsers[0].username : "N/A"}
-                      </td>
-                      <td className="py-2">
-                        {topUsers[0]?.alignment ? topUsers[0].alignment : "N/A"}
-                      </td>
-                      <td className="py-2">
-                        {topUsers[0]?.accuracy
-                          ? `${topUsers[0].accuracy}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">
-                        {topUsers[1]?.username ? topUsers[1].username : "N/A"}
-                      </td>
-                      <td className="py-2">
-                        {topUsers[1]?.alignment ? topUsers[1].alignment : "N/A"}
-                      </td>
-                      <td className="py-2">
-                        {topUsers[1]?.accuracy
-                          ? `${topUsers[1].accuracy}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">
-                        {topUsers[2]?.username ? topUsers[2].username : "N/A"}
-                      </td>
-                      <td className="py-2">
-                        {topUsers[2]?.alignment ? topUsers[2].alignment : "N/A"}
-                      </td>
-                      <td className="py-2">
-                        {topUsers[2]?.accuracy
-                          ? `${topUsers[2].accuracy}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">
-                        {topUsers[3]?.username ? topUsers[3].username : "N/A"}
-                      </td>
-                      <td className="py-2">
-                        {topUsers[3]?.alignment ? topUsers[3].alignment : "N/A"}
-                      </td>
-                      <td className="py-2">
-                        {topUsers[3]?.accuracy
-                          ? `${topUsers[3].accuracy}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">
-                        {topUsers[4]?.username ? topUsers[4].username : "N/A"}
-                      </td>
-                      <td className="py-2">
-                        {topUsers[4]?.alignment ? topUsers[4].alignment : "N/A"}
-                      </td>
-                      <td className="py-2">
-                        {topUsers[4]?.accuracy
-                          ? `${topUsers[4].accuracy}%`
-                          : "0%"}
-                      </td>
-                    </tr>
+                    {topUsers.map((user, index) => {
+                      return (
+                        <tr key={index}>
+                          <td className="py-2">{user.username}</td>
+                          <td className="py-2">{user.alignment}</td>
+                          <td className="py-2">{user.accuracy.toFixed(1)}%</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
