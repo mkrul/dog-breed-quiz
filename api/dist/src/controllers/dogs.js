@@ -9,14 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const user_1 = require("../services/user");
+const dogs_1 = require("../services/dogs");
 const asyncHandler = require("express-async-handler");
-exports.createUserData = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { data } = req.body;
-    yield (0, user_1.saveUserData)(data);
-    res.status(201);
-}));
-exports.getUserData = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = yield (0, user_1.fetchUsers)();
+exports.getDogs = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = yield (0, dogs_1.fetchDogs)();
     res.status(200).json({ data });
 }));

@@ -28,17 +28,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 const express_1 = __importDefault(require("express"));
+const body_parser_1 = __importDefault(require("body-parser"));
 const AboutRoutes = __importStar(require("./routes/about"));
 const ResultsRoutes = __importStar(require("./routes/results"));
 const TestRoutes = __importStar(require("./routes/test"));
 const UserRoutes = __importStar(require("./routes/user"));
+const DogsRoutes = __importStar(require("./routes/dogs"));
 const cors = require("cors");
 const app = (0, express_1.default)();
 app.use(cors());
 app.use(express_1.default.static(__dirname + "/public"));
-app.get("/");
-app.get('/user', UserRoutes.router);
+// set content security policy to allow loading of scripts and css from same origin
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
+    next();
+});
+app.use(express_1.default.json());
+app.use(body_parser_1.default.json());
+app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(AboutRoutes.router);
+app.use(DogsRoutes.router);
 app.use(ResultsRoutes.router);
 app.use(TestRoutes.router);
 app.use(UserRoutes.router);

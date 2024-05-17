@@ -7,7 +7,6 @@ exports.startTest = asyncHandler(async (req: any, res: any, next: any) => {
 });
 
 exports.showBreedsPage = asyncHandler(async (req: any, res: any, next: any) => {
-  console.log('in controllers/test.ts, showBreedsPage')
   res.status(200).json({
     message: 'Breeds page'
   });

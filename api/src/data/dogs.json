@@ -1,0 +1,182 @@
+[
+  {
+    "dir": "001",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 10,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "002",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 50,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "003",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "004",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "005",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 7,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "006",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 33,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "007",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 11,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "008",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 12,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "009",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 14,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "010",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 21,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "011",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "012",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "013",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 50,
+    "ast": 24,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "014",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 50
+  },
+  {
+    "dir": "015",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 33,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  }
+]

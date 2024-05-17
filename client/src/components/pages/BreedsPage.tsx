@@ -27,10 +27,13 @@ const BreedsPage = () => {
   const selectedBreeds = useSelector((state: RootState) => state.breeds);
 
   const handleSetBreed = (breed: string) => {
-    if (selectedBreeds.find((b) => b.selected === true && b.name === breed)) {
-      dispatch(removeBreedAction(breed));
-    } else {
-      dispatch(addBreedAction(breed));
+    const index = selectedBreeds.findIndex((b) => b.label === breed);
+    if (index > -1) {
+      if (selectedBreeds[index].selected) {
+        dispatch(removeBreedAction(breed));
+      } else {
+        dispatch(addBreedAction(breed));
+      }
     }
   };
 

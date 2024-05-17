@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserData = exports.saveUserData = void 0;
-const user_1 = __importDefault(require("../../models/user"));
+exports.fetchUsers = exports.saveUserData = void 0;
+const user_1 = __importDefault(require("../models/user"));
 function saveUserData(data) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = new user_1.default(data);
@@ -22,10 +22,8 @@ function saveUserData(data) {
     });
 }
 exports.saveUserData = saveUserData;
-function getUserData() {
+function fetchUsers() {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("getting user data");
-        // get all "pro" alignment users
         const proUsers = yield user_1.default.find({ alignment: "pro" });
         const moderateUsers = yield user_1.default.find({ alignment: "neutral" });
         const antiUsers = yield user_1.default.find({ alignment: "anti" });
@@ -37,10 +35,10 @@ function getUserData() {
         const moderateCount = moderateUsers.length;
         const antiCount = antiUsers.length;
         // get count of "pro" alignment users who selected "apbt" as the only breed
-        const proApbtCount = proUsers.filter((user) => user.breeds.length === 1 && user.breeds[0].name === "apbt").length;
+        const proApbtCount = proUsers.filter((user) => user.breeds.length === 1 && user.breeds[0].label === "apbt").length;
         // get average accuracy of "pro" alignment users who selected "apbt" as the only breed
         const proApbtAccuracy = proUsers
-            .filter((user) => user.breeds.length === 1 && user.breeds[0].name === "apbt")
+            .filter((user) => user.breeds.length === 1 && user.breeds[0].label === "apbt")
             .reduce((acc, user) => acc + user.accuracy, 0) / proApbtCount;
         // get count of "pro" alignment users who selected multiple breeds
         const proMultiCount = proUsers.filter((user) => user.breeds.length > 1).length;
@@ -49,21 +47,30 @@ function getUserData() {
             .filter((user) => user.breeds.length > 1)
             .reduce((acc, user) => acc + user.accuracy, 0) / proMultiCount;
         // get count of "neutral" alignment users who selected "apbt" as the only breed
-        const moderateApbtCount = moderateUsers.filter((user) => user.breeds.length === 1 && user.breeds[0].name === "apbt").length;
+        const moderateApbtCount = moderateUsers.filter((user) => user.breeds.length === 1 && user.breeds[0].label === "apbt").length;
         // get average accuracy of "neutral" alignment users who selected "apbt" as the only breed
         const moderateApbtAccuracy = moderateUsers
-            .filter((user) => user.breeds.length === 1 && user.breeds[0].name === "apbt")
+            .filter((user) => user.breeds.length === 1 && user.breeds[0].label === "apbt")
             .reduce((acc, user) => acc + user.accuracy, 0) / moderateApbtCount;
+        // get count of "neutral" alignment users who selected multiple breeds
+        const moderateMultiCount = moderateUsers.filter((user) => user.breeds.length > 1).length;
+        // get average accuracy of "neutral" alignment users who selected multiple breeds
+        const moderateMultiAccuracy = moderateUsers
+            .filter((user) => user.breeds.length > 1)
+            .reduce((acc, user) => acc + user.accuracy, 0) / moderateMultiCount;
         // get count of "anti" alignment users who selected "apbt" as the only breed
-        const antiApbtCount = antiUsers.filter((user) => user.breeds.length === 1 && user.breeds[0].name === "apbt").length;
+        const antiApbtCount = antiUsers.filter((user) => user.breeds.length === 1 && user.breeds[0].label === "apbt").length;
         // get average accuracy of "anti" alignment users who selected "apbt" as the only breed
         const antiApbtAccuracy = antiUsers
-            .filter((user) => user.breeds.length === 1 && user.breeds[0].name === "apbt")
+            .filter((user) => user.breeds.length === 1 && user.breeds[0].label === "apbt")
             .reduce((acc, user) => acc + user.accuracy, 0) / antiApbtCount;
-        // get top 5 users with the highest accuracy
-        const topUsers = proUsers
-            .sort((a, b) => b.accuracy - a.accuracy)
-            .slice(0, 5);
+        // get count of "anti" alignment users who selected multiple breeds
+        const antiMultiCount = antiUsers.filter((user) => user.breeds.length > 1).length;
+        // get average accuracy of "anti" alignment users who selected multiple breeds
+        const antiMultiAccuracy = antiUsers
+            .filter((user) => user.breeds.length > 1)
+            .reduce((acc, user) => acc + user.accuracy, 0) / antiMultiCount;
+        const topUsers = yield user_1.default.find().sort({ accuracy: -1 }).limit(5);
         return {
             proAccuracy,
             moderateAccuracy,
@@ -77,10 +84,14 @@ function getUserData() {
             proMultiAccuracy,
             moderateApbtCount,
             moderateApbtAccuracy,
+            moderateMultiCount,
+            moderateMultiAccuracy,
             antiApbtCount,
             antiApbtAccuracy,
+            antiMultiCount,
+            antiMultiAccuracy,
             topUsers
         };
     });
 }
-exports.getUserData = getUserData;
+exports.fetchUsers = fetchUsers;

@@ -105,22 +105,35 @@ const DogsPage = () => {
   };
 
   const handleAnswerYes = async () => {
-    const { apbt, ast, sbt, ab } = currentDog;
-    // get the breeds that the user selected
     const selectedBreeds = breedData.filter((breed) => breed.selected);
-    // check if the current dog has any keys that match the selected breeds
+
     let currentDogHasApbt = currentDog.apbt > 0;
     let currentDogHasAst = currentDog.ast > 0;
     let currentDogHasSbt = currentDog.sbt > 0;
     let currentDogHasAb = currentDog.ab > 0;
 
-    // check if the user selected any breeds that match the current dog
     let userSelectedApbt = selectedBreeds.find(
       (breed) => breed.label === "apbt"
     );
 
-    // let correctGuess =
-    //   apbt + ast + sbt + ab >= userSelectedPercentage + 10 ? 1 : 0;
+    let userSelectedAst = selectedBreeds.find((breed) => breed.label === "ast");
+    let userSelectedSbt = selectedBreeds.find((breed) => breed.label === "sbt");
+    let userSelectedAb = selectedBreeds.find((breed) => breed.label === "ab");
+
+    let apbt = currentDogHasApbt && userSelectedApbt ? currentDog.apbt : 0;
+    let ast = currentDogHasAst && userSelectedAst ? currentDog.ast : 0;
+    let sbt = currentDogHasSbt && userSelectedSbt ? currentDog.sbt : 0;
+    let ab = currentDogHasAb && userSelectedAb ? currentDog.ab : 0;
+
+    let guessRangeStart = userSelectedPercentage - 10;
+    let guessRangeEnd = userSelectedPercentage + 10;
+
+    let correctGuess =
+      apbt + ast + sbt + ab > guessRangeStart &&
+      apbt + ast + sbt + ab < guessRangeEnd
+        ? 1
+        : 0;
+
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
 
     await Promise.all([

@@ -1,19 +1,17 @@
-import { createUser, updateUser } from "./services/user";
+import { saveUserData, fetchUsers } from "../services/user";
+
 const asyncHandler = require("express-async-handler");
 
-exports.createUser = asyncHandler(async (req: any, res: any, next: any) => {
-  const { username } = req.body;
+exports.createUserData = asyncHandler(async (req: any, res: any, next: any) => {
+  const { data } = req.body;
 
-  const user = await createUser(username);
+  await saveUserData(data);
 
-  res.status(201).json({ user });
+  res.status(201);
 });
 
-exports.updateUser = asyncHandler(async (req: any, res: any, next: any) => {
-  const { userId } = req.params;
-  const data = req.body;
+exports.getUserData = asyncHandler(async (req: any, res: any, next: any) => {
+  const data = await fetchUsers();
 
-  const user = await updateUser(userId, data);
-
-  res.status(200).json({ user });
+  res.status(200).json({ data });
 });

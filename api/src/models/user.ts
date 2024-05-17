@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
 import { ObjectId } from 'mongodb';
+import settings, { SettingsType } from './settings';
+import breed, { BreedType } from './breed';
+import result, { ResultType } from './result';
 
 const Schema = mongoose.Schema;
 
@@ -8,18 +11,22 @@ export type UserType = {
   username: string,
   alignment: string,
   percentage: number,
-  buffer: boolean,
-  breeds: string[],
-  createdAt: Date
+  breeds: BreedType[],
+  createdAt: Date,
+  settings: SettingsType,
+  results: ResultType[],
+  accuracy: number
 }
 
 const userSchema = new Schema({
-  username: { type: String, required: true },
+  username: { type: String, default: '' },
   alignment: { type: String, default: '' },
   percentage: { type: Number, default: 0 },
-  buffer: { type: Boolean, default: false },
-  breeds: { type: [String], default: [] },
-  createdAt: { type: Date, default: Date.now }
+  breeds: { type: Array, default: [] },
+  createdAt: { type: Date, default: Date.now },
+  settings: { type: Object, default: settings },
+  results: { type: Array, default: [] },
+  accuracy: { type: Number, default: 0 }
 });
 
 export default mongoose.model('User', userSchema);

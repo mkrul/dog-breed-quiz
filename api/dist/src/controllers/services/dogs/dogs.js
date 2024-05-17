@@ -12,26 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const validateEnv_1 = __importDefault(require("./src/util/validateEnv"));
-const app_1 = __importDefault(require("./src/app"));
-const conn_1 = __importDefault(require("./db/conn"));
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    const port = validateEnv_1.default.PORT;
-    try {
-        app_1.default.listen(port, () => {
-            conn_1.default.on("error", console.error.bind(console, "connection error:"));
-            conn_1.default.on("connected", function () {
-                console.log("Connected to MongoDB");
-            });
-            console.log(`Server started at http://localhost:${port}`);
-        });
-    }
-    catch (err) {
-        const error = new Error("Request failed");
-        console.log(err);
-        throw error;
-    }
-    finally {
-        console.log("Server started");
-    }
-}))();
+exports.getDogs = void 0;
+const fs_1 = __importDefault(require("fs"));
+function readBreedData() {
+    return __awaiter(this, void 0, void 0, function* () {
+        var data = JSON.parse(fs_1.default.readFileSync('./data.json', 'utf8'));
+        console.log('data:', data);
+        return data;
+    });
+}
+function getDogs() {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log('in getDogs');
+        const data = yield readBreedData();
+        const breeds = data.breeds;
+        const randomBreeds = breeds.sort(() => Math.random() - Math.random()).slice(0, 5);
+        return randomBreeds;
+    });
+}
+exports.getDogs = getDogs;

@@ -15,7 +15,6 @@ exports.startTest = asyncHandler((req, res, next) => __awaiter(void 0, void 0, v
     });
 }));
 exports.showBreedsPage = asyncHandler((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('in controllers/test.ts, showBreedsPage');
     res.status(200).json({
         message: 'Breeds page'
     });

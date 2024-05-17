@@ -7,7 +7,5 @@ exports.router = void 0;
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 exports.router = router;
-const userController = require("../controllers/user");
-// GET /user/:uuid
-router.post("/api/user", userController.createUserData);
-router.get("/api/users", userController.getUserData);
+const dogsController = require("../controllers/dogs");
+router.get("/api/dogs", dogsController.getDogs);
