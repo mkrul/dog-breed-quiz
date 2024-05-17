@@ -32,6 +32,11 @@ const DogsPage = () => {
   const settings = useSelector((state: RootState) => state.settings);
   const userSelectedPercentage = settings.percentage;
 
+  const positiveBtnText =
+    settingsData.alignment === "anti" ? "Ban it" : "It's a Pit";
+  const negativeBtnText =
+    settingsData.alignment === "anti" ? "Skip it" : "Not a Pit";
+
   useEffect(() => {
     if (endOfTest) {
       setShowFinalLoading(true);
@@ -125,14 +130,9 @@ const DogsPage = () => {
     let sbt = currentDogHasSbt && userSelectedSbt ? currentDog.sbt : 0;
     let ab = currentDogHasAb && userSelectedAb ? currentDog.ab : 0;
 
-    let guessRangeStart = userSelectedPercentage - 10;
-    let guessRangeEnd = userSelectedPercentage + 10;
+    let guessRangeStart = userSelectedPercentage - 5;
 
-    let correctGuess =
-      apbt + ast + sbt + ab > guessRangeStart &&
-      apbt + ast + sbt + ab < guessRangeEnd
-        ? 1
-        : 0;
+    let correctGuess = apbt + ast + sbt + ab >= guessRangeStart ? 1 : 0;
 
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
 
@@ -160,9 +160,30 @@ const DogsPage = () => {
   };
 
   const handleAnswerNo = async () => {
-    const { apbt, ast, sbt, ab } = currentDog;
-    let correctGuess =
-      apbt + ast + sbt + ab < userSelectedPercentage + 10 ? 1 : 0;
+    const selectedBreeds = breedData.filter((breed) => breed.selected);
+
+    let currentDogHasApbt = currentDog.apbt > 0;
+    let currentDogHasAst = currentDog.ast > 0;
+    let currentDogHasSbt = currentDog.sbt > 0;
+    let currentDogHasAb = currentDog.ab > 0;
+
+    let userSelectedApbt = selectedBreeds.find(
+      (breed) => breed.label === "apbt"
+    );
+
+    let userSelectedAst = selectedBreeds.find((breed) => breed.label === "ast");
+    let userSelectedSbt = selectedBreeds.find((breed) => breed.label === "sbt");
+    let userSelectedAb = selectedBreeds.find((breed) => breed.label === "ab");
+
+    let apbt = currentDogHasApbt && userSelectedApbt ? currentDog.apbt : 0;
+    let ast = currentDogHasAst && userSelectedAst ? currentDog.ast : 0;
+    let sbt = currentDogHasSbt && userSelectedSbt ? currentDog.sbt : 0;
+    let ab = currentDogHasAb && userSelectedAb ? currentDog.ab : 0;
+
+    let guessRangeStart = userSelectedPercentage - 5;
+
+    let correctGuess = apbt + ast + sbt + ab < guessRangeStart ? 1 : 0;
+
     const imageUrl = `../../assets/images/dogs/${currentDog.dir}/${currentDog.images[0]}`;
 
     await Promise.all([
@@ -238,7 +259,7 @@ const DogsPage = () => {
                               onClick={handleAnswerYes}
                               className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-green-700 hover:bg-green-800 focus:bg-green-800 rounded-lg focus:ring-4 focus:ring-green-300 transition duration-200"
                             >
-                              It's a Pit
+                              {positiveBtnText}
                             </button>
                           </div>
                         </div>
@@ -248,7 +269,7 @@ const DogsPage = () => {
                               onClick={handleAnswerNo}
                               className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-white bg-crimson-700 hover:bg-crimson-800 focus:bg-crimson-800 rounded-lg focus:ring-4 focus:ring-red-300 transition duration-200"
                             >
-                              Not a Pit
+                              {negativeBtnText}
                             </button>
                           </div>
                         </div>

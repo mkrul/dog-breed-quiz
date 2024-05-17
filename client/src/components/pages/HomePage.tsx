@@ -97,10 +97,10 @@ const HomePage = () => {
                     certain dog breeds should be banned or regulated based on
                     statistical data surrounding dog attacks. The most commonly
                     targeted breeds are those labeled "pit bulls". Many people
-                    use "pit bull" as an umbrella term for dogs with similar
-                    physical characteristics or a certain amount of pit bull
-                    heritage. For others, the term is used to describe a
-                    specific breed of dog, the American Pit Bull Terrier.
+                    use "pit bull" as an umbrella term for dogs with certain
+                    physical characteristics, such as a muscular build and a
+                    short coat, and breed bans often target individual dogs
+                    based on their appearance.
                   </Typography>
                   <Typography className="mb-4">
                     This project aims to measure the accuracy of visual breed

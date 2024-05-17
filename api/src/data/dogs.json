@@ -178,5 +178,856 @@
     "ast": 0,
     "sbt": 0,
     "ab": 0
-  }
+  },
+  {
+    "dir": "016",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 14,
+    "ast": 3,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "017",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "018",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 54,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "019",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 37,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "020",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 86,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "021",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 28,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "022",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "023",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "024",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 10,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "025",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 8,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "026",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 12,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 24
+  },
+  {
+    "dir": "027",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 23,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "028",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 33,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "029",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "030",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 10,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "031",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 33,
+    "ast": 6,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "032",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 21,
+    "ast": 9,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "033",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 35,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "034",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 17,
+    "ast": 8,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "035",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 32,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "036",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "037",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 13,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 28
+  },
+  {
+    "dir": "038",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 30,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "039",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "040",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 40,
+    "ast": 19,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "041",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 29,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "042",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 11,
+    "ast": 4,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "043",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "044",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 17,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "045",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 11,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "046",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 16,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "047",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 14,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "048",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 12,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "049",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 24,
+    "ast": 19,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "050",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 30,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "051",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 60,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "052",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "053",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 100,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "054",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 34,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "055",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 100,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "056",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 100,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "057",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 100,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "058",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "059",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "060",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "061",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "062",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 21,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "063",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 23,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "064",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "065",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "066",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 52,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "067",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 100,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "068",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 10,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 20
+  },
+  {
+    "dir": "069",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 24,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "070",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "071",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 12,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "072",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "073",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "074",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "075",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "076",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "077",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 13,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "078",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 0,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "079",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 17,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "080",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 13,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "081",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 13,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "082",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 13,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "083",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 13,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "084",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 13,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "085",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 13,
+    "ast": 0,
+    "sbt": 0,
+    "ab": 0
+  },
+  {
+    "dir": "086",
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "apbt": 13,
+    "ast": 0,
+    "sbt": 0,
+    "ab":
 ]

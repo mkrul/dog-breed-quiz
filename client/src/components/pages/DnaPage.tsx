@@ -84,10 +84,12 @@ const DnaPage = () => {
                     dog as a pit bull?
                   </h6>
                   <p className="mb-5 text-xl text-neutral-700 font-medium">
-                    Adjust the slider to set a percentage. A 10% buffer will be
-                    applied, meaning that any dog with a DNA match within 10% of
-                    the selected percentage value will be counted in your
-                    results.
+                    Adjust the slider to select a percentage. The system
+                    includes a 5% courtesy buffer, meaning it considers
+                    selections within 5% of the actual percentage as correct.
+                    For instance, if a dog is 45% American Bully and you select
+                    50%, your answer will be deemed correct because it falls
+                    within the 5% buffer range.
                   </p>
                   <div className="mb-2 ml-6">
                     <Slider
