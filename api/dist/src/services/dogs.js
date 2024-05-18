@@ -16,11 +16,7 @@ exports.fetchDogs = void 0;
 const dog_1 = __importDefault(require("../models/dog"));
 function fetchDogs() {
     return __awaiter(this, void 0, void 0, function* () {
-        // const dogs = await Dog.aggregate([{ $sample: { size: 50 } }]);
-        // get all 335 dogs
-        // const dogs = await Dog.find({});
-        // get all dogs after 165
-        const dogs = yield dog_1.default.find({}).skip(310);
+        const dogs = yield dog_1.default.aggregate([{ $sample: { size: 60 } }]);
         return dogs;
     });
 }

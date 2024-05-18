@@ -74,6 +74,7 @@ const DogsPage = () => {
   }, []);
 
   const handleNext = async () => {
+    console.log(currentDog);
     if (currentIndex === dogData.length - 1) {
       setEndOfTest(true);
       dispatch(incrementFieldAsync({ field: "completed", increment: 1 }));
@@ -130,7 +131,7 @@ const DogsPage = () => {
     let sbt = currentDogHasSbt && userSelectedSbt ? currentDog.sbt : 0;
     let ab = currentDogHasAb && userSelectedAb ? currentDog.ab : 0;
 
-    let guessRangeStart = userSelectedPercentage - 5;
+    let guessRangeStart = userSelectedPercentage - 10;
 
     let correctGuess = apbt + ast + sbt + ab >= guessRangeStart ? 1 : 0;
 
@@ -180,7 +181,7 @@ const DogsPage = () => {
     let sbt = currentDogHasSbt && userSelectedSbt ? currentDog.sbt : 0;
     let ab = currentDogHasAb && userSelectedAb ? currentDog.ab : 0;
 
-    let guessRangeStart = userSelectedPercentage - 5;
+    let guessRangeStart = userSelectedPercentage - 10;
 
     let correctGuess = apbt + ast + sbt + ab < guessRangeStart ? 1 : 0;
 
@@ -237,7 +238,7 @@ const DogsPage = () => {
                         image && (
                           <img
                             key={index}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover scale-x-[-1]"
                             src={require(`../../assets/images/dogs/${currentDog.dir}/${image}`)}
                           />
                         )
@@ -249,7 +250,7 @@ const DogsPage = () => {
                 <div className="flex flex-col justify-center h-full">
                   <div>
                     <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
-                      {currentIndex + 1} / 50
+                      {currentIndex + 1} / 60
                     </h6>
                     <div className="mb-6">
                       <div className="relative flex items-center justify-center gap-2 mb-4">
