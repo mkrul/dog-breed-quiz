@@ -161,9 +161,9 @@ const ResultsPage = () => {
               {!showDogs ? "View" : "Hide"} incorrect guesses
             </button>
           )}
-          <div>
+          <div className="w-full">
             {showDogs && (
-              <div className="inline-flex justify-center">
+              <div className="inline-flex justify-center w-full">
                 {loading ? (
                   <div className="mt-3 w-full p-5">
                     <CircularProgress />
