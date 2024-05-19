@@ -52,7 +52,7 @@ const DogsPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:5000/api/dogs");
+        const response = await fetch(`${process.env.DOMAIN_URL}:5000/api/dogs`);
         const res = await response.json();
         setDogData(res.data);
         setLoading(false);
@@ -85,7 +85,7 @@ const DogsPage = () => {
 
   const handleSaveUserData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/user", {
+      const response = await fetch(`${process.env.DOMAIN_URL}:5000/api/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

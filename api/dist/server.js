@@ -23,7 +23,7 @@ const conn_1 = __importDefault(require("./db/conn"));
             conn_1.default.on("connected", function () {
                 console.log("Connected to MongoDB");
             });
-            console.log(`Server started at http://localhost:${port}`);
+            console.log(`Server started at ${validateEnv_1.default.DOMAIN_URL}:${port}`);
         });
     }
     catch (err) {

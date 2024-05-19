@@ -11,6 +11,7 @@ config({
 
 const env = cleanEnv(process.env, {
   MONGO_DB_URI: str(),
+  DOMAIN_URL: str(),
   NODE_ENV: str(),
   PORT: port(),
 });

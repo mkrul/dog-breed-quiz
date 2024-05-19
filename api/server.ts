@@ -11,7 +11,7 @@ import db from "./db/conn";
       db.on("connected", function () {
         console.log("Connected to MongoDB");
       });
-      console.log(`Server started at http://localhost:${port}`);
+      console.log(`Server started at ${env.DOMAIN_URL}:${port}`);
     });
   } catch (err) {
     const error = new Error("Request failed");

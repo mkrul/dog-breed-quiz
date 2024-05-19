@@ -49,7 +49,7 @@ const ResultsPage = () => {
   const fetchAllUserData = async () => {
     try {
       setLoadingBreakdown(true);
-      const response = await fetch("http://localhost:5000/api/users");
+      const response = await fetch(`${process.env.DOMAIN_URL}:5000/api/users`);
       response.json().then((res) => {
         const breakdown = res.data as Breakdown;
         setLoadingBreakdown(false);
