@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist ",
     "start": "npm-run-all clean --parallel watch:build watch:server --print-label",
     "watch": "tsc --watch",
     "build": "nodemon './dist/index.js' && tsc && --watch './dist'",
