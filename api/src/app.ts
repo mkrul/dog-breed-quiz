@@ -19,7 +19,6 @@ app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
   next();
 })
-
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
