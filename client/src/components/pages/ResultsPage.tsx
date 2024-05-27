@@ -51,7 +51,7 @@ const ResultsPage = () => {
       setLoadingBreakdown(true);
       const domain_url =
         process.env.NODE_ENV === "production"
-          ? "https://www.banthisbreed.com"
+          ? "https://ban-this-breed-b3bc9b835a36.herokuapp.com"
           : "http://localhost";
       const response = await fetch(`${domain_url}:5000/api/users`);
       response.json().then((res) => {
