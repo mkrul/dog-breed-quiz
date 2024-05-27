@@ -49,7 +49,11 @@ const ResultsPage = () => {
   const fetchAllUserData = async () => {
     try {
       setLoadingBreakdown(true);
-      const response = await fetch(`${process.env.DOMAIN_URL}:5000/api/users`);
+      const domain_url =
+        process.env.NODE_ENV === "production"
+          ? "https://www.banthisbreed.com"
+          : "http://localhost";
+      const response = await fetch(`${domain_url}:5000/api/users`);
       response.json().then((res) => {
         const breakdown = res.data as Breakdown;
         setLoadingBreakdown(false);

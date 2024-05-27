@@ -507,10 +507,11 @@
     "dir": "043",
     "images": [
       "1.jpg",
-      "2.jpg"
+      "2.jpg",
+      "3.jpg"
     ],
-    "apbt": 0,
-    "ast": 0,
+    "apbt": 62,
+    "ast": 13,
     "sbt": 0,
     "ab": 0
   },
@@ -554,9 +555,10 @@
     "dir": "047",
     "images": [
       "1.jpg",
-      "2.jpg"
+      "2.jpg",
+      "3.jpg"
     ],
-    "apbt": 14,
+    "apbt": 21,
     "ast": 0,
     "sbt": 0,
     "ab": 0
@@ -709,9 +711,10 @@
     "dir": "060",
     "images": [
       "1.jpg",
-      "2.jpg"
+      "2.jpg",
+      "3.jpg"
     ],
-    "apbt": 0,
+    "apbt": 100,
     "ast": 0,
     "sbt": 0,
     "ab": 0
