@@ -132,7 +132,7 @@ const DnaPage = () => {
                                 Attention
                               </h2>
                               <Typography className="mb-4 mt-3">
-                                You will now be shown 50 random dogs to
+                                You will now be shown 60 random dogs to
                                 identify. Once you begin the test, you will{" "}
                                 <strong>not</strong> be able to modify your
                                 settings.

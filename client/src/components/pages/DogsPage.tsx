@@ -13,6 +13,8 @@ import {
   updateSelectionsAsync,
   updateUserAccuracyAsync,
 } from "../../redux/features/resultsSlice";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage } from "@cloudinary/react";
 
 const DogsPage = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +25,7 @@ const DogsPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showFinalLoading, setShowFinalLoading] = useState(false);
   const [endOfTest, setEndOfTest] = useState(false);
+  const [imagesLoading, setImagesLoading] = useState(false);
 
   const userData = useSelector((state: RootState) => state.user);
   const breedData = useSelector((state: RootState) => state.breeds);
@@ -73,8 +76,27 @@ const DogsPage = () => {
     };
   }, []);
 
+  const renderImages = (currentDog: Dog) => {
+    const cld = new Cloudinary({
+      cloud: { cloudName: "dtyadd1w5" },
+    });
+
+    const images = currentDog.images.map((image, index) => {
+      const img = cld
+        .image(`${currentDog.dir}/${currentDog.images[index]}`)
+        .format("auto") // Optimize delivery by resizing and applying auto-format and auto-quality
+        .quality("auto");
+      return (
+        <div key={index}>
+          <AdvancedImage cldImg={img} />
+        </div>
+      );
+    });
+
+    return images;
+  };
+
   const handleNext = async () => {
-    console.log(currentDog);
     if (currentIndex === dogData.length - 1) {
       setEndOfTest(true);
       dispatch(incrementFieldAsync({ field: "completed", increment: 1 }));
@@ -111,6 +133,7 @@ const DogsPage = () => {
   };
 
   const handleAnswerYes = async () => {
+    setImagesLoading(true);
     const selectedBreeds = breedData.filter((breed) => breed.selected);
 
     let currentDogHasApbt = currentDog.apbt > 0;
@@ -161,6 +184,7 @@ const DogsPage = () => {
   };
 
   const handleAnswerNo = async () => {
+    setImagesLoading(true);
     const selectedBreeds = breedData.filter((breed) => breed.selected);
 
     let currentDogHasApbt = currentDog.apbt > 0;
@@ -232,18 +256,13 @@ const DogsPage = () => {
             <div className="flex flex-wrap -m-5">
               <div className="w-full md:w-1/2 p-5">
                 <div className="overflow-hidden rounded-2xl">
-                  <Carousel>
-                    {currentDog.images.map(
-                      (image, index) =>
-                        image && (
-                          <img
-                            key={index}
-                            className="w-full h-full object-cover scale-x-[-1]"
-                            src={require(`../../assets/images/dogs/${currentDog.dir}/${image}`)}
-                          />
-                        )
-                    )}
-                  </Carousel>
+                  {!imagesLoading ? (
+                    <Carousel showThumbs={false}>
+                      {renderImages(currentDog)}
+                    </Carousel>
+                  ) : (
+                    <CircularProgress />
+                  )}
                 </div>
               </div>
               <div className="w-full md:w-1/2 p-5">
