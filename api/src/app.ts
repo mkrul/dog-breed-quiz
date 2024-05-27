@@ -13,15 +13,12 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname + "/public"));
 // set content security policy to allow loading of scripts and css from same origin
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
   next();
 })
-app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
 
 app.use(express.json());
 app.use(bodyParser.json());
