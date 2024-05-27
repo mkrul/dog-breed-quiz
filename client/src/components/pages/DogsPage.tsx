@@ -74,7 +74,6 @@ const DogsPage = () => {
   }, []);
 
   const handleNext = async () => {
-    console.log(currentDog);
     if (currentIndex === dogData.length - 1) {
       setEndOfTest(true);
       dispatch(incrementFieldAsync({ field: "completed", increment: 1 }));

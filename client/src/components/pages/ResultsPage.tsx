@@ -94,7 +94,6 @@ const ResultsPage = () => {
           img.src = `/assets/images/dogs/${selection.dir}/${selection.image}`;
           img.onload = () => {
             loadedImages++;
-            console.log(`Loaded ${img.src}`);
             if (loadedImages === incorrectGuesses.length) {
               setLoading(false);
             }
