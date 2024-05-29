@@ -14,7 +14,8 @@ const app = express();
 
 app.use(cors());
 console.log("dirname: ", __dirname);
-app.use(express.static(__dirname + "/public"));
+// app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.resolve('client/build')))
 // set content security policy to allow loading of scripts and css from same origin
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");

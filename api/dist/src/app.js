@@ -29,6 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const path_1 = __importDefault(require("path"));
 const AboutRoutes = __importStar(require("./routes/about"));
 const ResultsRoutes = __importStar(require("./routes/results"));
 const TestRoutes = __importStar(require("./routes/test"));
@@ -38,7 +39,8 @@ const cors = require("cors");
 const app = (0, express_1.default)();
 app.use(cors());
 console.log("dirname: ", __dirname);
-app.use(express_1.default.static(__dirname + "/public"));
+// app.use(express.static(__dirname + "/public"));
+app.use(express_1.default.static(path_1.default.resolve('client/build')));
 // set content security policy to allow loading of scripts and css from same origin
 app.use((req, res, next) => {
     res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
