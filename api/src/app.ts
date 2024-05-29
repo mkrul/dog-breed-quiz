@@ -14,6 +14,11 @@ const app = express();
 
 app.use(cors());
 app.use(express.static(path.resolve('client/build')))
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve('client/build', 'index.html'));
+  });
+};
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
   next();

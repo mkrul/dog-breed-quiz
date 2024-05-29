@@ -39,6 +39,12 @@ const cors = require("cors");
 const app = (0, express_1.default)();
 app.use(cors());
 app.use(express_1.default.static(path_1.default.resolve('client/build')));
+if (process.env.NODE_ENV === 'production') {
+    app.get('*', (req, res) => {
+        res.sendFile(path_1.default.resolve('client/build', 'index.html'));
+    });
+}
+;
 app.use((req, res, next) => {
     res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
     next();
