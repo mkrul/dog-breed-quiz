@@ -10,6 +10,7 @@ export type BreakdownType = {
   proCount: number;
   moderateCount: number;
   antiCount: number;
+  allUsersAccuracy: number;
   proApbtCount: number;
   proApbtAccuracy: number;
   proMultiCount: number;
@@ -32,6 +33,7 @@ const breakdownSchema = new Schema({
   proCount: { type: Number, default: 0 },
   moderateCount: { type: Number, default: 0 },
   antiCount: { type: Number, default: 0 },
+  allUsersAccuracy: { type: Number, default: 0 },
   proApbtCount: { type: Number, default: 0 },
   proApbtAccuracy: { type: Number, default: 0 },
   proMultiCount: { type: Number, default: 0 },

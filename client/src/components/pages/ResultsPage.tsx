@@ -23,6 +23,7 @@ const ResultsPage = () => {
   const [modCount, setModerateCount] = useState(0);
   const [antiCount, setAntiCount] = useState(0);
   const [proApbtCount, setProApbtCount] = useState(0);
+  const [allUsersAccuracy, setAllUsersAccuracy] = useState(0);
   const [proApbtAccuracy, setProApbtAccuracy] = useState(0);
   const [proMultiCount, setProMultiCount] = useState(0);
   const [proMultiAccuracy, setProMultiAccuracy] = useState(0);
@@ -146,12 +147,18 @@ const ResultsPage = () => {
               </p>
               <p className="mb-5">
                 The average accuracy for all participants is currently{" "}
-                <span className="font-bold">45.3%</span>
+                <span className="font-bold">
+                  {allUsersAccuracy > 0
+                    ? `${allUsersAccuracy.toFixed(1)}%`
+                    : "0%"}
+                </span>
               </p>
               <p className="mb-5">
                 Your overall accuracy was{" "}
                 <span className="font-bold">
-                  {resultData.userAccuracy.toFixed(1)}%
+                  {resultData.userAccuracy > 0
+                    ? `${resultData.userAccuracy.toFixed(1)}%`
+                    : "0%"}
                 </span>
               </p>
             </div>

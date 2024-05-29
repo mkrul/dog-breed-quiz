@@ -34,6 +34,9 @@ function fetchUsers() {
         const proCount = proUsers.length;
         const moderateCount = moderateUsers.length;
         const antiCount = antiUsers.length;
+        // get average accuracy of all users
+        const allUsers = yield user_1.default.find();
+        const allUsersAccuracy = allUsers.reduce((acc, user) => acc + user.accuracy, 0) / allUsers.length;
         // get count of "pro" alignment users who selected "apbt" as the only breed
         const proApbtCount = proUsers.filter((user) => user.breeds.length === 1 && user.breeds[0].label === "apbt").length;
         // get average accuracy of "pro" alignment users who selected "apbt" as the only breed
@@ -78,6 +81,7 @@ function fetchUsers() {
             proCount,
             moderateCount,
             antiCount,
+            allUsersAccuracy,
             proApbtCount,
             proApbtAccuracy,
             proMultiCount,
