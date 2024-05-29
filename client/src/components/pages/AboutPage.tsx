@@ -63,8 +63,9 @@ const AboutPage: React.FC = () => {
                       This test is designed to measure how accurately pit bulls
                       can be identified based on observed physical
                       characteristics. The assessment relies on how individual
-                      participants categorize pit bulls, as well as DNA test
-                      results.
+                      participants classify pit bulls according to breed makeup,
+                      as well as the amount of pit bull DNA present in a dog's
+                      genetic profile.
                     </div>
                   )}
                 </div>
