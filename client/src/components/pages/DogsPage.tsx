@@ -55,8 +55,8 @@ const DogsPage = () => {
         const domain_url =
           process.env.NODE_ENV === "production"
             ? "https://ban-this-breed-b3bc9b835a36.herokuapp.com"
-            : "http://localhost";
-        const response = await fetch(`${domain_url}:5000/api/dogs`);
+            : "http://localhost:5000";
+        const response = await fetch(`${domain_url}/api/dogs`);
         const res = await response.json();
         setDogData(res.data);
         setLoading(false);
@@ -91,8 +91,8 @@ const DogsPage = () => {
       const domain_url =
         process.env.NODE_ENV === "production"
           ? "https://ban-this-breed-b3bc9b835a36.herokuapp.com"
-          : "http://localhost";
-      const response = await fetch(`${domain_url}:5000/api/user`, {
+          : "http://localhost:5000";
+      const response = await fetch(`${domain_url}/api/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
