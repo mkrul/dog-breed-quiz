@@ -78,7 +78,7 @@ const AboutPage: React.FC = () => {
                   {divVisibility["q3"] && (
                     <div className="mt-5 text-left">
                       Data used in this assessment were gathered at random from
-                      public sources . Some of the companies that provide DNA
+                      public sources. Some of the companies that provide DNA
                       testing services for dogs include{" "}
                       <a href="https://shop.embarkvet.com" target="_blank">
                         Embark
@@ -94,7 +94,7 @@ const AboutPage: React.FC = () => {
                       , and{" "}
                       <a href="https://www.orivet.com/" target="_blank">
                         Orivet
-                      </a>{" "}
+                      </a>
                       . Because Embark is widely considered to be the most
                       accurate DNA test kit for dogs, this project will use
                       Embark's results to compare against visual breed

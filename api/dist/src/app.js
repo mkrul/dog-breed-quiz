@@ -29,7 +29,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const path_1 = __importDefault(require("path"));
 const AboutRoutes = __importStar(require("./routes/about"));
 const ResultsRoutes = __importStar(require("./routes/results"));
 const TestRoutes = __importStar(require("./routes/test"));
@@ -38,13 +37,8 @@ const DogsRoutes = __importStar(require("./routes/dogs"));
 const cors = require("cors");
 const app = (0, express_1.default)();
 app.use(cors());
-// app.use(express.static(__dirname + "/public"));
-// if (process.env.NODE_ENV === 'production') {
-app.use(express_1.default.static(path_1.default.join(__dirname, 'client', 'build')));
-app.get('*', (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, 'client', 'build', 'index.html'));
-});
-// }
+console.log("dirname: ", __dirname);
+app.use(express_1.default.static(__dirname + "/public"));
 // set content security policy to allow loading of scripts and css from same origin
 app.use((req, res, next) => {
     res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
