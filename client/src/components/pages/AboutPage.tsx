@@ -96,9 +96,9 @@ const AboutPage: React.FC = () => {
                       <a href="https://www.orivet.com/" target="_blank">
                         Orivet
                       </a>
-                      . Because Embark is widely considered to be the most
-                      accurate DNA test kit for dogs, this project will use
-                      Embark's results to compare against visual breed
+                      . Because Embark is widely considered to be one of the
+                      most accurate DNA test kits for dogs, this project will
+                      use Embark's results to compare against visual breed
                       identifications.
                     </div>
                   )}
