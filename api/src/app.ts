@@ -9,7 +9,6 @@ import * as UserRoutes from "./routes/user";
 import * as DogsRoutes from "./routes/dogs";
 
 const cors = require("cors");
-
 const app = express();
 
 app.use(express.json());
@@ -37,6 +36,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
   next();
