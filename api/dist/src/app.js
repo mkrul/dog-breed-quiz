@@ -37,6 +37,7 @@ const UserRoutes = __importStar(require("./routes/user"));
 const DogsRoutes = __importStar(require("./routes/dogs"));
 const cors = require("cors");
 const app = (0, express_1.default)();
+app.use(express_1.default.static(path_1.default.resolve('client/build')));
 app.use(express_1.default.json());
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
@@ -45,9 +46,7 @@ app.use(DogsRoutes.router);
 app.use(ResultsRoutes.router);
 app.use(TestRoutes.router);
 app.use(UserRoutes.router);
-// app.use(express.static(path.resolve('client/build')))
 if (process.env.NODE_ENV === 'production') {
-    app.use(express_1.default.static('client/build'));
     app.get('*', (req, res) => {
         res.sendFile(path_1.default.resolve(__dirname, 'client', 'build', 'index.html'));
     });
