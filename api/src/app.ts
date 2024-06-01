@@ -12,7 +12,26 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(cors());
+const origin = process.env.NODE_ENV === 'production' ? 'https://ban-this-breed-b3bc9b835a36.herokuapp.com' : 'http://localhost:3000';
+const corsOptions = {
+  origin,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+app.use((req, res, next) => {
+  res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
+  next();
+})
+
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,23 +41,5 @@ app.use(DogsRoutes.router);
 app.use(ResultsRoutes.router);
 app.use(TestRoutes.router);
 app.use(UserRoutes.router);
-
-// Static files
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.resolve(__dirname, "client", "build")));
-
-  // Serve the React application on all other requests
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
-
-app.use((req, res, next) => {
-  res.setHeader(
-    "Content-Security-Policy",
-    "script-src 'self'; style-src 'self'"
-  );
-  next();
-});
 
 export default app;
