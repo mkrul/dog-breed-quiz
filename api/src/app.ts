@@ -19,6 +19,15 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// app.use(express.static(path.resolve('client/build')))
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
   next();
@@ -33,13 +42,5 @@ app.use(DogsRoutes.router);
 app.use(ResultsRoutes.router);
 app.use(TestRoutes.router);
 app.use(UserRoutes.router);
-
-// app.use(express.static(path.resolve('client/build')))
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
 
 export default app;
