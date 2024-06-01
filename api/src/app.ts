@@ -9,10 +9,10 @@ import * as UserRoutes from "./routes/user";
 import * as DogsRoutes from "./routes/dogs";
 
 const cors = require("cors");
+
 const app = express();
 
-app.use(express.static(path.resolve('client/build')))
-
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,23 +23,22 @@ app.use(ResultsRoutes.router);
 app.use(TestRoutes.router);
 app.use(UserRoutes.router);
 
-if (process.env.NODE_ENV === 'production') {
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+// Static files
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.resolve(__dirname, "client", "build")));
+
+  // Serve the React application on all other requests
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 
-const origin = process.env.NODE_ENV === 'production' ? 'https://ban-this-breed-b3bc9b835a36.herokuapp.com' : 'http://localhost:3000';
-const corsOptions = {
-  origin,
-  optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
-
 app.use((req, res, next) => {
-  res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
+  res.setHeader(
+    "Content-Security-Policy",
+    "script-src 'self'; style-src 'self'"
+  );
   next();
-})
+});
 
 export default app;
