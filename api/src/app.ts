@@ -12,13 +12,22 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(cors());
-app.use(express.static(path.resolve('client/build')))
+const origin = process.env.NODE_ENV === 'production' ? 'https://ban-this-breed-b3bc9b835a36.herokuapp.com' : 'http://localhost:3000';
+const corsOptions = {
+  origin,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
+// app.use(express.static(path.resolve('client/build')))
 if (process.env.NODE_ENV === 'production') {
-  app.get('/', (req, res) => {
-    res.sendFile(path.resolve('client/build', 'index.html'));
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 };
+
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
   next();
