@@ -28,11 +28,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 };
 
-app.use((req, res, next) => {
-  res.setHeader("Content-Security-Policy", "script-src 'self'; style-src 'self'");
-  next();
-})
-
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
