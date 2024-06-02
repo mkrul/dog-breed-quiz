@@ -3,13 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { useSelector } from "react-redux";
 import Slider from "@mui/material/Slider";
-import Checkbox from "@mui/material/Checkbox";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import { Settings } from "../../interfaces/settings";
 import { Modal, Box, Typography } from "@mui/material";
 import { setPercentageAction } from "../../redux/features/settingSlice";
-import "../../assets/main.css";
 
 const DnaPage = () => {
   const [showModal, setShowModal] = useState(false);

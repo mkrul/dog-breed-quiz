@@ -10,7 +10,6 @@ import {
   removeBreedAction,
 } from "../../redux/features/breedSlice";
 import { RootState } from "../../redux/store";
-import "../../assets/main.css";
 
 const BreedsPage = () => {
   const dispatch = useAppDispatch();
