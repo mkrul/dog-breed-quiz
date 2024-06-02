@@ -42,12 +42,9 @@ app.use(DogsRoutes.router);
 app.use(ResultsRoutes.router);
 app.use(UserRoutes.router);
 // Serve static files from the React app build directory
-if (process.env.NODE_ENV === 'production') {
-    app.use(express_1.default.static('client/build'));
-    // This route configuration must come after all other API and middleware routes
-    app.get('*', (req, res) => {
-        res.sendFile(path_1.default.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-}
-;
+app.use(express_1.default.static('client/build'));
+// This route configuration must come after all other API and middleware routes
+app.get('*', (req, res) => {
+    res.sendFile(path_1.default.resolve(__dirname, 'client', 'build', 'index.html'));
+});
 exports.default = app;

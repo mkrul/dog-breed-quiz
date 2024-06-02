@@ -43,7 +43,7 @@ const DogsPage = () => {
       handleSaveUserData();
       setTimeout(() => {
         setShowFinalLoading(false);
-        navigate("/results");
+        navigate("/test/results");
       }, 1000);
     }
   }, [resultData]);
