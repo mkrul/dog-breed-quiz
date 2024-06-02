@@ -13,6 +13,7 @@ import {
   updateSelectionsAsync,
   updateUserAccuracyAsync,
 } from "../../redux/features/resultsSlice";
+import "../../assets/main.css";
 
 const DogsPage = () => {
   const dispatch = useAppDispatch();

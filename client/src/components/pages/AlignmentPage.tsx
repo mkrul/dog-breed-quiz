@@ -6,6 +6,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { setAlignmentAction } from "../../redux/features/settingSlice";
 import { Settings } from "../../interfaces/settings";
+import "../../assets/main.css";
 
 const AlignmentPage = () => {
   const dispatch = useAppDispatch();

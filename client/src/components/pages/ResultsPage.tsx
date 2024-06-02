@@ -9,6 +9,7 @@ import { Result } from "../../interfaces/result";
 import { Selection } from "../../interfaces/selection";
 import { CircularProgress } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "../../assets/main.css";
 
 const ResultsPage = () => {
   const [showDogs, setShowDogs] = useState(false);

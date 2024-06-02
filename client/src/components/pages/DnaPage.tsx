@@ -9,6 +9,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { Settings } from "../../interfaces/settings";
 import { Modal, Box, Typography } from "@mui/material";
 import { setPercentageAction } from "../../redux/features/settingSlice";
+import "../../assets/main.css";
 
 const DnaPage = () => {
   const [showModal, setShowModal] = useState(false);
