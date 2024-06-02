@@ -50,7 +50,7 @@ app.use(UserRoutes.router);
 if (process.env.NODE_ENV === 'production') {
     app.use(express_1.default.static('client/build'));
     app.get('*', (req, res) => {
-        res.sendFile(path_1.default.resolve(__dirname, 'client', 'build', 'index.html'));
+        res.sendFile(path_1.default.join(__dirname, 'client', 'build', 'index.html'));
     });
 }
 ;
