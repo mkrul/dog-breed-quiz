@@ -31,26 +31,21 @@ const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const AboutRoutes = __importStar(require("./routes/about"));
 const ResultsRoutes = __importStar(require("./routes/results"));
-const TestRoutes = __importStar(require("./routes/test"));
 const UserRoutes = __importStar(require("./routes/user"));
 const DogsRoutes = __importStar(require("./routes/dogs"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-const cors = require("cors");
-const origin = process.env.NODE_ENV === 'production' ? 'https://ban-this-breed-b3bc9b835a36.herokuapp.com' : 'http://localhost:3000';
-app.use(cors({
-    origin: origin,
-    optionsSuccessStatus: 200
-}));
+// const origin = process.env.NODE_ENV === 'production' ? 'https://ban-this-breed-b3bc9b835a36.herokuapp.com' : 'http://localhost:3000';
+app.use((0, cors_1.default)());
 app.use(AboutRoutes.router);
 app.use(DogsRoutes.router);
 app.use(ResultsRoutes.router);
-app.use(TestRoutes.router);
 app.use(UserRoutes.router);
 // app.use(express.static(path.resolve('client/build')))
 if (process.env.NODE_ENV === 'production') {
     app.use(express_1.default.static('client/build'));
     app.get('*', (req, res) => {
-        res.sendFile(path_1.default.join(__dirname, 'client', 'build', 'index.html'));
+        res.sendFile(path_1.default.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
 ;
