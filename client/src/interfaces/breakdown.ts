@@ -7,6 +7,7 @@ export interface Breakdown {
   proCount: number;
   moderateCount: number;
   antiCount: number;
+  allUsersAccuracy: number;
   proApbtCount: number;
   proApbtAccuracy: number;
   proMultiCount: number;

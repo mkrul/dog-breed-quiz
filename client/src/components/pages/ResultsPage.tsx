@@ -77,6 +77,7 @@ const ResultsPage = () => {
         setAntiApbtAccuracy(breakdown.antiApbtAccuracy);
         setAntiMultiCount(breakdown.antiMultiCount);
         setAntiMultiAccuracy(breakdown.antiMultiAccuracy);
+        setAllUsersAccuracy(breakdown.allUsersAccuracy);
         setTopUsers(breakdown.topUsers);
       });
     } catch (error) {
