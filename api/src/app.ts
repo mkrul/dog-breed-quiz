@@ -11,16 +11,13 @@ const app = express();
 
 app.use(cors());
 
-// Register API routes before the static files middleware
 app.use(AboutRoutes.router);
 app.use(DogsRoutes.router);
 app.use(ResultsRoutes.router);
 app.use(UserRoutes.router);
 
-// Serve static files from the React app build directory
 app.use(express.static('client/build'));
 
-// This route configuration must come after all other API and middleware routes
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
