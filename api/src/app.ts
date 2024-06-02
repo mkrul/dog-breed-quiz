@@ -1,6 +1,5 @@
 import "dotenv/config";
 import express from "express";
-import bodyParser from "body-parser";
 import path from "path";
 import * as AboutRoutes from "./routes/about";
 import * as ResultsRoutes from "./routes/results";
@@ -11,18 +10,19 @@ import cors from "cors";
 
 const app = express();
 
-// const origin = process.env.NODE_ENV === 'production' ? 'https://ban-this-breed-b3bc9b835a36.herokuapp.com' : 'http://localhost:3000';
-
 app.use(cors());
 
+// Register API routes before the static files middleware
 app.use(AboutRoutes.router);
 app.use(DogsRoutes.router);
 app.use(ResultsRoutes.router);
 app.use(UserRoutes.router);
 
-// app.use(express.static(path.resolve('client/build')))
+// Serve static files from the React app build directory
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
+
+  // This route configuration must come after all other API and middleware routes
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });

@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GET /results
 router.get("/results", (req: Request, res: Response) => {
-  res.send("Results page");
+  res.json({ message: "GET /results" });
 });
 
 export { router };

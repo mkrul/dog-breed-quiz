@@ -9,5 +9,5 @@ const router = express_1.default.Router();
 exports.router = router;
 // GET /results
 router.get("/results", (req, res) => {
-    res.send("Results page");
+    res.json({ message: "GET /results" });
 });

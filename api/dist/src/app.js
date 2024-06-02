@@ -35,15 +35,16 @@ const UserRoutes = __importStar(require("./routes/user"));
 const DogsRoutes = __importStar(require("./routes/dogs"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-// const origin = process.env.NODE_ENV === 'production' ? 'https://ban-this-breed-b3bc9b835a36.herokuapp.com' : 'http://localhost:3000';
 app.use((0, cors_1.default)());
+// Register API routes before the static files middleware
 app.use(AboutRoutes.router);
 app.use(DogsRoutes.router);
 app.use(ResultsRoutes.router);
 app.use(UserRoutes.router);
-// app.use(express.static(path.resolve('client/build')))
+// Serve static files from the React app build directory
 if (process.env.NODE_ENV === 'production') {
     app.use(express_1.default.static('client/build'));
+    // This route configuration must come after all other API and middleware routes
     app.get('*', (req, res) => {
         res.sendFile(path_1.default.resolve(__dirname, 'client', 'build', 'index.html'));
     });
