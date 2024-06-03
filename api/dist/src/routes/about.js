@@ -9,5 +9,5 @@ const router = express_1.default.Router();
 exports.router = router;
 // GET /about
 router.get("/about", (req, res) => {
-    res.redirect(301, '/about');
+    res.render("about", { title: "About" });
 });
