@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GET /about
 router.get("/about", (req: Request, res: Response) => {
-  res.render("about", { title: "About" });
+  res.send("About page");
 });
 
 export { router };

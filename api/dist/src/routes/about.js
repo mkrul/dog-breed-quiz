@@ -9,5 +9,5 @@ const router = express_1.default.Router();
 exports.router = router;
 // GET /about
 router.get("/about", (req, res) => {
-    res.render("about", { title: "About" });
+    res.send("About page");
 });
