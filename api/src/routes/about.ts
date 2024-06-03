@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GET /about
 router.get("/about", (req: Request, res: Response) => {
-  res.send("About page");
+  res.redirect(301, '/about');
 });
 
 export { router };
