@@ -34,7 +34,13 @@ const ResultsRoutes = __importStar(require("./routes/results"));
 const UserRoutes = __importStar(require("./routes/user"));
 const DogsRoutes = __importStar(require("./routes/dogs"));
 const cors_1 = __importDefault(require("cors"));
+const crypto_1 = __importDefault(require("crypto"));
 const app = (0, express_1.default)();
+app.use((req, res, next) => {
+    res.locals.nonce = crypto_1.default.randomBytes(16).toString('base64');
+    res.setHeader("Content-Security-Policy", `default-src 'self'; script-src 'self' 'nonce-${res.locals.nonce}';`);
+    next();
+});
 app.use((0, cors_1.default)());
 app.use(AboutRoutes.router);
 app.use(DogsRoutes.router);
