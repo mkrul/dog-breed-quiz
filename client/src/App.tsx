@@ -1,20 +1,8 @@
-import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import "bulma/css/bulma.min.css";
-import "./App.css";
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/AboutPage";
-import ResultsPage from "./components/pages/ResultsPage";
-import BreedsPage from "./components/pages/BreedsPage";
-import DnaPage from "./components/pages/DnaPage";
-import AlignmentPage from "./components/pages/AlignmentPage";
-import DogsPage from "./components/pages/DogsPage";
 
 const theme = createTheme({
   palette: {
@@ -49,26 +37,19 @@ const theme = createTheme({
   },
 });
 
-function App() {
+const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className="App">
-        <Router>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/test/results" element={<ResultsPage />} />
-            <Route path="/test/alignment" element={<AlignmentPage />} />
-            <Route path="/test/breeds" element={<BreedsPage />} />
-            <Route path="/test/dna" element={<DnaPage />} />
-            <Route path="/test/dogs" element={<DogsPage />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       </div>
     </ThemeProvider>
   );
-}
+};
 
 export default App;
