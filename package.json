@@ -7,10 +7,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build:client": "cd client && npm run build",
-    "build:server": "tsc -p api",
-    "build": "npm run build:client && npm run build:server",
-    "start": "node -r @babel/register api/babel-register.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./api/dist/server.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "postinstall": "cd client && npm install && npm run build"
   },
@@ -19,12 +17,7 @@
   },
   "homepage": "https://github.com/mkrul/ban-this-breed#readme",
   "dependencies": {
-    "@babel/core": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
     "autoprefixer": "^10.4.19",
-    "babel-plugin-module-resolver": "^5.0.2",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",

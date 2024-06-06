@@ -12,4 +12,3 @@ api/dist/production.env
 client/dist/development.env
 client/dist/staging.env
 client/dist/production.env
-node_modules
