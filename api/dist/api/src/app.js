@@ -28,6 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 const express_1 = __importDefault(require("express"));
+const path_1 = __importDefault(require("path"));
 const AboutRoutes = __importStar(require("./routes/about"));
 const ResultsRoutes = __importStar(require("./routes/results"));
 const UserRoutes = __importStar(require("./routes/user"));
@@ -36,12 +37,14 @@ const cors_1 = __importDefault(require("cors"));
 const crypto_1 = __importDefault(require("crypto"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
 app.use(AboutRoutes.router);
 app.use(DogsRoutes.router);
 app.use(ResultsRoutes.router);
 app.use(UserRoutes.router);
+app.use(express_1.default.static("client/build"));
+app.get("*", (req, res) => {
+    res.sendFile(path_1.default.resolve(__dirname, "client", "build", "index.html"));
+});
 app.use((req, res, next) => {
     res.locals.nonce = crypto_1.default.randomBytes(16).toString("base64");
     res.setHeader("Content-Security-Policy", `default-src 'self'; script-src 'self' 'nonce-${res.locals.nonce}';`);
