@@ -8,7 +8,8 @@ interface CircleProps {
 const Circle = ({ buttonId, toggle }: CircleProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = (buttonId: string) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault(); // Prevent the default anchor behavior
     setIsOpen(!isOpen);
     toggle(buttonId);
   };
@@ -33,22 +34,20 @@ const Circle = ({ buttonId, toggle }: CircleProps) => {
   };
 
   return (
-    <button onClick={() => handleClick(buttonId)}>
-      <a
-        className="text-green-100 hover:text-green-200 transition duration-200"
-        href="#"
+    <button
+      onClick={handleClick}
+      className="text-green-100 hover:text-green-200 transition duration-200"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={40}
+        height={40}
+        viewBox="0 0 40 40"
+        fill="none"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={40}
-          height={40}
-          viewBox="0 0 40 40"
-          fill="none"
-        >
-          <circle cx={20} cy={20} r={20} fill="currentColor" />
-          {isOpen ? minusSign() : plusSign()}
-        </svg>
-      </a>
+        <circle cx={20} cy={20} r={20} fill="currentColor" />
+        {isOpen ? minusSign() : plusSign()}
+      </svg>
     </button>
   );
 };
