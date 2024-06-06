@@ -6,6 +6,7 @@ const router = express.Router();
 
 // GET /about
 router.get("/about", (req: Request, res: Response) => {
+  console.log(req)
   return app.render("/about");
 });
 
