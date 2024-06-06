@@ -63,11 +63,19 @@ const DnaPage = () => {
                 />
                 <div className="mt-4 text-sm">
                   Photo by{" "}
-                  <a href="https://www.pinterest.com/workingdogsintheworld/">
+                  <a
+                    href="https://www.pinterest.com/workingdogsintheworld/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Dogs In The World
                   </a>{" "}
                   on{" "}
-                  <a href="https://i.pinimg.com/originals/24/35/63/24356337cf5b07b6c28e76f3806ff2a0.jpg">
+                  <a
+                    href="https://i.pinimg.com/originals/24/35/63/24356337cf5b07b6c28e76f3806ff2a0.jpg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Pinterest
                   </a>
                 </div>

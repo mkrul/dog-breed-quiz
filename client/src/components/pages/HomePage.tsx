@@ -76,11 +76,19 @@ const HomePage = () => {
                 />
                 <div className="mt-4 text-sm">
                   Photo by{" "}
-                  <a href="https://unsplash.com/@pupscruffs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+                  <a
+                    href="https://unsplash.com/@pupscruffs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Katie Bernotsky
                   </a>{" "}
                   on{" "}
-                  <a href="https://unsplash.com/photos/black-and-white-short-coated-dog-on-green-grass-field-during-daytime-47vG88bHW7U?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+                  <a
+                    href="https://unsplash.com/photos/black-and-white-short-coated-dog-on-green-grass-field-during-daytime-47vG88bHW7U?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Unsplash
                   </a>
                 </div>
