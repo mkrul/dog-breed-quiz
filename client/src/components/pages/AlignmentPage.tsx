@@ -107,7 +107,7 @@ const AlignmentPage = () => {
                   </div>
 
                   <div className="flex flex-wrap -m-4 justify-center">
-                    <div className="w-full md:w-auto p-4">
+                    <div className="md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
                           onClick={handleSubmit}
@@ -117,7 +117,7 @@ const AlignmentPage = () => {
                         </button>
                       </p>
                     </div>
-                    <div className="w-full md:w-auto p-4">
+                    <div className="md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
                           onClick={() => navigate("/")}

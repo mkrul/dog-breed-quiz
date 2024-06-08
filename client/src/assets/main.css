@@ -762,6 +762,10 @@ video {
   object-fit: cover;
 }
 
+.p-3 {
+  padding: 0.75rem;
+}
+
 .p-4 {
   padding: 1rem;
 }
@@ -1070,4 +1074,8 @@ video {
     font-size: 5.5rem;
     line-height: 1;
   }
+}
+
+.btn-primary {
+  width: 12rem !important;
 }

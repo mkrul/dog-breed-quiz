@@ -96,7 +96,7 @@ const DnaPage = () => {
                     50%, your answer will be deemed correct because it falls
                     within the 10% buffer range.
                   </p>
-                  <div className="mb-2 ml-6">
+                  <div className="mb-2">
                     <Slider
                       aria-label="percentage"
                       value={selectedPercentage}
@@ -117,7 +117,7 @@ const DnaPage = () => {
                   </div>
 
                   <div className="flex flex-wrap -m-4 justify-center">
-                    <div className="w-full md:w-auto p-4">
+                    <div className="md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
                           onClick={handleOpenModal}
@@ -166,7 +166,7 @@ const DnaPage = () => {
                         )}
                       </p>
                     </div>
-                    <div className="w-full md:w-auto p-4">
+                    <div className="md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
                           onClick={() => navigate("/test/breeds")}

@@ -154,7 +154,7 @@ const BreedsPage = () => {
                     ))}
                   </div>
                   <div className="flex flex-wrap -m-4 justify-center">
-                    <div className="w-full md:w-auto p-4">
+                    <div className="md:w-auto p-4">
                       <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
                           onClick={handleSubmit}
@@ -164,7 +164,7 @@ const BreedsPage = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="w-full md:w-auto p-4">
+                    <div className="md:w-auto p-4">
                       <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
                           onClick={() => navigate("/test/alignment")}

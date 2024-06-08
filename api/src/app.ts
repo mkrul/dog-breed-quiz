@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import path from "path";
+import bodyParser from "body-parser";
 import * as AboutRoutes from "./routes/about";
 import * as ResultsRoutes from "./routes/results";
 import * as UserRoutes from "./routes/user";
@@ -9,6 +10,10 @@ import cors from "cors";
 import crypto from "crypto";
 
 const app = express();
+
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors());
 
