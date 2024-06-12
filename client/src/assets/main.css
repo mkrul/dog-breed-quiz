@@ -762,10 +762,6 @@ video {
   object-fit: cover;
 }
 
-.p-3 {
-  padding: 0.75rem;
-}
-
 .p-4 {
   padding: 1rem;
 }
@@ -1076,6 +1072,33 @@ video {
   }
 }
 
-.btn-primary {
-  width: 12rem !important;
+.col-first {
+  width: 35%;
+}
+
+.carousel .control-prev.control-arrow:before {
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: black;
+  border-left: transparent !important;
+  border-right: 8px solid #000 !important;
+  border-width: 9px;
+  margin-right: 2rem;
+  margin-bottom: 1.15rem;
+}
+
+.carousel .control-next.control-arrow::before {
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: black;
+  border-left: 8px solid #000 !important;
+  border-right: transparent !important;
+  border-width: 9px;
+  margin-left: 2.2rem;
+  margin-bottom: 1.15rem;
+}
+
+.carousel .control-arrow {
+    width: 45px;
+    height: 45px;
 }

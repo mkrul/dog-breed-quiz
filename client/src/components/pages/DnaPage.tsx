@@ -84,17 +84,17 @@ const DnaPage = () => {
             <div className="w-full md:w-1/2 p-5">
               <div className="flex flex-col justify-center h-full">
                 <div>
-                  <h6 className="mb-10 text-4xl font-medium tracking-tight font-heading">
+                  <h6 className="mb-5 text-4xl font-medium tracking-tight font-heading">
                     What percentage of pit bull DNA would you use to classify a
                     dog as a pit bull?
                   </h6>
                   <p className="mb-5 text-xl text-neutral-700 font-medium">
-                    Adjust the slider to select a percentage. The system
-                    includes a 10% courtesy buffer, meaning it considers
-                    selections within 10% of the actual percentage as correct.
-                    For instance, if a dog is 40% American Bully and you select
-                    50%, your answer will be deemed correct because it falls
-                    within the 10% buffer range.
+                    Adjust the slider to select the percentage of "pit bull" DNA
+                    that you would use to consider a dog a pit bull. The system
+                    includes a 10% courtesy buffer, meaning that if a dog is 40%
+                    pit bull and you selected 50% in the slider, your answer
+                    will be deemed correct because it falls within the 10%
+                    buffer range.
                   </p>
                   <div className="mb-2">
                     <Slider
@@ -117,6 +117,16 @@ const DnaPage = () => {
                   </div>
 
                   <div className="flex flex-wrap -m-4 justify-center">
+                    <div className="md:w-auto p-4">
+                      <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
+                        <button
+                          onClick={() => navigate("/test/breeds")}
+                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
+                        >
+                          Back
+                        </button>
+                      </p>
+                    </div>
                     <div className="md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
@@ -164,16 +174,6 @@ const DnaPage = () => {
                             </Box>
                           </Modal>
                         )}
-                      </p>
-                    </div>
-                    <div className="md:w-auto p-4">
-                      <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
-                        <button
-                          onClick={() => navigate("/test/breeds")}
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
-                        >
-                          Back
-                        </button>
                       </p>
                     </div>
                   </div>

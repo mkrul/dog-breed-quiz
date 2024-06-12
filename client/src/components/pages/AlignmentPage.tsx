@@ -60,9 +60,14 @@ const AlignmentPage = () => {
             <div className="w-full md:w-1/2 p-5">
               <div className="flex flex-col justify-center h-full">
                 <div>
-                  <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
+                  <h6 className="mb-5 text-5xl font-medium tracking-tight font-heading">
                     Choose the statement that best aligns with your beliefs
                   </h6>
+                  <p className="mb-5 mt-3 text-xl text-neutral-700 font-medium">
+                    Your answer here will <strong>not</strong> affect your
+                    score. This information will be used to aggregate results
+                    data at the end of the test.
+                  </p>
                   <div className="mb-6">
                     <div className="relative flex items-center gap-2 mb-4">
                       <FormGroup>
@@ -110,20 +115,20 @@ const AlignmentPage = () => {
                     <div className="md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
-                          onClick={handleSubmit}
+                          onClick={() => navigate("/")}
                           className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
-                          Next
+                          Back
                         </button>
                       </p>
                     </div>
                     <div className="md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
-                          onClick={() => navigate("/")}
+                          onClick={handleSubmit}
                           className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
-                          Back
+                          Next
                         </button>
                       </p>
                     </div>

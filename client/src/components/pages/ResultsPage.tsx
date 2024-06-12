@@ -86,6 +86,10 @@ const ResultsPage = () => {
   };
 
   useEffect(() => {
+    fetchAllUserData();
+  }, []);
+
+  useEffect(() => {
     if (incorrectGuesses.length > 0) {
       setLoading(true);
       let loadedImages = 0;
@@ -122,6 +126,14 @@ const ResultsPage = () => {
 
   const handleShowSelections = () => {
     setShowDogs(!showDogs);
+  };
+
+  const renderUserName = (username: string) => {
+    if (username.length > 14) {
+      return username.substring(0, 14) + "...";
+    }
+
+    return username;
   };
 
   return (
@@ -202,14 +214,6 @@ const ResultsPage = () => {
             <div className="mt-6 mb-5">
               <CircularProgress />
             </div>
-          )}
-          {!loadingBreakdown && !showBreakdown && (
-            <button
-              onClick={fetchAllUserData}
-              className="inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-md text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-5"
-            >
-              View All Results
-            </button>
           )}
           {!loadingBreakdown && showBreakdown && (
             <div>
@@ -390,7 +394,9 @@ const ResultsPage = () => {
                     {topUsers.map((user, index) => {
                       return (
                         <tr key={index}>
-                          <td className="py-2">{user.username}</td>
+                          <td className="py-2 col-first">
+                            {renderUserName(user.username)}
+                          </td>
                           <td className="py-2">{user.alignment}</td>
                           <td className="py-2">{user.accuracy.toFixed(1)}%</td>
                         </tr>

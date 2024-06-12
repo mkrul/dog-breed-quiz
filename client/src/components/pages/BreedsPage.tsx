@@ -130,9 +130,16 @@ const BreedsPage = () => {
             <div className="w-full md:w-1/2 p-5">
               <div className="flex flex-col justify-center h-full">
                 <div>
-                  <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
+                  <h6 className="mb-5 text-5xl font-medium tracking-tight font-heading">
                     Select the breeds that you consider to be pit bulls
                   </h6>
+                  <p className="mb-5 mt-3 text-xl text-neutral-700 font-medium">
+                    Your selections below will determine how your results are
+                    calculated. For example, if you only select "American Pit
+                    Bull Terrier" and "American Staffordshire Terrier", the
+                    system will consider <strong>only</strong> those breeds to
+                    be pit bulls during the assessment.
+                  </p>
                   <div className="mb-6 ml-6">
                     {selectedBreeds.map((breed) => (
                       <FormGroup key={breed.label}>
@@ -157,20 +164,20 @@ const BreedsPage = () => {
                     <div className="md:w-auto p-4">
                       <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
-                          onClick={handleSubmit}
+                          onClick={() => navigate("/test/alignment")}
                           className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
-                          Next
+                          Back
                         </button>
                       </div>
                     </div>
                     <div className="md:w-auto p-4">
                       <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
                         <button
-                          onClick={() => navigate("/test/alignment")}
+                          onClick={handleSubmit}
                           className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
                         >
-                          Back
+                          Next
                         </button>
                       </div>
                     </div>

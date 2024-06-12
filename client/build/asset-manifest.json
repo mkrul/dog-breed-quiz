@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.2464fc03.css",
-    "main.js": "/static/js/main.f85f25e2.js",
+    "main.css": "/static/css/main.b64adb2d.css",
+    "main.js": "/static/js/main.c4d54fc0.js",
     "static/js/787.d5fa4d18.chunk.js": "/static/js/787.d5fa4d18.chunk.js",
-    "static/media/2.jpg": "/static/media/2.f29d495c1ec4ad225d29.jpg",
     "static/media/3.jpg": "/static/media/3.ff8833ee65f3062203d7.jpg",
+    "static/media/2.jpg": "/static/media/2.f29d495c1ec4ad225d29.jpg",
     "static/media/1.jpg": "/static/media/1.3c2ad1dc46fd35340aaf.jpg",
     "static/media/pit-bull-03.jpg": "/static/media/pit-bull-03.a1c7fbf3a451461387a0.jpg",
     "static/media/apbt.jpg": "/static/media/apbt.6570618f8063e7faea7a.jpg",
@@ -14,12 +14,12 @@
     "static/media/pit-bull-02.jpg": "/static/media/pit-bull-02.bac133ced1bc4d3c0fd1.jpg",
     "static/media/ast.jpg": "/static/media/ast.f282d92ca33cae751319.jpg",
     "index.html": "/index.html",
-    "main.2464fc03.css.map": "/static/css/main.2464fc03.css.map",
-    "main.f85f25e2.js.map": "/static/js/main.f85f25e2.js.map",
+    "main.b64adb2d.css.map": "/static/css/main.b64adb2d.css.map",
+    "main.c4d54fc0.js.map": "/static/js/main.c4d54fc0.js.map",
     "787.d5fa4d18.chunk.js.map": "/static/js/787.d5fa4d18.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2464fc03.css",
-    "static/js/main.f85f25e2.js"
+    "static/css/main.b64adb2d.css",
+    "static/js/main.c4d54fc0.js"
   ]
 }
