@@ -65,7 +65,7 @@ export async function fetchUsers(): Promise<BreakdownType> {
     .filter((user) => user.breeds.length > 1)
     .reduce((acc, user) => acc + user.accuracy, 0) / antiMultiCount;
 
-  const topUsers = await User.find().sort({ accuracy: -1 }).limit(5);
+  const topUsers = await User.find().sort({ accuracy: -1 }).limit(10);
 
   return {
     proAccuracy,
