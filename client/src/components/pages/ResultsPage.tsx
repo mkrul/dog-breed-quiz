@@ -272,7 +272,7 @@ const ResultsPage = () => {
                 <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
                   <thead>
                     <tr>
-                      <th className="py-2">"What is a pit bull?"</th>
+                      <th className="py-2">Breeds Selected</th>
                       <th className="py-2">Count</th>
                       <th className="py-2">Avg. Accuracy</th>
                     </tr>
@@ -311,7 +311,7 @@ const ResultsPage = () => {
                 <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
                   <thead>
                     <tr>
-                      <th className="py-2">"What is a pit bull?"</th>
+                      <th className="py-2">Breeds Selected</th>
                       <th className="py-2">Count</th>
                       <th className="py-2">Avg. Accuracy</th>
                     </tr>
@@ -350,7 +350,7 @@ const ResultsPage = () => {
                 <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
                   <thead>
                     <tr>
-                      <th className="py-2">"What is a pit bull?"</th>
+                      <th className="py-2">Breeds Selected</th>
                       <th className="py-2">Count</th>
                       <th className="py-2">Avg. Accuracy</th>
                     </tr>
@@ -397,7 +397,11 @@ const ResultsPage = () => {
                           <td className="py-2 col-first">
                             {renderUserName(user.username)}
                           </td>
-                          <td className="py-2">{user.alignment}</td>
+                          <td className="py-2">
+                            {user.alignment === "neutral"
+                              ? "moderate"
+                              : user.alignment}
+                          </td>
                           <td className="py-2">{user.accuracy.toFixed(1)}%</td>
                         </tr>
                       );
