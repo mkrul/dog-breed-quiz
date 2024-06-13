@@ -236,7 +236,7 @@ const ResultsPage = () => {
               </div>
             )}
           </div>
-          {resultData.completed === 0 &&
+          {resultData.completed === 1 &&
             !showDogs &&
             resultData.totalIncorrectGuesses > 0 && (
               <button
