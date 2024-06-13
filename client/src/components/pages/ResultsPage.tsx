@@ -287,10 +287,10 @@ const ResultsPage = () => {
                   way. The column on the right displays the average accuracy of
                   participants in each alignment group.
                 </p>
-                <h6 className="py-1 font-bold bg-neutral-100">
+                <h6 className="py-1 font-bold bg-neutral-300">
                   All Participants
                 </h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
                   <thead>
                     <tr>
                       <th className="py-2">Alignment</th>
@@ -335,8 +335,8 @@ const ResultsPage = () => {
                   breed when asked to specify which breeds they consider to be
                   pit bulls.
                 </p>
-                <h6 className="py-1 font-bold bg-neutral-100">Pro-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
+                <h6 className="py-1 font-bold bg-neutral-300">Pro-Pit Bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -370,8 +370,8 @@ const ResultsPage = () => {
                     </tr>
                   </tbody>
                 </table>
-                <h6 className="py-1 font-bold bg-neutral-100">Moderate</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
+                <h6 className="py-1 font-bold bg-neutral-300">Moderate</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -413,8 +413,8 @@ const ResultsPage = () => {
                     </tr>
                   </tbody>
                 </table>
-                <h6 className="py-1 font-bold bg-neutral-100">Anti-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
+                <h6 className="py-1 font-bold bg-neutral-300">Anti-Pit Bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -470,8 +470,8 @@ const ResultsPage = () => {
                   column shows the percentage of participants who selected a
                   value within the specified range.
                 </p>
-                <h6 className="py-1 font-bold bg-neutral-100">Pro-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
+                <h6 className="py-1 font-bold bg-neutral-300">Pro-Pit Bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -514,8 +514,8 @@ const ResultsPage = () => {
                   </tbody>
                 </table>
 
-                <h6 className="py-1 font-bold bg-neutral-100">Moderate</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
+                <h6 className="py-1 font-bold bg-neutral-300">Moderate</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -558,8 +558,8 @@ const ResultsPage = () => {
                   </tbody>
                 </table>
 
-                <h6 className="py-1 font-bold bg-neutral-100">Anti-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
+                <h6 className="py-1 font-bold bg-neutral-300">Anti-Pit Bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -614,10 +614,10 @@ const ResultsPage = () => {
                   subjective, as it is based on each individual's personal
                   criteria and perception.
                 </p>
-                <h6 className="py-1 font-bold bg-neutral-100">
+                <h6 className="py-1 font-bold bg-neutral-300">
                   All Participants
                 </h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
                   <thead>
                     <tr>
                       <th className="py-2">Username</th>
