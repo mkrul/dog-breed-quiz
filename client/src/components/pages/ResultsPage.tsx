@@ -36,6 +36,33 @@ const ResultsPage = () => {
   const [antiMultiCount, setAntiMultiCount] = useState(0);
   const [antiMultiAccuracy, setAntiMultiAccuracy] = useState(0);
   const [topUsers, setTopUsers] = useState<TopUser[]>([]);
+  const [proPercentage25, setProPercentage25] = useState(0);
+  const [proPercentage50, setProPercentage50] = useState(0);
+  const [proPercentage75, setProPercentage75] = useState(0);
+  const [proPercentageGreaterThan75, setProPercentageGreaterThan75] =
+    useState(0);
+  const [modPercentage25, setModeratePercentage25] = useState(0);
+  const [modPercentage50, setModeratePercentage50] = useState(0);
+  const [modPercentage75, setModeratePercentage75] = useState(0);
+  const [modPercentageGreaterThan75, setModeratePercentageGreaterThan75] =
+    useState(0);
+  const [antiPercentage25, setAntiPercentage25] = useState(0);
+  const [antiPercentage50, setAntiPercentage50] = useState(0);
+  const [antiPercentage75, setAntiPercentage75] = useState(0);
+  const [antiPercentageGreaterThan75, setAntiPercentageGreaterThan75] =
+    useState(0);
+  const [antiApbt, setAntiApbt] = useState(0);
+  const [antiAst, setAntiAst] = useState(0);
+  const [antiSbt, setAntiSbt] = useState(0);
+  const [antiAb, setAntiAb] = useState(0);
+  const [proApbt, setProApbt] = useState(0);
+  const [proAst, setProAst] = useState(0);
+  const [proSbt, setProSbt] = useState(0);
+  const [proAb, setProAb] = useState(0);
+  const [moderateApbt, setModerateApbt] = useState(0);
+  const [moderateAst, setModerateAst] = useState(0);
+  const [moderateSbt, setModerateSbt] = useState(0);
+  const [moderateAb, setModerateAb] = useState(0);
 
   const resultData = useSelector((state: RootState) => state.results as Result);
   const word1 = resultData.totalSelected === 1 ? "dog" : "dogs";
@@ -79,6 +106,32 @@ const ResultsPage = () => {
         setAntiMultiAccuracy(breakdown.antiMultiAccuracy);
         setAllUsersAccuracy(breakdown.allUsersAccuracy);
         setTopUsers(breakdown.topUsers);
+        setProPercentage25(breakdown.proPercentage25);
+        setProPercentage50(breakdown.proPercentage50);
+        setProPercentage75(breakdown.proPercentage75);
+        setProPercentageGreaterThan75(breakdown.proPercentageGreaterThan75);
+        setModeratePercentage25(breakdown.moderatePercentage25);
+        setModeratePercentage50(breakdown.moderatePercentage50);
+        setModeratePercentage75(breakdown.moderatePercentage75);
+        setModeratePercentageGreaterThan75(
+          breakdown.moderatePercentageGreaterThan75
+        );
+        setAntiPercentage25(breakdown.antiPercentage25);
+        setAntiPercentage50(breakdown.antiPercentage50);
+        setAntiPercentage75(breakdown.antiPercentage75);
+        setAntiPercentageGreaterThan75(breakdown.antiPercentageGreaterThan75);
+        setAntiApbt(breakdown.antiApbt);
+        setAntiAst(breakdown.antiAst);
+        setAntiSbt(breakdown.antiSbt);
+        setAntiAb(breakdown.antiAb);
+        setProApbt(breakdown.proApbt);
+        setProAst(breakdown.proAst);
+        setProSbt(breakdown.proSbt);
+        setProAb(breakdown.proAb);
+        setModerateApbt(breakdown.moderateApbt);
+        setModerateAst(breakdown.moderateAst);
+        setModerateSbt(breakdown.moderateSbt);
+        setModerateAb(breakdown.moderateAb);
       });
     } catch (error) {
       console.log(error);
@@ -142,7 +195,7 @@ const ResultsPage = () => {
         <div className="container mx-auto px-4 pb-5">
           <div className="mb-15">
             <h2 className="mb-12 text-5xl font-semibold font-subheading">
-              Your Results
+              🥇<span className="ml-2">Your Results</span>
             </h2>
             <div className="mb-5 text-xl text-neutral-700 font-medium">
               <p className="mb-5">
@@ -176,12 +229,12 @@ const ResultsPage = () => {
               </p>
             </div>
           </div>
-          {resultData.totalIncorrectGuesses > 0 && (
+          {!showDogs && resultData.totalIncorrectGuesses > 0 && (
             <button
               onClick={handleShowSelections}
               className="inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-md text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-3"
             >
-              {!showDogs ? "View" : "Hide"} incorrect guesses
+              Show incorrect guesses
             </button>
           )}
           <div className="w-full">
@@ -217,17 +270,21 @@ const ResultsPage = () => {
           )}
           {!loadingBreakdown && showBreakdown && (
             <div>
-              <div className="mb-20 mt-6">
+              <div className="my-6">
                 <h2 className="text-5xl font-semibold font-subheading">
-                  Total Results
+                  📊 <span className="ml-2">Total Results</span>
                 </h2>
-                <h6 className="mb-5 font-bold">(All Participants)</h6>
-                <p className="mb-6">
-                  These results are based on the criteria set by all
-                  participants and broken down based on how participants
-                  identified themselves.
+                <p className="mt-5 mb-6">
+                  These results are broken down based on how participants
+                  identified their feelings toward pit bulls. The middle column
+                  indicates the number of participants who identified a certain
+                  way. The column on the right displays the average accuracy of
+                  participants in each alignment group.
                 </p>
-                <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
+                <h6 className="py-1 font-bold table-header">
+                  All Participants
+                </h6>
+                <table className="w-full text-xl text-neutral-700 font-medium">
                   <thead>
                     <tr>
                       <th className="py-2">Alignment</th>
@@ -260,129 +317,301 @@ const ResultsPage = () => {
                   </tbody>
                 </table>
               </div>
-              <div className="mb-20">
+
+              <div className="my-5 py-5">
                 <h2 className="text-5xl font-semibold font-subheading">
-                  Breakdown
+                  🐕 <span className="ml-2">Breed Selection</span>
                 </h2>
-                <h6 className="mb-5 font-bold">(Pro-pit bull)</h6>
-                <p className="mb-6">
-                  These results are based on the criteria set by participants
-                  who identified as pro-pit bull.
+                <p className="mt-5 mb-6">
+                  The left column indicates the name of each breed that
+                  participants could choose during the initial survey. The right
+                  column lists the percentage of participants who selected that
+                  breed when asked to specify which breeds they consider to be
+                  pit bulls.
                 </p>
-                <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
+                <h6 className="py-1 font-bold table-header">Pro-pit bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium">
                   <thead>
                     <tr>
-                      <th className="py-2">Breeds Selected</th>
-                      <th className="py-2">Count</th>
-                      <th className="py-2">Avg. Accuracy</th>
+                      <th className="py-2">Selection</th>
+                      <th className="py-2">% of Users</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="py-2">APBT only</td>
-                      <td className="py-2">{proApbtCount}</td>
+                      <td className="py-2">APBT</td>
                       <td className="py-2">
-                        {proApbtCount > 0
-                          ? `${proApbtAccuracy.toFixed(1)}%`
+                        {proApbt > 0 ? `${(proApbt * 100).toFixed(1)}%` : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">AST</td>
+                      <td className="py-2">
+                        {proAst > 0 ? `${(proAst * 100).toFixed(1)}%` : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">SBT</td>
+                      <td className="py-2">
+                        {proSbt > 0 ? `${(proSbt * 100).toFixed(1)}%` : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">AB</td>
+                      <td className="py-2">
+                        {proAb > 0 ? `${(proAb * 100).toFixed(1)}%` : "0%"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h6 className="py-1 font-bold table-header">Moderate</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium">
+                  <thead>
+                    <tr>
+                      <th className="py-2">Selection</th>
+                      <th className="py-2">% of Users</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2">APBT</td>
+                      <td className="py-2">
+                        {moderateApbt > 0
+                          ? `${(moderateApbt * 100).toFixed(1)}%`
                           : "0%"}
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2">Multiple breeds</td>
-                      <td className="py-2">{proMultiCount}</td>
+                      <td className="py-2">AST</td>
                       <td className="py-2">
-                        {proMultiCount > 0
-                          ? `${proMultiAccuracy.toFixed(1)}%`
+                        {moderateAst > 0
+                          ? `${(moderateAst * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">SBT</td>
+                      <td className="py-2">
+                        {moderateSbt > 0
+                          ? `${(moderateSbt * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">AB</td>
+                      <td className="py-2">
+                        {moderateAb > 0
+                          ? `${(moderateAb * 100).toFixed(1)}%`
                           : "0%"}
                       </td>
                     </tr>
                   </tbody>
                 </table>
-              </div>
-              <div className="mb-20">
-                <h2 className="text-5xl font-semibold font-subheading">
-                  Breakdown
-                </h2>
-                <h6 className="mb-5 font-bold">(Moderate)</h6>
-                <p className="mb-6">
-                  These results are based on the criteria set by participants
-                  who identified as moderate.
-                </p>
-                <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
+                <h6 className="py-1 font-bold table-header">Anti-Pit Bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium">
                   <thead>
                     <tr>
-                      <th className="py-2">Breeds Selected</th>
-                      <th className="py-2">Count</th>
-                      <th className="py-2">Avg. Accuracy</th>
+                      <th className="py-2">Selection</th>
+                      <th className="py-2">% of Users</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="py-2">APBT only</td>
-                      <td className="py-2">{modApbtCount}</td>
+                      <td className="py-2">APBT</td>
                       <td className="py-2">
-                        {modApbtCount > 0
-                          ? `${modApbtAccuracy.toFixed(1)}%`
+                        {antiApbt > 0
+                          ? `${(antiApbt * 100).toFixed(1)}%`
                           : "0%"}
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2">Multiple breeds</td>
-                      <td className="py-2">{modMultiCount}</td>
+                      <td className="py-2">AST</td>
                       <td className="py-2">
-                        {modMultiCount > 0
-                          ? `${modMultiAccuracy.toFixed(1)}%`
-                          : "0%"}
+                        {antiAst > 0 ? `${(antiAst * 100).toFixed(1)}%` : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">SBT</td>
+                      <td className="py-2">
+                        {antiSbt > 0 ? `${(antiSbt * 100).toFixed(1)}%` : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">AB</td>
+                      <td className="py-2">
+                        {antiAb > 0 ? `${(antiAb * 100).toFixed(1)}%` : "0%"}
                       </td>
                     </tr>
                   </tbody>
                 </table>
+                <div className="mt-4 text-sm">
+                  APBT - American Pit Bull Terrier{" "}
+                  <span className="mx-1">|</span> AST - American Staffordshire
+                  Terrier <span className="mx-1">|</span> SBT - Staffordshire
+                  Bull Terrier <span className="mx-1">|</span> AB - American
+                  Bully
+                </div>
               </div>
-              <div className="mb-20">
+
+              <div className="my-5 py-5">
                 <h2 className="text-5xl font-semibold font-subheading">
-                  Breakdown
+                  🧬 <span className="ml-2">DNA Selection</span>
                 </h2>
-                <h6 className="mb-5 font-bold">(Anti-pit bull)</h6>
-                <p className="mb-6">
-                  These results are based on the criteria set by participants
-                  who identified as anti-pit bull.
+                <p className="mt-5 mb-6">
+                  Participants were initially asked to specify how much "pit
+                  bull DNA" is required for a dog to be considered a pit bull.
+                  The left column displays multiple ranges of DNA. The right
+                  column shows the percentage of participants who selected a
+                  value within the specified range.
                 </p>
-                <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
+                <h6 className="py-1 font-bold table-header">Pro-pit bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium">
                   <thead>
                     <tr>
-                      <th className="py-2">Breeds Selected</th>
-                      <th className="py-2">Count</th>
-                      <th className="py-2">Avg. Accuracy</th>
+                      <th className="py-2">Selection</th>
+                      <th className="py-2">% of Users</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="py-2">APBT only</td>
-                      <td className="py-2">{antiApbtCount}</td>
+                      <td className="py-2">≤ 25%</td>
                       <td className="py-2">
-                        {antiApbtCount > 0
-                          ? `${antiApbtAccuracy.toFixed(1)}%`
+                        {proPercentage25 > 0
+                          ? `${(proPercentage25 * 100).toFixed(1)}%`
                           : "0%"}
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2">Multiple breeds</td>
-                      <td className="py-2">{antiMultiCount}</td>
+                      <td className="py-2">25% - 50%</td>
                       <td className="py-2">
-                        {antiMultiCount > 0
-                          ? `${antiMultiAccuracy.toFixed(1)}%`
+                        {proPercentage50 > 0
+                          ? `${(proPercentage50 * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">51% - 75%</td>
+                      <td className="py-2">
+                        {proPercentage75 > 0
+                          ? `${(proPercentage75 * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">76% - 100%</td>
+                      <td className="py-2">
+                        {proPercentageGreaterThan75 > 0
+                          ? `${(proPercentageGreaterThan75 * 100).toFixed(1)}%`
                           : "0%"}
                       </td>
                     </tr>
                   </tbody>
                 </table>
 
-                <h2 className="pt-6 text-5xl font-semibold font-subheading">
-                  Top Results
-                </h2>
-                <h6 className="mb-5 font-bold">(All Participants)</h6>
+                <h6 className="py-1 font-bold table-header">Moderate</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium">
+                  <thead>
+                    <tr>
+                      <th className="py-2">Selection</th>
+                      <th className="py-2">% of Users</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2">≤ 25%</td>
+                      <td className="py-2">
+                        {modPercentage25 > 0
+                          ? `${(modPercentage25 * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">25% - 50%</td>
+                      <td className="py-2">
+                        {modPercentage50 > 0
+                          ? `${(modPercentage50 * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">51% - 75%</td>
+                      <td className="py-2">
+                        {modPercentage75 > 0
+                          ? `${(modPercentage75 * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">76% - 100%</td>
+                      <td className="py-2">
+                        {modPercentageGreaterThan75 > 0
+                          ? `${(modPercentageGreaterThan75 * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
 
-                <table className="w-full mb-5 text-xl text-neutral-700 font-medium">
+                <h6 className="py-1 font-bold table-header">Anti-pit bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium">
+                  <thead>
+                    <tr>
+                      <th className="py-2">Selection</th>
+                      <th className="py-2">% of Users</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-2">≤ 25%</td>
+                      <td className="py-2">
+                        {antiPercentage25 > 0
+                          ? `${(antiPercentage25 * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">25% - 50%</td>
+                      <td className="py-2">
+                        {antiPercentage50 > 0
+                          ? `${(antiPercentage50 * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">51% - 75%</td>
+                      <td className="py-2">
+                        {antiPercentage75 > 0
+                          ? `${(antiPercentage75 * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2">76% - 100%</td>
+                      <td className="py-2">
+                        {antiPercentageGreaterThan75 > 0
+                          ? `${(antiPercentageGreaterThan75 * 100).toFixed(1)}%`
+                          : "0%"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="my-5 py-5">
+                <h2 className="text-5xl font-semibold font-subheading">
+                  🏆 <span className="ml-2">High Scores</span>
+                </h2>
+                <p className="mt-5 mb-6">
+                  The following table lists the top 10 participants based on how
+                  many dogs they were able to correctly identify as pit bulls.
+                  It is important to note that this data is partially
+                  subjective, as it is based on each individual's personal
+                  criteria and perception.
+                </p>
+                <h6 className="py-1 font-bold table-header">
+                  All Participants
+                </h6>
+                <table className="w-full text-xl text-neutral-700 font-medium">
                   <thead>
                     <tr>
                       <th className="py-2">Username</th>
@@ -414,7 +643,7 @@ const ResultsPage = () => {
         </div>
         <Link
           to="/1"
-          className="mb-6 mt-3 inline-flex items-center justify-center text-center h-16 p-5 font-semibold text-lg text-white tracking-tight bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
+          className="mb-6 mt-3 inline-flex items-center justify-center text-center h-16 p-5 font-semibold text-2xl text-white tracking-tight bg-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 rounded-lg focus:ring-4 focus:ring-neutral-300 transition duration-200"
         >
           Go Back
         </Link>

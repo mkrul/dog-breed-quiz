@@ -21,4 +21,28 @@ export interface Breakdown {
   antiMultiCount: number;
   antiMultiAccuracy: number;
   topUsers: TopUser[];
+  proPercentage25: number;
+  proPercentage50: number;
+  proPercentage75: number;
+  proPercentageGreaterThan75: number;
+  moderatePercentage25: number;
+  moderatePercentage50: number;
+  moderatePercentage75: number;
+  moderatePercentageGreaterThan75: number;
+  antiPercentage25: number;
+  antiPercentage50: number;
+  antiPercentage75: number;
+  antiPercentageGreaterThan75: number;
+  antiApbt: number;
+  antiAst: number;
+  antiSbt: number;
+  antiAb: number;
+  proApbt: number;
+  proAst: number;
+  proSbt: number;
+  proAb: number;
+  moderateApbt: number;
+  moderateAst: number;
+  moderateSbt: number;
+  moderateAb: number;
 }

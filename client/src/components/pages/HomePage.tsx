@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Modal, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Input, Typography } from "@mui/material";
 import {
   setUsernameAction,
@@ -11,6 +12,8 @@ import {
 import { clearBreedsAction } from "../../redux/features/breedSlice";
 import { clearSettingsAction } from "../../redux/features/settingSlice";
 import { clearResultAction } from "../../redux/features/resultsSlice";
+import { RootState } from "../../redux/store";
+import { Result } from "../../interfaces/result";
 import "../../assets/main.css";
 import "../../assets/homepage.css";
 
@@ -19,6 +22,8 @@ const HomePage = () => {
   const [userNameInput, setUserNameInput] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const resultData = useSelector((state: RootState) => state.results as Result);
 
   const modalStyle = {
     position: "absolute" as "absolute",
@@ -128,12 +133,14 @@ const HomePage = () => {
                   <div className="flex flex-wrap -m-4 justify-center">
                     <div className="w-full md:w-auto p-4">
                       <p className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
-                        <button
-                          onClick={handleOpenModal}
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
-                        >
-                          Start the test
-                        </button>
+                        {!resultData.completed && (
+                          <button
+                            onClick={handleOpenModal}
+                            className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
+                          >
+                            Start the test
+                          </button>
+                        )}
                         {showModal && (
                           <Modal
                             open={showModal}

@@ -9,6 +9,7 @@ import {
   addBreedAction,
   removeBreedAction,
 } from "../../redux/features/breedSlice";
+import { Result } from "../../interfaces/result";
 import { RootState } from "../../redux/store";
 
 const BreedsPage = () => {
@@ -25,6 +26,7 @@ const BreedsPage = () => {
   );
 
   const selectedBreeds = useSelector((state: RootState) => state.breeds);
+  const resultData = useSelector((state: RootState) => state.results as Result);
 
   const handleSetBreed = (breed: string) => {
     const index = selectedBreeds.findIndex((b) => b.label === breed);
@@ -104,81 +106,85 @@ const BreedsPage = () => {
 
   return (
     <div className="antialiased bg-body text-body font-body">
-      <section className="pt-8 py-12 md:py-24">
-        <div className="container mx-auto px-4">
-          <h2 className="mb-10 md:mb-20 text-5xl sm:text-6xl md:text-9xl xl:text-10xl font-semibold font-heading"></h2>
-          <div className="flex flex-wrap -m-5">
-            <div className="w-full md:w-1/2 p-5">
-              <div className="overflow-hidden rounded-2xl">
-                <img
-                  className="w-full h-full object-cover"
-                  src={require(`../../assets/images/${selectedImage}.jpg`)}
-                  alt={`Photo by ${imageAuthor}`}
-                />
-                <div className="mt-4 text-sm">
-                  Photo by{" "}
-                  <a href={imageLinkPrimary} target="_blank">
-                    {imageAuthor}
-                  </a>{" "}
-                  on{" "}
-                  <a href={imageLinkSecondary} target="_blank">
-                    {imageSource}
-                  </a>
+      {!resultData.completed && (
+        <section className="pt-8 py-12 md:py-24">
+          <div className="container mx-auto px-4">
+            <h2 className="mb-10 md:mb-20 text-5xl sm:text-6xl md:text-9xl xl:text-10xl font-semibold font-heading"></h2>
+            <div className="flex flex-wrap -m-5">
+              <div className="w-full md:w-1/2 p-5">
+                <div className="overflow-hidden rounded-2xl">
+                  <img
+                    className="w-full h-full object-cover"
+                    src={require(`../../assets/images/${selectedImage}.jpg`)}
+                    alt={`Photo by ${imageAuthor}`}
+                  />
+                  <div className="mt-4 text-sm">
+                    Photo by{" "}
+                    <a href={imageLinkPrimary} target="_blank">
+                      {imageAuthor}
+                    </a>{" "}
+                    on{" "}
+                    <a href={imageLinkSecondary} target="_blank">
+                      {imageSource}
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="w-full md:w-1/2 p-5">
-              <div className="flex flex-col justify-center h-full">
-                <div>
-                  <h6 className="mb-5 text-5xl font-medium tracking-tight font-heading">
-                    Select the breeds that you consider to be pit bulls
-                  </h6>
-                  <p className="mb-5 mt-3 text-xl text-neutral-700 font-medium">
-                    Your selections below will determine how your results are
-                    calculated. For example, if you only select "American Pit
-                    Bull Terrier" and "American Staffordshire Terrier", the
-                    system will consider <strong>only</strong> those breeds to
-                    be pit bulls during the assessment.
-                  </p>
-                  <div className="mb-6 ml-6">
-                    {selectedBreeds.map((breed) => (
-                      <FormGroup key={breed.label}>
-                        <FormControlLabel
-                          className="text-neutral-600 text-lg font-medium tracking-tight text-left ml-2 relative flex items-center gap-2 mb-2"
-                          onMouseEnter={() => handleChangeImageData(breed.name)}
-                          control={
-                            <Checkbox
-                              checked={breed.selected}
-                              onChange={() => handleSetBreed(breed.label)}
-                              inputProps={{
-                                "aria-label": breed.label,
-                              }}
-                            />
-                          }
-                          label={breed.name}
-                        />
-                      </FormGroup>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap -m-4 justify-center">
-                    <div className="md:w-auto p-4">
-                      <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
-                        <button
-                          onClick={() => navigate("/test/alignment")}
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
-                        >
-                          Back
-                        </button>
-                      </div>
+              <div className="w-full md:w-1/2 p-5">
+                <div className="flex flex-col justify-center h-full">
+                  <div>
+                    <h6 className="mb-5 text-5xl font-medium tracking-tight font-heading">
+                      Select the breeds that you consider to be pit bulls
+                    </h6>
+                    <p className="mb-5 mt-3 text-xl text-neutral-700 font-medium">
+                      Your selections below will determine how your results are
+                      calculated. For example, if you only select "American Pit
+                      Bull Terrier" and "American Staffordshire Terrier", the
+                      system will consider <strong>only</strong> those breeds to
+                      be pit bulls during the assessment.
+                    </p>
+                    <div className="mb-6 ml-6">
+                      {selectedBreeds.map((breed) => (
+                        <FormGroup key={breed.label}>
+                          <FormControlLabel
+                            className="text-neutral-600 text-lg font-medium tracking-tight text-left ml-2 relative flex items-center gap-2 mb-2"
+                            onMouseEnter={() =>
+                              handleChangeImageData(breed.name)
+                            }
+                            control={
+                              <Checkbox
+                                checked={breed.selected}
+                                onChange={() => handleSetBreed(breed.label)}
+                                inputProps={{
+                                  "aria-label": breed.label,
+                                }}
+                              />
+                            }
+                            label={breed.name}
+                          />
+                        </FormGroup>
+                      ))}
                     </div>
-                    <div className="md:w-auto p-4">
-                      <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
-                        <button
-                          onClick={handleSubmit}
-                          className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
-                        >
-                          Next
-                        </button>
+                    <div className="flex flex-wrap -m-4 justify-center">
+                      <div className="md:w-auto p-4">
+                        <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
+                          <button
+                            onClick={() => navigate("/test/alignment")}
+                            className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
+                          >
+                            Back
+                          </button>
+                        </div>
+                      </div>
+                      <div className="md:w-auto p-4">
+                        <div className="mb-2 text-xl text-neutral-600 font-semibold tracking-tight">
+                          <button
+                            onClick={handleSubmit}
+                            className="inline-flex justify-center items-center text-center h-20 p-5 font-semibold tracking-tight text-2xl text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200"
+                          >
+                            Next
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -186,8 +192,8 @@ const BreedsPage = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };

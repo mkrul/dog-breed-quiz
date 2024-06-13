@@ -157,6 +157,11 @@ table {
   text-indent: 0; /* 1 */
   border-color: inherit; /* 2 */
   border-collapse: collapse; /* 3 */
+  background-color: #eee;
+}
+
+.table-header {
+  background-color: #ccc;
 }
 
 /*
