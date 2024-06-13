@@ -53,7 +53,7 @@ const DnaPage = () => {
 
   return (
     <div className="antialiased bg-body text-body font-body">
-      {!resultData.completed && (
+      {resultData.completed === 0 && (
         <section className="pt-8 py-12 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-10 md:mb-20 text-5xl sm:text-6xl md:text-9xl xl:text-10xl font-semibold font-heading"></h2>

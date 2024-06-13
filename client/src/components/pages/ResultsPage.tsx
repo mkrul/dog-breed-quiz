@@ -195,7 +195,7 @@ const ResultsPage = () => {
       <section className="mt-4 pt-6 py-12 md:py-2">
         <div className="container mx-auto px-4 pb-5">
           <div className="mb-15">
-            {resultData.completed && (
+            {resultData.completed === 1 && (
               <div>
                 <h2 className="mb-12 text-5xl font-semibold font-subheading">
                   🥇<span className="ml-2">Your Results</span>
@@ -236,7 +236,7 @@ const ResultsPage = () => {
               </div>
             )}
           </div>
-          {resultData.completed &&
+          {resultData.completed === 0 &&
             !showDogs &&
             resultData.totalIncorrectGuesses > 0 && (
               <button
