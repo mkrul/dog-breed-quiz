@@ -186,7 +186,6 @@ const ResultsPage = () => {
     if (username.length > 14) {
       return username.substring(0, 14) + "...";
     }
-
     return username;
   };
 
