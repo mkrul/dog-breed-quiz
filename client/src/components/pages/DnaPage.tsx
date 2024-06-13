@@ -27,6 +27,7 @@ const DnaPage = () => {
   };
 
   const resultData = useSelector((state: RootState) => state.results as Result);
+
   const selectedPercentage = useSelector(
     (state: { settings: Settings }) => state.settings.percentage
   );

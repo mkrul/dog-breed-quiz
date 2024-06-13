@@ -65,7 +65,50 @@ export async function fetchUsers(): Promise<BreakdownType> {
     .filter((user) => user.breeds.length > 1)
     .reduce((acc, user) => acc + user.accuracy, 0) / antiMultiCount;
 
-  const topUsers = await User.find().sort({ accuracy: -1 }).limit(10);
+  const topUsers = allUsers.sort((a, b) => b.accuracy - a.accuracy).slice(0, 10);
+
+  const proPercentage25 = proUsers.filter((user) => user.percentage <= 25).length / proUsers.length;
+  const proPercentage50 = proUsers.filter((user) => user.percentage > 25 && user.percentage <= 50).length / proUsers.length;
+  const proPercentage75 = proUsers.filter((user) => user.percentage > 50 && user.percentage <= 75).length / proUsers.length;
+  const proPercentageGreaterThan75 = proUsers.filter((user) => user.percentage > 75).length / proUsers.length;
+
+  const moderatePercentage25 = moderateUsers.filter((user) => user.percentage <= 25).length / moderateUsers.length;
+  const moderatePercentage50 = moderateUsers.filter((user) => user.percentage > 25 && user.percentage <= 50).length / moderateUsers.length;
+  const moderatePercentage75 = moderateUsers.filter((user) => user.percentage > 50 && user.percentage <= 75).length / moderateUsers.length;
+  const moderatePercentageGreaterThan75 = moderateUsers.filter((user) => user.percentage > 75).length / moderateUsers.length;
+
+  const antiPercentage25 = antiUsers.filter((user) => user.percentage <= 25).length / antiUsers.length;
+  const antiPercentage50 = antiUsers.filter((user) => user.percentage > 25 && user.percentage <= 50).length / antiUsers.length;
+  const antiPercentage75 = antiUsers.filter((user) => user.percentage > 50 && user.percentage <= 75).length / antiUsers.length;
+  const antiPercentageGreaterThan75 = antiUsers.filter((user) => user.percentage > 75).length / antiUsers.length;
+
+  // what percentage of "anti" alignment users selected "apbt" as a breed
+  const antiApbt = antiUsers.filter((user) => user.breeds.some((breed) => breed.label === "apbt" && breed.selected === true)).length / antiUsers.length;
+  // what percentage of "anti" alignment users selected "ast" as a breed
+  const antiAst = antiUsers.filter((user) => user.breeds.some((breed) => breed.label === "ast" && breed.selected === true)).length / antiUsers.length;
+  // what percentage of "anti" alignment users selected "sbt" as a breed
+  const antiSbt = antiUsers.filter((user) => user.breeds.some((breed) => breed.label === "sbt" && breed.selected === true)).length / antiUsers.length;
+  // what percentage of "anti" alignment users selected "ab" as a breed
+  const antiAb = antiUsers.filter((user) => user.breeds.some((breed) => breed.label === "ab" && breed.selected === true)).length / antiUsers.length;
+
+  // what percentage of "pro" alignment users selected "apbt" as a breed
+  const proApbt = proUsers.filter((user) => user.breeds.some((breed) => breed.label === "apbt" && breed.selected === true)).length / proUsers.length;
+  // what percentage of "pro" alignment users selected "ast" as a breed
+  const proAst = proUsers.filter((user) => user.breeds.some((breed) => breed.label === "ast" && breed.selected === true)).length / proUsers.length;
+  // what percentage of "pro" alignment users selected "sbt" as a breed
+  const proSbt = proUsers.filter((user) => user.breeds.some((breed) => breed.label === "sbt" && breed.selected === true)).length / proUsers.length;
+  // what percentage of "pro" alignment users selected "ab" as a breed
+  const proAb = proUsers.filter((user) => user.breeds.some((breed) => breed.label === "ab" && breed.selected === true)).length / proUsers.length;
+
+  // what percentage of "neutral" alignment users selected "apbt" as a breed
+  const moderateApbt = moderateUsers.filter((user) => user.breeds.some((breed) => breed.label === "apbt" && breed.selected === true)).length / moderateUsers.length;
+  // what percentage of "neutral" alignment users selected "ast" as a breed
+  const moderateAst = moderateUsers.filter((user) => user.breeds.some((breed) => breed.label === "ast" && breed.selected === true)).length / moderateUsers.length;
+  // what percentage of "neutral" alignment users selected "sbt" as a breed
+  const moderateSbt = moderateUsers.filter((user) => user.breeds.some((breed) => breed.label === "sbt" && breed.selected === true)).length / moderateUsers.length;
+  // what percentage of "neutral" alignment users selected "ab" as a breed
+  const moderateAb = moderateUsers.filter((user) => user.breeds.some((breed) => breed.label === "ab" && breed.selected === true)).length / moderateUsers.length;
+
 
   return {
     proAccuracy,
@@ -87,6 +130,30 @@ export async function fetchUsers(): Promise<BreakdownType> {
     antiApbtAccuracy,
     antiMultiCount,
     antiMultiAccuracy,
-    topUsers
+    topUsers,
+    proPercentage25,
+    proPercentage50,
+    proPercentage75,
+    proPercentageGreaterThan75,
+    moderatePercentage25,
+    moderatePercentage50,
+    moderatePercentage75,
+    moderatePercentageGreaterThan75,
+    antiPercentage25,
+    antiPercentage50,
+    antiPercentage75,
+    antiPercentageGreaterThan75,
+    antiApbt,
+    antiAst,
+    antiSbt,
+    antiAb,
+    proApbt,
+    proAst,
+    proSbt,
+    proAb,
+    moderateApbt,
+    moderateAst,
+    moderateSbt,
+    moderateAb,
   } as BreakdownType;
 }
