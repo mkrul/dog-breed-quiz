@@ -294,7 +294,7 @@ const ResultsPage = () => {
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="py-2">Pro-pit bull</td>
+                      <td className="py-2">Pro-Pit Bull</td>
                       <td className="py-2">{proCount}</td>
                       <td className="py-2">
                         {proCount > 0 ? `${proAccuracy.toFixed(1)}%` : "0%"}
@@ -308,7 +308,7 @@ const ResultsPage = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2">Anti-pit bull</td>
+                      <td className="py-2">Anti-Pit Bull</td>
                       <td className="py-2">{antiCount}</td>
                       <td className="py-2">
                         {antiCount > 0 ? `${antiAccuracy.toFixed(1)}%` : "0%"}
@@ -329,7 +329,7 @@ const ResultsPage = () => {
                   breed when asked to specify which breeds they consider to be
                   pit bulls.
                 </p>
-                <h6 className="py-1 font-bold table-header">Pro-pit bull</h6>
+                <h6 className="py-1 font-bold table-header">Pro-Pit Bull</h6>
                 <table className="w-full text-xl text-neutral-700 font-medium">
                   <thead>
                     <tr>
@@ -464,7 +464,7 @@ const ResultsPage = () => {
                   column shows the percentage of participants who selected a
                   value within the specified range.
                 </p>
-                <h6 className="py-1 font-bold table-header">Pro-pit bull</h6>
+                <h6 className="py-1 font-bold table-header">Pro-Pit Bull</h6>
                 <table className="w-full text-xl text-neutral-700 font-medium">
                   <thead>
                     <tr>
@@ -482,7 +482,7 @@ const ResultsPage = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2">25% - 50%</td>
+                      <td className="py-2">26% - 50%</td>
                       <td className="py-2">
                         {proPercentage50 > 0
                           ? `${(proPercentage50 * 100).toFixed(1)}%`
@@ -526,7 +526,7 @@ const ResultsPage = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2">25% - 50%</td>
+                      <td className="py-2">26% - 50%</td>
                       <td className="py-2">
                         {modPercentage50 > 0
                           ? `${(modPercentage50 * 100).toFixed(1)}%`
@@ -552,7 +552,7 @@ const ResultsPage = () => {
                   </tbody>
                 </table>
 
-                <h6 className="py-1 font-bold table-header">Anti-pit bull</h6>
+                <h6 className="py-1 font-bold table-header">Anti-Pit Bull</h6>
                 <table className="w-full text-xl text-neutral-700 font-medium">
                   <thead>
                     <tr>
@@ -570,7 +570,7 @@ const ResultsPage = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2">25% - 50%</td>
+                      <td className="py-2">26% - 50%</td>
                       <td className="py-2">
                         {antiPercentage50 > 0
                           ? `${(antiPercentage50 * 100).toFixed(1)}%`
