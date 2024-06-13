@@ -194,40 +194,46 @@ const ResultsPage = () => {
       <section className="mt-4 pt-6 py-12 md:py-2">
         <div className="container mx-auto px-4 pb-5">
           <div className="mb-15">
-            <h2 className="mb-12 text-5xl font-semibold font-subheading">
-              🥇<span className="ml-2">Your Results</span>
-            </h2>
-            <div className="mb-5 text-xl text-neutral-700 font-medium">
-              <p className="mb-5">
-                You selected{" "}
-                <span className="font-bold">{resultData.totalSelected}</span>{" "}
-                {word1} that appeared to be {word2} based on the criteria you
-                set at the beginning of the test
-              </p>
-              <p className="mb-5">
-                Out of all dogs selected,{" "}
-                <span className="font-bold">
-                  {resultData.totalIncorrectGuesses}
-                </span>{" "}
-                {word3} identified incorrectly based on your criteria
-              </p>
-              <p className="mb-5">
-                The average accuracy for all participants is currently{" "}
-                <span className="font-bold">
-                  {allUsersAccuracy > 0
-                    ? `${allUsersAccuracy.toFixed(1)}%`
-                    : "0%"}
-                </span>
-              </p>
-              <p className="mb-5">
-                Your overall accuracy was{" "}
-                <span className="font-bold">
-                  {resultData.userAccuracy > 0
-                    ? `${resultData.userAccuracy.toFixed(1)}%`
-                    : "0%"}
-                </span>
-              </p>
-            </div>
+            {resultData.completed && (
+              <>
+                <h2 className="mb-12 text-5xl font-semibold font-subheading">
+                  🥇<span className="ml-2">Your Results</span>
+                </h2>
+                <div className="mb-5 text-xl text-neutral-700 font-medium">
+                  <p className="mb-5">
+                    You selected{" "}
+                    <span className="font-bold">
+                      {resultData.totalSelected}
+                    </span>{" "}
+                    {word1} that appeared to be {word2} based on the criteria
+                    you set at the beginning of the test
+                  </p>
+                  <p className="mb-5">
+                    Out of all dogs selected,{" "}
+                    <span className="font-bold">
+                      {resultData.totalIncorrectGuesses}
+                    </span>{" "}
+                    {word3} identified incorrectly based on your criteria
+                  </p>
+                  <p className="mb-5">
+                    The average accuracy for all participants is currently{" "}
+                    <span className="font-bold">
+                      {allUsersAccuracy > 0
+                        ? `${allUsersAccuracy.toFixed(1)}%`
+                        : "0%"}
+                    </span>
+                  </p>
+                  <p className="mb-5">
+                    Your overall accuracy was{" "}
+                    <span className="font-bold">
+                      {resultData.userAccuracy > 0
+                        ? `${resultData.userAccuracy.toFixed(1)}%`
+                        : "0%"}
+                    </span>
+                  </p>
+                </div>
+              </>
+            )}
           </div>
           {!showDogs && resultData.totalIncorrectGuesses > 0 && (
             <button
@@ -281,10 +287,10 @@ const ResultsPage = () => {
                   way. The column on the right displays the average accuracy of
                   participants in each alignment group.
                 </p>
-                <h6 className="py-1 font-bold table-header">
+                <h6 className="py-1 font-bold bg-neutral-100">
                   All Participants
                 </h6>
-                <table className="w-full text-xl text-neutral-700 font-medium">
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
                   <thead>
                     <tr>
                       <th className="py-2">Alignment</th>
@@ -329,8 +335,8 @@ const ResultsPage = () => {
                   breed when asked to specify which breeds they consider to be
                   pit bulls.
                 </p>
-                <h6 className="py-1 font-bold table-header">Pro-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium">
+                <h6 className="py-1 font-bold bg-neutral-100">Pro-Pit Bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -364,8 +370,8 @@ const ResultsPage = () => {
                     </tr>
                   </tbody>
                 </table>
-                <h6 className="py-1 font-bold table-header">Moderate</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium">
+                <h6 className="py-1 font-bold bg-neutral-100">Moderate</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -407,8 +413,8 @@ const ResultsPage = () => {
                     </tr>
                   </tbody>
                 </table>
-                <h6 className="py-1 font-bold table-header">Anti-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium">
+                <h6 className="py-1 font-bold bg-neutral-100">Anti-Pit Bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -464,8 +470,8 @@ const ResultsPage = () => {
                   column shows the percentage of participants who selected a
                   value within the specified range.
                 </p>
-                <h6 className="py-1 font-bold table-header">Pro-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium">
+                <h6 className="py-1 font-bold bg-neutral-100">Pro-Pit Bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -508,8 +514,8 @@ const ResultsPage = () => {
                   </tbody>
                 </table>
 
-                <h6 className="py-1 font-bold table-header">Moderate</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium">
+                <h6 className="py-1 font-bold bg-neutral-100">Moderate</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -552,8 +558,8 @@ const ResultsPage = () => {
                   </tbody>
                 </table>
 
-                <h6 className="py-1 font-bold table-header">Anti-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium">
+                <h6 className="py-1 font-bold bg-neutral-100">Anti-Pit Bull</h6>
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
                   <thead>
                     <tr>
                       <th className="py-2">Selection</th>
@@ -608,10 +614,10 @@ const ResultsPage = () => {
                   subjective, as it is based on each individual's personal
                   criteria and perception.
                 </p>
-                <h6 className="py-1 font-bold table-header">
+                <h6 className="py-1 font-bold bg-neutral-100">
                   All Participants
                 </h6>
-                <table className="w-full text-xl text-neutral-700 font-medium">
+                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-25">
                   <thead>
                     <tr>
                       <th className="py-2">Username</th>
