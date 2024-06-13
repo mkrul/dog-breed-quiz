@@ -9,6 +9,7 @@ import { Result } from "../../interfaces/result";
 import { Selection } from "../../interfaces/selection";
 import { CircularProgress } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import resultsSlice from "../../redux/features/resultsSlice";
 
 const ResultsPage = () => {
   const [showDogs, setShowDogs] = useState(false);
@@ -195,7 +196,7 @@ const ResultsPage = () => {
         <div className="container mx-auto px-4 pb-5">
           <div className="mb-15">
             {resultData.completed && (
-              <>
+              <div>
                 <h2 className="mb-12 text-5xl font-semibold font-subheading">
                   🥇<span className="ml-2">Your Results</span>
                 </h2>
@@ -232,17 +233,19 @@ const ResultsPage = () => {
                     </span>
                   </p>
                 </div>
-              </>
+              </div>
             )}
           </div>
-          {!showDogs && resultData.totalIncorrectGuesses > 0 && (
-            <button
-              onClick={handleShowSelections}
-              className="inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-md text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-3"
-            >
-              Show incorrect guesses
-            </button>
-          )}
+          {resultData.completed &&
+            !showDogs &&
+            resultData.totalIncorrectGuesses > 0 && (
+              <button
+                onClick={handleShowSelections}
+                className="inline-flex justify-center items-center text-center h-16 p-5 font-semibold tracking-tight text-md text-neutral-900 hover:text-white focus:text-white bg-white hover:bg-neutral-900 focus:bg-neutral-900 border border-neutral-900 rounded-lg focus:ring-4 focus:ring-neutral-400 transition duration-200 mt-3"
+              >
+                Show incorrect guesses
+              </button>
+            )}
           <div className="w-full">
             {showDogs && (
               <div className="inline-flex justify-center w-full">
