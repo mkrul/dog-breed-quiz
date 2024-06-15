@@ -27,11 +27,9 @@ const AboutPage: React.FC = () => {
                   FAQ
                 </h1>
                 <p className="text-xl font-medium max-w-3xl text-neutral-400">
-                  If you have any questions that aren't answered here, please
-                  contact us at{" "}
-                  <a href="mailto: banthisbreed@gmail.com">
-                    banthisbreed@gmail.com
-                  </a>
+                  Please review the following frequently asked questions to
+                  learn more about the purpose of this test, how it works, and
+                  the limits of DNA testing for dog breeds.
                 </p>
               </div>
               <div className="w-full md:w-2/3 p-8">

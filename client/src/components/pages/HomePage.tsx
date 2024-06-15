@@ -103,7 +103,7 @@ const HomePage = () => {
               <div className="flex flex-col justify-center h-full">
                 <div>
                   <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
-                    Why "ban this breed"?
+                    Can you identify a Pit Bull?
                   </h6>
                   <Typography className="mb-4">
                     Proponents of breed-specific legislation (BSL) argue that
