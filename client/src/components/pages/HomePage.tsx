@@ -106,20 +106,14 @@ const HomePage = () => {
                     Can you identify a Pit Bull?
                   </h6>
                   <Typography className="mb-4">
-                    Proponents of breed-specific legislation (BSL) argue that
-                    certain dog breeds should be banned or regulated based on
-                    statistical data surrounding dog attacks. The most commonly
-                    targeted breeds are those labeled "pit bulls". Many people
-                    use "pit bull" as an umbrella term for dogs with certain
-                    physical characteristics, such as a muscular build and a
-                    short coat, and breed bans often target individual dogs
-                    based on their appearance.
-                  </Typography>
-                  <Typography className="mb-4">
-                    This project aims to measure the accuracy of visual breed
-                    identification, as well as how different groups of people
-                    identify dogs as pit bulls, taking their personal biases
-                    into account.
+                    Many people use "pit bull" as an umbrella term to describe
+                    dogs with certain physical characteristics, such as a
+                    muscular build and a short coat. Others use the term to
+                    refer to a specific breed of dog - the American Pit Bull
+                    Terrier. This project aims to measure the accuracy of visual
+                    breed identification, as well as how different groups of
+                    people identify dogs as pit bulls, taking their personal
+                    biases into account.
                   </Typography>
                   <Typography className="mb-6">
                     You can learn more about this test by clicking{" "}
