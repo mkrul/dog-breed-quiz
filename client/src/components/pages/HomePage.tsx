@@ -102,8 +102,11 @@ const HomePage = () => {
             <div className="w-full md:w-1/2 p-5">
               <div className="flex flex-col justify-center h-full">
                 <div>
+                  <h6 className="text-5xl font-medium tracking-tight font-heading">
+                    Can you identify a
+                  </h6>
                   <h6 className="mb-10 text-5xl font-medium tracking-tight font-heading">
-                    Can you identify a Pit Bull?
+                    Pit Bull?
                   </h6>
                   <Typography className="mb-4">
                     Many people use "pit bull" as an umbrella term for dogs with
