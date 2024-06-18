@@ -109,10 +109,11 @@ const HomePage = () => {
                     Pit Bull?
                   </h6>
                   <Typography className="mb-4">
-                    Many people use "pit bull" as an umbrella term for dogs with
-                    certain physical characteristics, such as a muscular build
-                    and a short coat. Others use the term to refer to a specific
-                    breed of dog - the American Pit Bull Terrier.
+                    "Pit bull" is most commonly used as an umbrella term for
+                    dogs with certain physical characteristics, such as a
+                    muscular build and a short coat. Others use the term to
+                    refer to a specific breed of dog - the American Pit Bull
+                    Terrier.
                   </Typography>
                   <Typography className="mb-4">
                     This project aims to measure the accuracy of visual breed
