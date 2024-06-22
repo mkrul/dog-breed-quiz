@@ -267,7 +267,7 @@ const ResultsPage = () => {
                   participants in each alignment group.
                 </p>
                 <div className="container mx-auto py-4">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2">
                     <div className="my-auto">
                       <h6 className="py-1 font-bold bg-neutral-300">
                         All Participants
@@ -286,7 +286,7 @@ const ResultsPage = () => {
                             <td className="py-2">{proCount}</td>
                             <td className="py-2">
                               {proCount > 0
-                                ? `${proAccuracy.toFixed(1)}%`
+                                ? `${parseFloat(proAccuracy.toFixed(1))}%`
                                 : "0%"}
                             </td>
                           </tr>
@@ -295,7 +295,7 @@ const ResultsPage = () => {
                             <td className="py-2">{modCount}</td>
                             <td className="py-2">
                               {modCount > 0
-                                ? `${modAccuracy.toFixed(1)}%`
+                                ? `${parseFloat(modAccuracy.toFixed(1))}%`
                                 : "0%"}
                             </td>
                           </tr>
@@ -304,7 +304,7 @@ const ResultsPage = () => {
                             <td className="py-2">{antiCount}</td>
                             <td className="py-2">
                               {antiCount > 0
-                                ? `${antiAccuracy.toFixed(1)}%`
+                                ? `${parseFloat(antiAccuracy.toFixed(1))}%`
                                 : "0%"}
                             </td>
                           </tr>
@@ -329,9 +329,9 @@ const ResultsPage = () => {
                             },
                           ]}
                           series={[
-                            { data: [proAccuracy] },
-                            { data: [modAccuracy] },
-                            { data: [antiAccuracy] },
+                            { data: [parseFloat(proAccuracy.toFixed(1))] },
+                            { data: [parseFloat(modAccuracy.toFixed(1))] },
+                            { data: [parseFloat(antiAccuracy.toFixed(1))] },
                           ]}
                           colors={["#AFE1AF", "#7661E2", "#F6866A"]}
                           height={300}
@@ -340,7 +340,7 @@ const ResultsPage = () => {
                           container
                           sx={{
                             padding: "0px 0px 20px 40px",
-                            justifyContent: "flex-start",
+                            justifyContent: "space-around",
                             display: "flex",
                           }}
                         >
@@ -411,7 +411,7 @@ const ResultsPage = () => {
                 <h2 className="text-5xl font-semibold font-subheading">
                   🐕 <span className="ml-2">Breed Selection</span>
                 </h2>
-                <p className="mt-5 mb-6">
+                <p className="mt-5 mb-3">
                   The left column indicates the name of each breed that
                   participants could choose during the initial survey. The right
                   column lists the percentage of participants who selected that
@@ -419,7 +419,7 @@ const ResultsPage = () => {
                   pit bulls.
                 </p>
                 <div className="container mx-auto py-4">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2">
                     <div className="my-auto">
                       <h6 className="py-1 font-bold bg-neutral-300">
                         Pro-Pit Bull
@@ -556,7 +556,120 @@ const ResultsPage = () => {
                           </tr>
                         </tbody>
                       </table>
-                      <div className="mt-4 text-sm">
+                    </div>
+                    <div>
+                      <Container
+                        style={{
+                          width: "100%",
+                          backgroundColor: "white",
+                          boxShadow: "5px 5px 10px rgba(0,0,0,0.01)",
+                          borderRadius: "10px",
+                          marginTop: "20px",
+                        }}
+                      >
+                        <BarChart
+                          colors={["#AFE1AF", "#7661E2", "#F6866A"]}
+                          xAxis={[
+                            {
+                              scaleType: "band",
+                              data: ["APBT", "AST", "SBT", "AB"],
+                            },
+                          ]}
+                          series={[
+                            {
+                              data: [
+                                parseFloat((proApbt * 100).toFixed(1)),
+                                parseFloat((proAst * 100).toFixed(1)),
+                                parseFloat((proSbt * 100).toFixed(1)),
+                                parseFloat((proAb * 100).toFixed(1)),
+                              ],
+                            },
+                            {
+                              data: [
+                                parseFloat((moderateApbt * 100).toFixed(1)),
+                                parseFloat((moderateAst * 100).toFixed(1)),
+                                parseFloat((moderateSbt * 100).toFixed(1)),
+                                parseFloat((moderateAb * 100).toFixed(1)),
+                              ],
+                            },
+                            {
+                              data: [
+                                parseFloat((antiApbt * 100).toFixed(1)),
+                                parseFloat((antiAst * 100).toFixed(1)),
+                                parseFloat((antiSbt * 100).toFixed(1)),
+                                parseFloat((antiAb * 100).toFixed(1)),
+                              ],
+                            },
+                          ]}
+                          height={400}
+                        />
+                      </Container>
+                      <Grid
+                        container
+                        sx={{
+                          padding: "0px 0px 20px 40px",
+                          justifyContent: "space-around",
+                          display: "flex",
+                        }}
+                      >
+                        <Grid
+                          item
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              height: "10px",
+                              width: "10px",
+                              borderRadius: "100%",
+                              backgroundColor: "#AFE1AF",
+                            }}
+                          ></div>
+                          <Typography>Pro-Pit Bull</Typography>
+                        </Grid>
+                        <Grid
+                          item
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                            marginLeft: "15px",
+                            marginRight: "15px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              height: "10px",
+                              width: "10px",
+                              borderRadius: "100%",
+                              backgroundColor: "#7661E2",
+                            }}
+                          ></div>
+                          <Typography>Moderate</Typography>
+                        </Grid>
+                        <Grid
+                          item
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              height: "10px",
+                              width: "10px",
+                              borderRadius: "100%",
+                              backgroundColor: "#F6866A",
+                            }}
+                          ></div>
+                          <Typography>Anti-Pit Bull</Typography>
+                        </Grid>
+                      </Grid>
+                      <div className="mx-6 text-sm">
                         APBT - American Pit Bull Terrier{" "}
                         <span className="mx-1">|</span> AST - American
                         Staffordshire Terrier <span className="mx-1">|</span>{" "}
@@ -572,144 +685,286 @@ const ResultsPage = () => {
                 <h2 className="text-5xl font-semibold font-subheading">
                   🧬 <span className="ml-2">DNA Selection</span>
                 </h2>
-                <p className="mt-5 mb-6">
+                <p className="mt-5 mb-4">
                   Participants were initially asked to specify how much "pit
                   bull DNA" is required for a dog to be considered a pit bull.
                   The left column displays multiple ranges of DNA. The right
                   column shows the percentage of participants who selected a
                   value within the specified range.
                 </p>
-                <h6 className="py-1 font-bold bg-neutral-300">Pro-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
-                  <thead>
-                    <tr>
-                      <th className="py-2">Selection</th>
-                      <th className="py-2">% of Users</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-2">≤ 25%</td>
-                      <td className="py-2">
-                        {proPercentage25 > 0
-                          ? `${(proPercentage25 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">26% - 50%</td>
-                      <td className="py-2">
-                        {proPercentage50 > 0
-                          ? `${(proPercentage50 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">51% - 75%</td>
-                      <td className="py-2">
-                        {proPercentage75 > 0
-                          ? `${(proPercentage75 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">76% - 100%</td>
-                      <td className="py-2">
-                        {proPercentageGreaterThan75 > 0
-                          ? `${(proPercentageGreaterThan75 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div className="container mx-auto py-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2">
+                    <div className="my-auto">
+                      <h6 className="py-1 font-bold bg-neutral-300">
+                        Pro-Pit Bull
+                      </h6>
+                      <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
+                        <thead>
+                          <tr>
+                            <th className="py-2">Selection</th>
+                            <th className="py-2">% of Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="py-2">≤ 25%</td>
+                            <td className="py-2">
+                              {proPercentage25 > 0
+                                ? `${(proPercentage25 * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">26% - 50%</td>
+                            <td className="py-2">
+                              {proPercentage50 > 0
+                                ? `${(proPercentage50 * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">51% - 75%</td>
+                            <td className="py-2">
+                              {proPercentage75 > 0
+                                ? `${(proPercentage75 * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">76% - 100%</td>
+                            <td className="py-2">
+                              {proPercentageGreaterThan75 > 0
+                                ? `${(proPercentageGreaterThan75 * 100).toFixed(
+                                    1
+                                  )}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
 
-                <h6 className="py-1 font-bold bg-neutral-300">Moderate</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
-                  <thead>
-                    <tr>
-                      <th className="py-2">Selection</th>
-                      <th className="py-2">% of Users</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-2">≤ 25%</td>
-                      <td className="py-2">
-                        {modPercentage25 > 0
-                          ? `${(modPercentage25 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">26% - 50%</td>
-                      <td className="py-2">
-                        {modPercentage50 > 0
-                          ? `${(modPercentage50 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">51% - 75%</td>
-                      <td className="py-2">
-                        {modPercentage75 > 0
-                          ? `${(modPercentage75 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">76% - 100%</td>
-                      <td className="py-2">
-                        {modPercentageGreaterThan75 > 0
-                          ? `${(modPercentageGreaterThan75 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                      <h6 className="py-1 font-bold bg-neutral-300">
+                        Moderate
+                      </h6>
+                      <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
+                        <thead>
+                          <tr>
+                            <th className="py-2">Selection</th>
+                            <th className="py-2">% of Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="py-2">≤ 25%</td>
+                            <td className="py-2">
+                              {modPercentage25 > 0
+                                ? `${(modPercentage25 * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">26% - 50%</td>
+                            <td className="py-2">
+                              {modPercentage50 > 0
+                                ? `${(modPercentage50 * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">51% - 75%</td>
+                            <td className="py-2">
+                              {modPercentage75 > 0
+                                ? `${(modPercentage75 * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">76% - 100%</td>
+                            <td className="py-2">
+                              {modPercentageGreaterThan75 > 0
+                                ? `${(modPercentageGreaterThan75 * 100).toFixed(
+                                    1
+                                  )}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
 
-                <h6 className="py-1 font-bold bg-neutral-300">Anti-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
-                  <thead>
-                    <tr>
-                      <th className="py-2">Selection</th>
-                      <th className="py-2">% of Users</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-2">≤ 25%</td>
-                      <td className="py-2">
-                        {antiPercentage25 > 0
-                          ? `${(antiPercentage25 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">26% - 50%</td>
-                      <td className="py-2">
-                        {antiPercentage50 > 0
-                          ? `${(antiPercentage50 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">51% - 75%</td>
-                      <td className="py-2">
-                        {antiPercentage75 > 0
-                          ? `${(antiPercentage75 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">76% - 100%</td>
-                      <td className="py-2">
-                        {antiPercentageGreaterThan75 > 0
-                          ? `${(antiPercentageGreaterThan75 * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                      <h6 className="py-1 font-bold bg-neutral-300">
+                        Anti-Pit Bull
+                      </h6>
+                      <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
+                        <thead>
+                          <tr>
+                            <th className="py-2">Selection</th>
+                            <th className="py-2">% of Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="py-2">≤ 25%</td>
+                            <td className="py-2">
+                              {antiPercentage25 > 0
+                                ? `${(antiPercentage25 * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">26% - 50%</td>
+                            <td className="py-2">
+                              {antiPercentage50 > 0
+                                ? `${(antiPercentage50 * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">51% - 75%</td>
+                            <td className="py-2">
+                              {antiPercentage75 > 0
+                                ? `${(antiPercentage75 * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">76% - 100%</td>
+                            <td className="py-2">
+                              {antiPercentageGreaterThan75 > 0
+                                ? `${(
+                                    antiPercentageGreaterThan75 * 100
+                                  ).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div>
+                      <Container
+                        style={{
+                          width: "100%",
+                          backgroundColor: "white",
+                          boxShadow: "5px 5px 10px rgba(0,0,0,0.01)",
+                          borderRadius: "10px",
+                          marginTop: "20px",
+                        }}
+                      >
+                        <BarChart
+                          colors={["#AFE1AF", "#7661E2", "#F6866A"]}
+                          xAxis={[
+                            {
+                              scaleType: "band",
+                              data: [
+                                "≤25%",
+                                "26% - 50%",
+                                "51% - 70%",
+                                "71% - 100%",
+                              ],
+                            },
+                          ]}
+                          series={[
+                            {
+                              data: [
+                                parseFloat((proPercentage25 * 100).toFixed(1)),
+                                parseFloat((proPercentage50 * 100).toFixed(1)),
+                                parseFloat((proPercentage75 * 100).toFixed(1)),
+                                parseFloat(
+                                  (proPercentageGreaterThan75 * 100).toFixed(1)
+                                ),
+                              ],
+                            },
+                            {
+                              data: [
+                                parseFloat((modPercentage25 * 100).toFixed(1)),
+                                parseFloat((modPercentage50 * 100).toFixed(1)),
+                                parseFloat((modPercentage75 * 100).toFixed(1)),
+                                parseFloat(
+                                  (modPercentageGreaterThan75 * 100).toFixed(1)
+                                ),
+                              ],
+                            },
+                            {
+                              data: [
+                                parseFloat((antiPercentage25 * 100).toFixed(1)),
+                                parseFloat((antiPercentage50 * 100).toFixed(1)),
+                                parseFloat((antiPercentage75 * 100).toFixed(1)),
+                                parseFloat(
+                                  (antiPercentageGreaterThan75 * 100).toFixed(1)
+                                ),
+                              ],
+                            },
+                          ]}
+                          height={400}
+                        />
+                      </Container>
+                      <Grid
+                        container
+                        sx={{
+                          padding: "0px 0px 20px 40px",
+                          justifyContent: "space-around",
+                          display: "flex",
+                        }}
+                      >
+                        <Grid
+                          item
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              height: "10px",
+                              width: "10px",
+                              borderRadius: "100%",
+                              backgroundColor: "#AFE1AF",
+                            }}
+                          ></div>
+                          <Typography>Pro-Pit Bull</Typography>
+                        </Grid>
+                        <Grid
+                          item
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                            marginLeft: "15px",
+                            marginRight: "15px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              height: "10px",
+                              width: "10px",
+                              borderRadius: "100%",
+                              backgroundColor: "#7661E2",
+                            }}
+                          ></div>
+                          <Typography>Moderate</Typography>
+                        </Grid>
+                        <Grid
+                          item
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              height: "10px",
+                              width: "10px",
+                              borderRadius: "100%",
+                              backgroundColor: "#F6866A",
+                            }}
+                          ></div>
+                          <Typography>Anti-Pit Bull</Typography>
+                        </Grid>
+                      </Grid>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="my-5 py-5">
@@ -723,35 +978,41 @@ const ResultsPage = () => {
                   subjective, as it is based on each individual's personal
                   criteria and perception.
                 </p>
-                <h6 className="py-1 font-bold bg-neutral-300">
-                  All Participants
-                </h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
-                  <thead>
-                    <tr>
-                      <th className="py-2">Username</th>
-                      <th className="py-2">Alignment</th>
-                      <th className="py-2">Accuracy</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {topUsers.map((user, index) => {
-                      return (
-                        <tr key={index}>
-                          <td className="py-2 col-first">
-                            {renderUserName(user.username)}
-                          </td>
-                          <td className="py-2">
-                            {user.alignment === "neutral"
-                              ? "moderate"
-                              : user.alignment}
-                          </td>
-                          <td className="py-2">{user.accuracy.toFixed(1)}%</td>
+                <div className="flex justify-center">
+                  <div className="w-full md:w-1/2">
+                    <h6 className="py-1 font-bold bg-neutral-300">
+                      All Participants
+                    </h6>
+                    <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
+                      <thead>
+                        <tr>
+                          <th className="py-2">Username</th>
+                          <th className="py-2">Alignment</th>
+                          <th className="py-2">Accuracy</th>
                         </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+                      </thead>
+                      <tbody>
+                        {topUsers.map((user, index) => {
+                          return (
+                            <tr key={index}>
+                              <td className="py-2 col-first">
+                                {renderUserName(user.username)}
+                              </td>
+                              <td className="py-2">
+                                {user.alignment === "neutral"
+                                  ? "moderate"
+                                  : user.alignment}
+                              </td>
+                              <td className="py-2">
+                                {user.accuracy.toFixed(1)}%
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
               <Link
                 to="/1"
