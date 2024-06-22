@@ -8,8 +8,9 @@ import { RootState } from "../../redux/store";
 import { Result } from "../../interfaces/result";
 import { Selection } from "../../interfaces/selection";
 import { CircularProgress } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
+import { BarChart } from "@mui/x-charts";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import resultsSlice from "../../redux/features/resultsSlice";
 
 const ResultsPage = () => {
   const [showDogs, setShowDogs] = useState(false);
@@ -23,19 +24,7 @@ const ResultsPage = () => {
   const [proCount, setProCount] = useState(0);
   const [modCount, setModerateCount] = useState(0);
   const [antiCount, setAntiCount] = useState(0);
-  const [proApbtCount, setProApbtCount] = useState(0);
   const [allUsersAccuracy, setAllUsersAccuracy] = useState(0);
-  const [proApbtAccuracy, setProApbtAccuracy] = useState(0);
-  const [proMultiCount, setProMultiCount] = useState(0);
-  const [proMultiAccuracy, setProMultiAccuracy] = useState(0);
-  const [modApbtCount, setModerateApbtCount] = useState(0);
-  const [modApbtAccuracy, setModerateApbtAccuracy] = useState(0);
-  const [modMultiCount, setModerateMultiCount] = useState(0);
-  const [modMultiAccuracy, setModerateMultiAccuracy] = useState(0);
-  const [antiApbtCount, setAntiApbtCount] = useState(0);
-  const [antiApbtAccuracy, setAntiApbtAccuracy] = useState(0);
-  const [antiMultiCount, setAntiMultiCount] = useState(0);
-  const [antiMultiAccuracy, setAntiMultiAccuracy] = useState(0);
   const [topUsers, setTopUsers] = useState<TopUser[]>([]);
   const [proPercentage25, setProPercentage25] = useState(0);
   const [proPercentage50, setProPercentage50] = useState(0);
@@ -93,18 +82,6 @@ const ResultsPage = () => {
         setProCount(breakdown.proCount);
         setModerateCount(breakdown.moderateCount);
         setAntiCount(breakdown.antiCount);
-        setProApbtCount(breakdown.proApbtCount);
-        setProApbtAccuracy(breakdown.proApbtAccuracy);
-        setProMultiCount(breakdown.proMultiCount);
-        setProMultiAccuracy(breakdown.proMultiAccuracy);
-        setModerateApbtCount(breakdown.moderateApbtCount);
-        setModerateApbtAccuracy(breakdown.moderateApbtAccuracy);
-        setModerateMultiCount(breakdown.moderateMultiCount);
-        setModerateMultiAccuracy(breakdown.moderateMultiAccuracy);
-        setAntiApbtCount(breakdown.antiApbtCount);
-        setAntiApbtAccuracy(breakdown.antiApbtAccuracy);
-        setAntiMultiCount(breakdown.antiMultiCount);
-        setAntiMultiAccuracy(breakdown.antiMultiAccuracy);
         setAllUsersAccuracy(breakdown.allUsersAccuracy);
         setTopUsers(breakdown.topUsers);
         setProPercentage25(breakdown.proPercentage25);
@@ -278,52 +255,156 @@ const ResultsPage = () => {
           )}
           {!loadingBreakdown && showBreakdown && (
             <div>
-              <div className="my-6">
+              <div className="my-6 pt-4">
                 <h2 className="text-5xl font-semibold font-subheading">
                   📊 <span className="ml-2">Total Results</span>
                 </h2>
-                <p className="mt-5 mb-6">
+                <p className="mt-5 mb-3">
                   These results are broken down based on how participants
                   identified their feelings toward pit bulls. The middle column
                   indicates the number of participants who identified a certain
                   way. The column on the right displays the average accuracy of
                   participants in each alignment group.
                 </p>
-                <h6 className="py-1 font-bold bg-neutral-300">
-                  All Participants
-                </h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
-                  <thead>
-                    <tr>
-                      <th className="py-2">Alignment</th>
-                      <th className="py-2">Count</th>
-                      <th className="py-2">Avg. Accuracy</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-2">Pro-Pit Bull</td>
-                      <td className="py-2">{proCount}</td>
-                      <td className="py-2">
-                        {proCount > 0 ? `${proAccuracy.toFixed(1)}%` : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">Moderate</td>
-                      <td className="py-2">{modCount}</td>
-                      <td className="py-2">
-                        {modCount > 0 ? `${modAccuracy.toFixed(1)}%` : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">Anti-Pit Bull</td>
-                      <td className="py-2">{antiCount}</td>
-                      <td className="py-2">
-                        {antiCount > 0 ? `${antiAccuracy.toFixed(1)}%` : "0%"}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div className="container mx-auto py-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div className="my-auto">
+                      <h6 className="py-1 font-bold bg-neutral-300">
+                        All Participants
+                      </h6>
+                      <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
+                        <thead>
+                          <tr>
+                            <th className="py-2">Alignment</th>
+                            <th className="py-2">Count</th>
+                            <th className="py-2">Accuracy</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="py-2">Pro</td>
+                            <td className="py-2">{proCount}</td>
+                            <td className="py-2">
+                              {proCount > 0
+                                ? `${proAccuracy.toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">Moderate</td>
+                            <td className="py-2">{modCount}</td>
+                            <td className="py-2">
+                              {modCount > 0
+                                ? `${modAccuracy.toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">Anti</td>
+                            <td className="py-2">{antiCount}</td>
+                            <td className="py-2">
+                              {antiCount > 0
+                                ? `${antiAccuracy.toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div>
+                      <Container
+                        style={{
+                          width: "100%",
+                          backgroundColor: "white",
+                          boxShadow: "5px 5px 10px rgba(0,0,0,0.01)",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        <BarChart
+                          xAxis={[
+                            {
+                              id: "barCategories",
+                              data: [""],
+                              scaleType: "band",
+                            },
+                          ]}
+                          series={[
+                            { data: [proAccuracy] },
+                            { data: [modAccuracy] },
+                            { data: [antiAccuracy] },
+                          ]}
+                          colors={["#AFE1AF", "#7661E2", "#F6866A"]}
+                          height={300}
+                        />
+                        <Grid
+                          container
+                          sx={{
+                            padding: "0px 0px 20px 40px",
+                            justifyContent: "flex-start",
+                            display: "flex",
+                          }}
+                        >
+                          <Grid
+                            item
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "10px",
+                            }}
+                          >
+                            <div
+                              style={{
+                                height: "10px",
+                                width: "10px",
+                                borderRadius: "100%",
+                                backgroundColor: "#AFE1AF",
+                              }}
+                            ></div>
+                            <Typography>Pro-Pit Bull</Typography>
+                          </Grid>
+                          <Grid
+                            item
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "10px",
+                              marginLeft: "15px",
+                              marginRight: "15px",
+                            }}
+                          >
+                            <div
+                              style={{
+                                height: "10px",
+                                width: "10px",
+                                borderRadius: "100%",
+                                backgroundColor: "#7661E2",
+                              }}
+                            ></div>
+                            <Typography>Moderate</Typography>
+                          </Grid>
+                          <Grid
+                            item
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "10px",
+                            }}
+                          >
+                            <div
+                              style={{
+                                height: "10px",
+                                width: "10px",
+                                borderRadius: "100%",
+                                backgroundColor: "#F6866A",
+                              }}
+                            ></div>
+                            <Typography>Anti-Pit Bull</Typography>
+                          </Grid>
+                        </Grid>
+                      </Container>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="my-5 py-5">
@@ -337,127 +418,153 @@ const ResultsPage = () => {
                   breed when asked to specify which breeds they consider to be
                   pit bulls.
                 </p>
-                <h6 className="py-1 font-bold bg-neutral-300">Pro-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
-                  <thead>
-                    <tr>
-                      <th className="py-2">Selection</th>
-                      <th className="py-2">% of Users</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-2">APBT</td>
-                      <td className="py-2">
-                        {proApbt > 0 ? `${(proApbt * 100).toFixed(1)}%` : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">AST</td>
-                      <td className="py-2">
-                        {proAst > 0 ? `${(proAst * 100).toFixed(1)}%` : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">SBT</td>
-                      <td className="py-2">
-                        {proSbt > 0 ? `${(proSbt * 100).toFixed(1)}%` : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">AB</td>
-                      <td className="py-2">
-                        {proAb > 0 ? `${(proAb * 100).toFixed(1)}%` : "0%"}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <h6 className="py-1 font-bold bg-neutral-300">Moderate</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
-                  <thead>
-                    <tr>
-                      <th className="py-2">Selection</th>
-                      <th className="py-2">% of Users</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-2">APBT</td>
-                      <td className="py-2">
-                        {moderateApbt > 0
-                          ? `${(moderateApbt * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">AST</td>
-                      <td className="py-2">
-                        {moderateAst > 0
-                          ? `${(moderateAst * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">SBT</td>
-                      <td className="py-2">
-                        {moderateSbt > 0
-                          ? `${(moderateSbt * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">AB</td>
-                      <td className="py-2">
-                        {moderateAb > 0
-                          ? `${(moderateAb * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <h6 className="py-1 font-bold bg-neutral-300">Anti-Pit Bull</h6>
-                <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
-                  <thead>
-                    <tr>
-                      <th className="py-2">Selection</th>
-                      <th className="py-2">% of Users</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-2">APBT</td>
-                      <td className="py-2">
-                        {antiApbt > 0
-                          ? `${(antiApbt * 100).toFixed(1)}%`
-                          : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">AST</td>
-                      <td className="py-2">
-                        {antiAst > 0 ? `${(antiAst * 100).toFixed(1)}%` : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">SBT</td>
-                      <td className="py-2">
-                        {antiSbt > 0 ? `${(antiSbt * 100).toFixed(1)}%` : "0%"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2">AB</td>
-                      <td className="py-2">
-                        {antiAb > 0 ? `${(antiAb * 100).toFixed(1)}%` : "0%"}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="mt-4 text-sm">
-                  APBT - American Pit Bull Terrier{" "}
-                  <span className="mx-1">|</span> AST - American Staffordshire
-                  Terrier <span className="mx-1">|</span> SBT - Staffordshire
-                  Bull Terrier <span className="mx-1">|</span> AB - American
-                  Bully
+                <div className="container mx-auto py-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div className="my-auto">
+                      <h6 className="py-1 font-bold bg-neutral-300">
+                        Pro-Pit Bull
+                      </h6>
+                      <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
+                        <thead>
+                          <tr>
+                            <th className="py-2">Selection</th>
+                            <th className="py-2">% of Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="py-2">APBT</td>
+                            <td className="py-2">
+                              {proApbt > 0
+                                ? `${(proApbt * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">AST</td>
+                            <td className="py-2">
+                              {proAst > 0
+                                ? `${(proAst * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">SBT</td>
+                            <td className="py-2">
+                              {proSbt > 0
+                                ? `${(proSbt * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">AB</td>
+                            <td className="py-2">
+                              {proAb > 0
+                                ? `${(proAb * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <h6 className="py-1 font-bold bg-neutral-300">
+                        Moderate
+                      </h6>
+                      <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
+                        <thead>
+                          <tr>
+                            <th className="py-2">Selection</th>
+                            <th className="py-2">% of Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="py-2">APBT</td>
+                            <td className="py-2">
+                              {moderateApbt > 0
+                                ? `${(moderateApbt * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">AST</td>
+                            <td className="py-2">
+                              {moderateAst > 0
+                                ? `${(moderateAst * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">SBT</td>
+                            <td className="py-2">
+                              {moderateSbt > 0
+                                ? `${(moderateSbt * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">AB</td>
+                            <td className="py-2">
+                              {moderateAb > 0
+                                ? `${(moderateAb * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <h6 className="py-1 font-bold bg-neutral-300">
+                        Anti-Pit Bull
+                      </h6>
+                      <table className="w-full text-xl text-neutral-700 font-medium bg-neutral-100">
+                        <thead>
+                          <tr>
+                            <th className="py-2">Selection</th>
+                            <th className="py-2">% of Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="py-2">APBT</td>
+                            <td className="py-2">
+                              {antiApbt > 0
+                                ? `${(antiApbt * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">AST</td>
+                            <td className="py-2">
+                              {antiAst > 0
+                                ? `${(antiAst * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">SBT</td>
+                            <td className="py-2">
+                              {antiSbt > 0
+                                ? `${(antiSbt * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="py-2">AB</td>
+                            <td className="py-2">
+                              {antiAb > 0
+                                ? `${(antiAb * 100).toFixed(1)}%`
+                                : "0%"}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div className="mt-4 text-sm">
+                        APBT - American Pit Bull Terrier{" "}
+                        <span className="mx-1">|</span> AST - American
+                        Staffordshire Terrier <span className="mx-1">|</span>{" "}
+                        SBT - Staffordshire Bull Terrier{" "}
+                        <span className="mx-1">|</span> AB - American Bully
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
