@@ -261,10 +261,10 @@ const ResultsPage = () => {
                 </h2>
                 <p className="mt-5 mb-3">
                   These results are broken down based on how participants
-                  identified their feelings toward pit bulls. The middle column
-                  indicates the number of participants who identified a certain
-                  way. The column on the right displays the average accuracy of
-                  participants in each alignment group.
+                  identified their feelings toward pit bulls, as well as the
+                  accuracy of their selections. Note that this data is somewhat
+                  subjective, since it is based on the criteria set by each
+                  individual participant.
                 </p>
                 <div className="container mx-auto py-4">
                   <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -412,11 +412,10 @@ const ResultsPage = () => {
                   🐕 <span className="ml-2">Breed Selection</span>
                 </h2>
                 <p className="mt-5 mb-3">
-                  The left column indicates the name of each breed that
-                  participants could choose during the initial survey. The right
-                  column lists the percentage of participants who selected that
-                  breed when asked to specify which breeds they consider to be
-                  pit bulls.
+                  During the initial survey, participants were asked to select
+                  from four breeds that are commonly called pit bulls. This data
+                  shows the percentage of users who selected each breed, grouped
+                  according to their alignment.
                 </p>
                 <div className="container mx-auto py-4">
                   <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -686,11 +685,10 @@ const ResultsPage = () => {
                   🧬 <span className="ml-2">DNA Selection</span>
                 </h2>
                 <p className="mt-5 mb-4">
-                  Participants were initially asked to specify how much "pit
-                  bull DNA" is required for a dog to be considered a pit bull.
-                  The left column displays multiple ranges of DNA. The right
-                  column shows the percentage of participants who selected a
-                  value within the specified range.
+                  Participants were asked to specify how much "pit bull DNA" is
+                  required for a dog to be considered a pit bull. The following
+                  results are broken down based on user alignment and ranges of
+                  DNA percentages.
                 </p>
                 <div className="container mx-auto py-4">
                   <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -974,9 +972,9 @@ const ResultsPage = () => {
                 <p className="mt-5 mb-6">
                   The following table lists the top 10 participants based on how
                   many dogs they were able to correctly identify as pit bulls.
-                  It is important to note that this data is partially
+                  It is important to understand that this data is partially
                   subjective, as it is based on each individual's personal
-                  criteria and perception.
+                  criteria and perceptions.
                 </p>
                 <div className="flex justify-center">
                   <div className="w-full md:w-1/2">
